@@ -1,19 +1,21 @@
+up:
+	./vendor/bin/sail up
 docker-connect-php:
-	docker exec -it redance_php bash
+	docker exec -it v10_php bash
 docker-connect-mysql:
-	docker exec -it redance_mysql bash
+	docker exec -it v10_mysql bash
 docker-connect-redis:
-	docker exec -it redance_mysql redis
+	docker exec -it v10_mysql redis
 docker-migrate:
-	docker exec -it redance_php php artisan migrate
-docker-db-refresh:
-	docker exec -it redance_php php artisan migrate:refresh --seed
+	./vendor/bin/sail artisan migrate
+docker-refresh:
+	./vendor/bin/sail artisan migrate:refresh --seed
 docker-seed:
-	docker exec -it redance_php php artisan migrate db:seed
+	./vendor/bin/sail artisan migrate db:seed
 docker-fix:
-	docker exec -it redance_php ./vendor/bin/phpcbf -w app/
+	docker exec -it v10_php ./vendor/bin/phpcbf -w app/
 docker-dev:
-	docker exec -it redance_php npm run dev
+	docker exec -it v10_php npm run dev
 
 migrate:
 	php artisan migrate
