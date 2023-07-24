@@ -39,15 +39,10 @@ Route::get('g', function () {
     return Inertia::render('G');
 });
 
-function a()
-{
-    sleep(1);
-    echo 11;
-}
 
 Route::get('a', function () {
     $fiber = new Fiber(function (): void {
-        a();
+        echo 123;
         Fiber::suspend(); // Tạm dừng fiber
         echo 'bfsjf';
     });
@@ -59,3 +54,16 @@ Route::get('a', function () {
 });
 
 require __DIR__.'/auth.php';
+
+//
+//// Hàm custom để xử lý các thông báo lỗi
+//function customErrorHandler($errno, $errstr, $errfile, $errline) {
+//    // Tạo thông báo lỗi
+//    $message = date("Y-m-d H:i:s") . " - Error: [$errno] $errstr in $errfile on line $errline" . PHP_EOL;
+//
+//    // Ghi thông báo lỗi vào tệp tin log
+//    error_log($message, 3, "error_log.txt");
+//}
+//
+//// Đặt "default error handler" thành hàm customErrorHandler
+//set_error_handler("customErrorHandler");

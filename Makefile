@@ -12,6 +12,8 @@ docker-refresh:
 	./vendor/bin/sail artisan migrate:refresh --seed
 docker-seed:
 	./vendor/bin/sail artisan migrate db:seed
+docker-queue:
+	./vendor/bin/sail artisan queue:work
 docker-fix:
 	docker exec -it v10_php ./vendor/bin/phpcbf -w app/
 docker-dev:
