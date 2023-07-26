@@ -53,6 +53,7 @@ class HeroLogService
         foreach ($home->toArray() as $key => $value)
         {
             $this->$key = $value;
+            $this->{"current_$key"} = $value;
         }
 
         return $this;

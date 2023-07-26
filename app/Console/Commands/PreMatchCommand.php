@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Services\Bet\PreMatchService;
 use App\Http\Services\Bet\RoundService;
 use Illuminate\Console\Command;
 
@@ -26,8 +27,8 @@ class PreMatchCommand extends Command
      *
      * @throws \Exception
      */
-    public function handle(RoundService $roundService)
+    public function handle(PreMatchService $preMatchService): void
     {
-        $roundService->bet();
+        $preMatchService->execute();
     }
 }

@@ -21,13 +21,6 @@ class FightEvent implements ShouldBroadcast
     }
 
     /**
-     * The time (seconds) before the job should be processed.
-     *
-     * @var int
-     */
-    public int $delay = 60;
-
-    /**
      * Get the channels the event should broadcast on.
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>

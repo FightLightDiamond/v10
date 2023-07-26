@@ -31,4 +31,5 @@ dev:
 	npm run dev
 start:
 	php artisan octane:start
-
+echo:
+	laravel-echo-server start

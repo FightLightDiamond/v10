@@ -11,7 +11,6 @@ class SkillFactory
      */
     static function create($home, $away): array
     {
-        dd($home->name);
         return match ($home->name) {
             'Hell' => SkillService::Hell($home, $away),
             'Sphinx' => SkillService::Sphinx($home, $away),

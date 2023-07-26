@@ -5,8 +5,7 @@ namespace App\Http\Services\Bet;
 
 use App\Const\BetStatusConstant;
 use App\Events\BetEvent;
-use App\Events\FightEvent;
-use App\Events\RewardEvent;
+use App\Jobs\FightJob;
 use App\Jobs\RewardJob;
 use Exception;
 use Illuminate\Support\Facades\Cache;
@@ -29,7 +28,8 @@ class PreMatchService
         $match->status = BetStatusConstant::BETTING;
         $match->save();
         BetEvent::dispatch($match);
-        FightEvent::dispatch($match);
-        RewardJob::dispatch($match)->delay(3*60);
+        FightJob::dispatch($match)->delay(60);
+        RewardJob::dispatch($match)->delay(180);
+        echo now();
     }
 }

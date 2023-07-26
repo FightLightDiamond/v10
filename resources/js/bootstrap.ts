@@ -33,10 +33,31 @@ if (typeof io !== 'undefined') {
 
     // @ts-ignore
     window.Echo.channel('chat-room')
-        .listen('.message.created', (event: any) => {
+        .listen('.created', (event: any) => {
             alert(12)
             // Xử lý dữ liệu nhận được từ event
-            console.log('New message:', event.message);
+            console.log('New message:', event);
+        });
+    // @ts-ignore
+    window.Echo.channel('match')
+        .listen('.bet', (event: any) => {
+            alert('bet')
+            // Xử lý dữ liệu nhận được từ event
+            console.log('New message:', event);
+        });
+    // @ts-ignore
+    window.Echo.channel('match')
+        .listen('.fight', (event: any) => {
+            alert('fight')
+            // Xử lý dữ liệu nhận được từ event
+            console.log('New message:', event);
+        });
+    // @ts-ignore
+    window.Echo.channel('match')
+        .listen('.reward', (event: any) => {
+            alert('reward')
+            // Xử lý dữ liệu nhận được từ event
+            console.log('New message:', event);
         });
 }
 

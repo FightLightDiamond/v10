@@ -73,18 +73,16 @@ class RoundService
         }
 
         $dataMatchUpdate = [
-            'hero_info' => $this->hero_info,
+            'hero_info' => json_encode($this->hero_info),
             'turn_number' => $this->turn_number,
             'winner' => $this->home->current_hp > $this->away->current_hp ? $this->home->id : $this->away->id,
             'loser' => $this->home->current_hp > $this->away->current_hp ? $this->away->id : $this->home->id,
-            'turns' => $this->turns,
-            'start_time' => strval(time()),
+            'turns' => json_encode($this->turns),
+            'start_time' => now(),
             'status' => BetStatusConstant::BETTING,
         ];
 
         // Assuming that you have your own implementation of matchRepository->save()
-        $match = $this->theMatchRepository->create($dataMatchUpdate);
-
         // Uncomment this block if you need to create and save preAutoBetData as well
         // $preAutoBetData = [
         //     'match_id' => $match->id,
@@ -93,12 +91,7 @@ class RoundService
         //         : $this->away->id . '|' . $this->home->id,
         // ];
 
-        // Clear the winner, loser, and turns properties to the default values
-        $match->winner = 0;
-        $match->loser = 0;
-        $match->turns = [];
-
-        return $match;
+        return $this->theMatchRepository->create($dataMatchUpdate);
     }
 
     /**
@@ -126,7 +119,7 @@ class RoundService
     /**
      * @throws Exception
      */
-    function turnAtk($home, $away): void
+    private function turnAtk($home, $away): void
     {
         // Reset
         $home->is_active_skill = false;
@@ -182,7 +175,6 @@ class RoundService
             //TODO: xử lý hiển thị né
             //$away->take_dmg = -1;
         }
-
         $this->turns[] = clone ($home);
         $this->turns[] = clone ($away);
     }
