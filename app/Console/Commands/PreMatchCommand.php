@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Services\Bet\RoundService;
 use Illuminate\Console\Command;
 
 class PreMatchCommand extends Command
@@ -11,7 +12,7 @@ class PreMatchCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:pre-match-command';
+    protected $signature = 'pre-match';
 
     /**
      * The console command description.
@@ -22,9 +23,10 @@ class PreMatchCommand extends Command
 
     /**
      * Execute the console command.
+     * @throws \Exception
      */
-    public function handle()
+    public function handle(RoundService $roundService)
     {
-        //
+        $roundService->bet();
     }
 }

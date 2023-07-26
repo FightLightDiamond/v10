@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedTinyInteger('type');
             $table->unsignedTinyInteger('level')->default(1);
-            $table->unsignedTinyInteger('available_num');
-            $table->unsignedTinyInteger('attached_num');
+            $table->unsignedTinyInteger('available_num')->default(1);
+            $table->unsignedTinyInteger('attached_num')->default(0);
             $table->timestamps();
         });
     }

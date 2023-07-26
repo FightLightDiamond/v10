@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BetRequest;
-use App\Http\Services\BetService;
-use Illuminate\Http\Request;
+use App\Http\Services\Bet\BetService;
 use Illuminate\Support\Facades\Auth;
 
 class BetController extends Controller

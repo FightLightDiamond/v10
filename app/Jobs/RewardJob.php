@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Services\Bet\RewardService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,7 +17,7 @@ class RewardJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    public function __construct(protected $match)
     {
         //
     }
@@ -24,8 +25,8 @@ class RewardJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(RewardService $rewardService): void
     {
-        //
+        $rewardService->execute($this->match);
     }
 }

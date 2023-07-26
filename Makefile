@@ -29,4 +29,6 @@ fix:
 	./vendor/bin/phpcbf -w app/
 dev:
 	npm run dev
+start:
+	php artisan octane:start
 

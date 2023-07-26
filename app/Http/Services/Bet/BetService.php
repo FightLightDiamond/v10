@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\Bet;
 
 use App\Const\BetStatusConstant;
 use App\Repositories\BetRepository;
 use App\Repositories\TheMatchRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BetService

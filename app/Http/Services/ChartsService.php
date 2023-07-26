@@ -14,8 +14,10 @@ class ChartsService
 
     public function getChartsGold()
     {
-        return Cache::remember('getChartsGold', 10, function () {
-            return $this->userRepository->getOrderLimit(['balance', 'DESC'], 20);
-        });
+        return Cache::remember(
+            'getChartsGold', 10, function () {
+                return $this->userRepository->getOrderLimit(['balance', 'DESC'], 20);
+            }
+        );
     }
 }

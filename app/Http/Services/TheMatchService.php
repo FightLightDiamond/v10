@@ -6,7 +6,9 @@ use App\Repositories\TheMatchRepository;
 
 class TheMatchService
 {
-    public function __construct(protected TheMatchRepository $theMatchRepository) {}
+    public function __construct(protected TheMatchRepository $theMatchRepository)
+    {
+    }
 
     public function paginate()
     {
