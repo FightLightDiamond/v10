@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TreeRepository;
-use App\Entities\Tree;
+use App\Models\Tree;
 use App\Validators\TreeValidator;
 
 /**
@@ -25,7 +25,7 @@ class TreeRepositoryEloquent extends BaseRepository implements TreeRepository
         return Tree::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class TreeRepositoryEloquent extends BaseRepository implements TreeRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

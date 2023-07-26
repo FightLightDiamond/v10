@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\HeroRepository;
-use App\Entities\Hero;
+use App\Models\Hero;
 use App\Validators\HeroValidator;
 
 /**

@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\GuildMatchRepository;
-use App\Entities\GuildMatch;
+use App\Models\GuildMatch;
 use App\Validators\GuildMatchValidator;
 
 /**
@@ -25,7 +25,7 @@ class GuildMatchRepositoryEloquent extends BaseRepository implements GuildMatchR
         return GuildMatch::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class GuildMatchRepositoryEloquent extends BaseRepository implements GuildMatchR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

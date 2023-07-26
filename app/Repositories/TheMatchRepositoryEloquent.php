@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TheMatchRepository;
-use App\Entities\TheMatch;
+use App\Models\TheMatch;
 use App\Validators\TheMatchValidator;
 
 /**
@@ -25,7 +25,7 @@ class TheMatchRepositoryEloquent extends BaseRepository implements TheMatchRepos
         return TheMatch::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class TheMatchRepositoryEloquent extends BaseRepository implements TheMatchRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

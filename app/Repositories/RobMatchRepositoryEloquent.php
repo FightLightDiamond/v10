@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\RobMatchRepository;
-use App\Entities\RobMatch;
+use App\Models\RobMatch;
 use App\Validators\RobMatchValidator;
 
 /**
@@ -25,7 +25,7 @@ class RobMatchRepositoryEloquent extends BaseRepository implements RobMatchRepos
         return RobMatch::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class RobMatchRepositoryEloquent extends BaseRepository implements RobMatchRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

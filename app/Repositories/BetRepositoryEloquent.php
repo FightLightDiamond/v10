@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\BetRepository;
-use App\Entities\Bet;
+use App\Models\Bet;
 use App\Validators\BetValidator;
 
 /**
@@ -25,7 +25,7 @@ class BetRepositoryEloquent extends BaseRepository implements BetRepository
         return Bet::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class BetRepositoryEloquent extends BaseRepository implements BetRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

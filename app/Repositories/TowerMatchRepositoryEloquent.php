@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TowerMatchRepository;
-use App\Entities\TowerMatch;
+use App\Models\TowerMatch;
 use App\Validators\TowerMatchValidator;
 
 /**
@@ -25,7 +25,7 @@ class TowerMatchRepositoryEloquent extends BaseRepository implements TowerMatchR
         return TowerMatch::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class TowerMatchRepositoryEloquent extends BaseRepository implements TowerMatchR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

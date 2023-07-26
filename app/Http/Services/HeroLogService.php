@@ -50,18 +50,11 @@ class HeroLogService
      */
     function setCurrent($home)
     {
-        $this->current_hp = $home->hp;
-        $this->current_atk = $home->atk;
-        $this->current_def = $home->def;
-        $this->current_spd = $home->spd;
-        $this->current_crit_rate = $home->crit_rate;
-        $this->current_crit_dmg = $home->crit_dmg;
-        $this->current_atk_healing = $home->atk_healing;
-        $this->current_take_dmg_healing = $home->take_dmg_healing;
-        $this->current_dodge = $home->dodge;
-        $this->current_acc = $home->acc;
-        $this->current_cc = $home->cc;
-        $this->is_atk = false;
+        foreach ($home->toArray() as $key => $value)
+        {
+            $this->$key = $value;
+        }
+
         return $this;
     }
 

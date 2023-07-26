@@ -23,6 +23,7 @@ class PreMatchCommand extends Command
 
     /**
      * Execute the console command.
+     *
      * @throws \Exception
      */
     public function handle(RoundService $roundService)

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedTinyInteger('status');
             $table->unsignedBigInteger('starting_value');
-            $table->dateTime('startTime');
-            $table->dateTime('endTime');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
             $table->timestamps();
         });
     }

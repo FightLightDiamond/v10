@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserHeroRepository;
-use App\Entities\UserHero;
+use App\Models\UserHero;
 use App\Validators\UserHeroValidator;
 
 /**
@@ -25,7 +25,7 @@ class UserHeroRepositoryEloquent extends BaseRepository implements UserHeroRepos
         return UserHero::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class UserHeroRepositoryEloquent extends BaseRepository implements UserHeroRepos
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

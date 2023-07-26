@@ -5,7 +5,7 @@ namespace App\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserGemRepository;
-use App\Entities\UserGem;
+use App\Models\UserGem;
 use App\Validators\UserGemValidator;
 
 /**
@@ -25,7 +25,7 @@ class UserGemRepositoryEloquent extends BaseRepository implements UserGemReposit
         return UserGem::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +34,5 @@ class UserGemRepositoryEloquent extends BaseRepository implements UserGemReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
 }

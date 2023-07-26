@@ -75,8 +75,8 @@ class RoundService
         $dataMatchUpdate = [
             'hero_info' => $this->hero_info,
             'turn_number' => $this->turn_number,
-            'winner' => $this->home['current_hp'] > $this->away['current_hp'] ? $this->home['id'] : $this->away['id'],
-            'loser' => $this->home['current_hp'] > $this->away['current_hp'] ? $this->away['id'] : $this->home['id'],
+            'winner' => $this->home->current_hp > $this->away->current_hp ? $this->home->id : $this->away->id,
+            'loser' => $this->home->current_hp > $this->away->current_hp ? $this->away->id : $this->home->id,
             'turns' => $this->turns,
             'start_time' => strval(time()),
             'status' => BetStatusConstant::BETTING,
@@ -88,9 +88,9 @@ class RoundService
         // Uncomment this block if you need to create and save preAutoBetData as well
         // $preAutoBetData = [
         //     'match_id' => $match->id,
-        //     'rival_pair' => $this->home['id'] < $this->away['id']
-        //         ? $this->home['id'] . '|' . $this->away['id']
-        //         : $this->away['id'] . '|' . $this->home['id'],
+        //     'rival_pair' => $this->home->id < $this->away->id
+        //         ? $this->home->id . '|' . $this->away->id
+        //         : $this->away->id . '|' . $this->home->id,
         // ];
 
         // Clear the winner, loser, and turns properties to the default values
@@ -126,23 +126,19 @@ class RoundService
     /**
      * @throws Exception
      */
-    function turnAtk(&$home, &$away): void
+    function turnAtk($home, $away): void
     {
         // Reset
         $home->is_active_skill = false;
         $home->take_skill_dmg = 0;
-        $home->is_active_skill = false;
         $home->take_dmg = 0;
 
         $away->is_active_skill = false;
         $away->take_dmg = 0;
-        $away->is_active_skill = false;
         $away->take_skill_dmg = 0;
 
         // Skill
-        [$i, $y] = SkillFactory::create($home, $away);
-        $home = $i;
-        $away = $y;
+        [$home, $away] = SkillFactory::create($home, $away);
 
         // Random xac suat ne'
         $dodgeProbability = rand(1, 100);

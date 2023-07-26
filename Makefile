@@ -21,7 +21,7 @@ docker-dev:
 
 migrate:
 	php artisan migrate
-migrate-refresh:
+refresh:
 	php artisan migrate:refresh --seed
 seed:
 	php artisan migrate db:seed
