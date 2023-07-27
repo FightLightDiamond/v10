@@ -39,6 +39,10 @@ Route::get('g', function () {
     return Inertia::render('G');
 });
 
+Route::get('/shooter', function () {
+    return Inertia::render('shooter');
+});
+
 
 Route::get('a', function () {
     $fiber = new Fiber(function (): void {
