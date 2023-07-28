@@ -1,7 +1,7 @@
 import {Tilt} from "../Tilt";
 import {motion} from "framer-motion";
 import {IMatchLog} from "@/App/interfaces/match-log.interface";
-import {ProgressBar} from "react-bootstrap";
+import {Progress} from "@/shadcn/ui/progress";
 
 const skills: any = {
   Chiron: "+Atk = 80% máu bị mất. Ví dụ máu giảm 50% tăng 40% ATK, giảm về 90% tăng 72% dame",
@@ -30,11 +30,12 @@ const HeroTurn = ({hero}: { hero: IMatchLog }) => {
     }}
   >
     <div>
-      <ProgressBar label={viewCurrent(hero.current_hp)} variant="danger" now={viewCurrent(hero.current_hp)} max={hero.hp}/>
-      <ProgressBar label={viewCurrent(hero.current_atk)} variant="warning" now={viewCurrent(hero.current_atk)} max={hero.atk * 3}/>
-      <ProgressBar label={viewCurrent(hero.current_def)} variant="info" now={viewCurrent(hero.current_def)} max={hero.def * 3}/>
-      <ProgressBar label={viewCurrent(hero.current_crit_rate)} variant="success" now={viewCurrent(hero.current_crit_rate)} max={100}/>
-      <ProgressBar label={viewCurrent(hero.current_crit_dmg)} now={viewCurrent(hero.current_crit_dmg)} max={400}/>
+        {hero.current_hp}
+        <Progress className={'text-red-600'} value={viewCurrent(hero.current_hp)} max={hero.hp}></Progress>
+        {/*<Progress value={viewCurrent(hero.current_atk)} max={hero.atk * 3}></Progress>*/}
+        {/*<Progress value={viewCurrent(hero.current_def)} max={hero.def * 3}></Progress>*/}
+        {/*<Progress value={viewCurrent(hero.current_crit_rate)} max={100}></Progress>*/}
+        {/*<Progress value={viewCurrent(hero.current_crit_dmg)} max={400}></Progress>*/}
       <div>
         <motion.h1
           animate={{

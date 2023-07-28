@@ -21,11 +21,11 @@ class FightListen
      */
     public function handle(FightEvent $event): void
     {
-//        $event->match->update(
-//            [
-//            'status' => BetStatusConstant::FIGHTING
-//            ]
-//        );
-//       $this->fightService->execute($event->id);
+        //        $event->match->update(
+        //            [
+        //            'status' => BetStatusConstant::FIGHTING
+        //            ]
+        //        );
+        //       $this->fightService->execute($event->id);
     }
 }

@@ -6,8 +6,9 @@ import {BETTING_STATUS, FIGHTING_STATUS} from "@/constants/bet-status.constant"
 import FightingMatch from "../Components/Match/fighting.match";
 import {memo, useEffect, useState} from "react";
 import BettingMatch from "../Components/Match/betting.match";
+import {PageProps} from "@/types";
 
-const Home = () => {
+const Home = ({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: string, phpVersion: string }>) => {
   const dispatch = useDispatch();
   const match: IMatchState = useSelector((state: RootState) => state.match);
   const {currentMatch} = match
@@ -22,14 +23,14 @@ const Home = () => {
 
   const [hero_info, setHeroInfo] = useState([])
   const [turns, setTurns] = useState([])
-
+    console.log({hero_info})
   useEffect(() => {
     if(item.status === BETTING_STATUS) {
-      const hero_info = item.hero_info
+      const hero_info = JSON.parse(item.hero_info)
       setHeroInfo(hero_info)
     }
     if(item.status === FIGHTING_STATUS) {
-      const turns = item.turns
+      const turns = JSON.parse(item.turns)
       setTurns(turns)
     }
   }, [item.id, item.status])

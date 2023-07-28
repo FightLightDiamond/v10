@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TheMatchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('bets', [BetController::class, 'index'])->name('bets.index');
+Route::post('bets', [BetController::class, 'bet'])->name('bets.bet');
+Route::get('matches/current', [TheMatchController::class, 'current'])
+    ->name('matches.current');
+
+
+
 Route::get('g', function () {
     return Inertia::render('G');
 });
@@ -46,7 +55,6 @@ Route::get('/shooter', function () {
 
 Route::get('a', function () {
     $fiber = new Fiber(function (): void {
-        echo 123;
         Fiber::suspend(); // Tạm dừng fiber
         echo 'bfsjf';
     });

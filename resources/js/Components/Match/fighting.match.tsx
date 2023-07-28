@@ -1,11 +1,7 @@
 import { memo, useEffect, useState } from "react";
-import styles from "../../../styles/fighting-match.module.css";
-import { Col, Row } from "react-bootstrap";
-import Spinner from 'react-bootstrap/Spinner';
 import { IMatchLog } from "@/App/interfaces/match-log.interface";
 import HeroTurn from "../hero/hero-select";
 import Countdown from "react-countdown";
-import { Button, MDBIcon } from "mdb-react-ui-kit";
 import { useEffectOnce } from "@/App/Hooks/useEffectOnce";
 
 const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, start_time: number, type?: string }) => {
@@ -76,49 +72,49 @@ const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, sta
   }
 
   return (
-    <div className={styles.container}>
-      <Row className="text-light">
-        <Col xs="6">
+    <div>
+      <div className="text-light">
+        <div   >
           FIGHT TIME: <Countdown date={start_time} />
-        </Col>
-        <Col xs="6">
+        </div>
+        <div >
           ROUND: {home?.turn_number}
-        </Col>
-      </Row>
+        </div>
+      </div>
 
-      <Row className={styles.card + " justify-content-xs-center"}>
-        <Col xs="6">
-          {home ? <HeroTurn hero={home} /> : <Spinner variant="light" animation="border" />}
-        </Col>
-        <Col xs="6">
-          {away ? <HeroTurn hero={away} /> : <Spinner variant="light" animation="border" />}
-        </Col>
-      </Row>
-      {indexInterval > 0 && (<Row className="text-light">
-        <Col xs="6" className="d-flex justify-content-start">
+      <div className={" justify-content-xs-center"}>
+        <div >
+          {home ? <HeroTurn hero={home} /> : <span className="loading loading-spinner loading-lg"></span>}
+        </div>
+        <div >
+          {away ? <HeroTurn hero={away} /> : <span className="loading loading-spinner loading-lg"></span>}
+        </div>
+      </div>
+      {indexInterval > 0 && (<div className="text-light">
+        <div  className="d-flex justify-content-start">
           {indexInterval === items.length - 1 && (
 
-            <Button floating color="dark"
+            <button color="dark"
               onClick={() => setMatch(-1, speedInterval)}>
-              <MDBIcon fas icon="redo-alt" />
-            </Button>
+              -----
+            </button>
           )}
-        </Col>
-        <Col xs="6" className="d-flex justify-content-end">
-          <Button className='mx-2' floating color="dark" type='button' outline={speedInterval === 2}
+        </div>
+        <div  className="d-flex justify-content-end">
+          <button className='mx-2 ' color="dark" type='button'
             onClick={() => setSpeedFunc(2)}>
             x2
-          </Button>
-          <Button floating color="dark" type='button' outline={speedInterval === 4}
+          </button>
+          <button color="dark" type='button'
             onClick={() => setSpeedFunc(4)}>
             x4
-          </Button>
-          <Button className='ms-2' floating color="dark" type='button' outline={speedInterval === 8}
+          </button>
+          <button className='ms-2' color="dark" type='button'
             onClick={() => setSpeedFunc(8)}>
             x8
-          </Button>
-        </Col>
-      </Row>)}
+          </button>
+        </div>
+      </div>)}
     </div >
   );
 };

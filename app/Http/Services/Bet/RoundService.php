@@ -43,7 +43,7 @@ class RoundService
         $this->home = (new HeroLogService())->setCurrent($home);
         $this->away = (new HeroLogService())->setCurrent($away);
         $this->turns = [];
-        $this->hero_info = [$this->home, $this->away];
+        $this->hero_info = [clone $this->home, clone $this->away];
 
         return $this;
     }

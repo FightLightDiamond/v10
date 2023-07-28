@@ -20,39 +20,34 @@ import Echo from 'laravel-echo';
 // @ts-ignore
 import * as io from 'socket.io-client'
 
-// @ts-ignore
+
 window.io = io
 // Have this in case you stop running your laravel echo server
 if (typeof io !== 'undefined') {
-    // @ts-ignore
     window.Echo = new Echo({
         broadcaster: 'socket.io',
         host: window.location.hostname + ':6001',
         transports: ['websocket', 'polling', 'flashsocket'] // Fix CORS error!
     });
 
-    // @ts-ignore
     window.Echo.channel('chat-room')
         .listen('.created', (event: any) => {
             alert(12)
             // Xử lý dữ liệu nhận được từ event
             console.log('New message:', event);
         });
-    // @ts-ignore
     window.Echo.channel('match')
         .listen('.bet', (event: any) => {
             alert('bet')
             // Xử lý dữ liệu nhận được từ event
             console.log('New message:', event);
         });
-    // @ts-ignore
     window.Echo.channel('match')
         .listen('.fight', (event: any) => {
             alert('fight')
             // Xử lý dữ liệu nhận được từ event
             console.log('New message:', event);
         });
-    // @ts-ignore
     window.Echo.channel('match')
         .listen('.reward', (event: any) => {
             alert('reward')

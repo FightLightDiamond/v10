@@ -35,7 +35,7 @@ class FightJob implements ShouldQueue
                 'status' => BetStatusConstant::FIGHTING
             ]
         );
-//        $fightService->execute($this->match->id);
+        //        $fightService->execute($this->match->id);
         FightEvent::dispatch($this->match);
     }
 }

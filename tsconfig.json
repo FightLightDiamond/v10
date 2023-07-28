@@ -10,6 +10,7 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "noEmit": true,
+        "baseUrl": ".",
         "paths": {
             "@/*": ["./resources/js/*"],
             "@floating-ui/core/src/types": ["./node_modules/@floating-ui/core/src/types"],
