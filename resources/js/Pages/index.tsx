@@ -21,6 +21,19 @@ const Home = ({ auth, laravelVersion, phpVersion }: PageProps<{ laravelVersion: 
     })
   });
 
+    useEffect(() => {
+        // Lắng nghe sự kiện "ExampleEvent" từ Laravel Echo
+        window.Echo.channel('example-channel').listen('ExampleEvent', (event) => {
+            console.log('Received event:', event);
+            // Xử lý dữ liệu từ sự kiện tại đây và cập nhật giao diện của bạn
+        });
+
+        // Xoá lắng nghe khi component bị huỷ
+        return () => {
+            window.Echo.leave('example-channel');
+        };
+    }, []);
+
   const [hero_info, setHeroInfo] = useState([])
   const [turns, setTurns] = useState([])
     console.log({hero_info})
