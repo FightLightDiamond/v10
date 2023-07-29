@@ -30,6 +30,5 @@ class PreMatchService
         BetEvent::dispatch($match);
         FightJob::dispatch($match)->delay(60);
         RewardJob::dispatch($match)->delay(180);
-        echo now();
     }
 }

@@ -22,9 +22,8 @@ class BetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "match_id" => 'required|integer|exists:matches,id',
+            "match_id" => 'required|integer|exists:the_matches,id',
             "hero_id" => 'required|integer|exists:heroes,id',
-            //TODO: check balance eng
             "balance" => 'required|integer',
         ];
     }

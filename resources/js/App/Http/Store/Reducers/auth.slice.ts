@@ -42,11 +42,11 @@ export const authSlice = createSlice({
 
 			Cookies.set('token', token)
 			Cookies.set('user', JSON.stringify(user))
-			Cookies.set('balance', user.balance)
+			Cookies.set('balance', user?.balance)
 
 			state.isAuthentication = true
 			state.token = token
-			state.balance = user.balance
+			state.balance = user?.balance
 			state.user = user
 			state.loading = false
 
@@ -77,10 +77,10 @@ export const authSlice = createSlice({
 			const user = action.payload
 
 			Cookies.set('user', JSON.stringify(user))
-			Cookies.set('balance', user.balance)
+			Cookies.set('balance', user?.balance)
 
 			state.isAuthentication = true
-			state.balance = user.balance
+			state.balance = user?.balance
 			state.user = user
 			state.loading = false
 		},

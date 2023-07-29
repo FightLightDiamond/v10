@@ -15,27 +15,24 @@ class FightJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $match;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($match)
+    public function __construct(public $match)
     {
-        //
     }
 
     /**
      * Execute the job.
      */
-    public function handle(FightService $fightService): void
+    public function handle(): void
     {
         $this->match->update(
             [
                 'status' => BetStatusConstant::FIGHTING
             ]
         );
-        //        $fightService->execute($this->match->id);
         FightEvent::dispatch($this->match);
     }
 }

@@ -38,9 +38,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('bets', [BetController::class, 'index'])->name('bets.index');
-Route::post('bets', [BetController::class, 'bet'])->name('bets.bet');
-Route::get('matches/current', [TheMatchController::class, 'current'])
-    ->name('matches.current');
+Route::post('bets', [BetController::class, 'execute'])->name('bets.bet');
+Route::get('the_matches/current', [TheMatchController::class, 'current'])
+    ->name('the_matches.current');
 
 
 

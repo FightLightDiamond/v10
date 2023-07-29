@@ -12,9 +12,8 @@ use Inertia\Inertia;
 class BetController extends Controller
 {
     public function __construct(protected BetService $betService,
-    protected TheMatchService $theMatchService
-    )
-    {
+        protected TheMatchService $theMatchService
+    ) {
     }
 
     public function index(): \Inertia\Response

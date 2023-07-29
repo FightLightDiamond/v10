@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\Bet;
 
+use App\Const\BetStatusConstant;
 use App\Events\RewardEvent;
 use App\Repositories\BetRepository;
 use App\Repositories\TheMatchRepository;
@@ -40,6 +41,10 @@ class RewardService
 
             $this->userGemService->drop($bet->user_id);
         }
+
+        $match->update([
+            'status' => BetStatusConstant::END
+        ]);
 
         RewardEvent::dispatch($bets);
     }

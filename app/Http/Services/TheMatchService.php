@@ -27,16 +27,16 @@ class TheMatchService
         }
 
         switch ($match->status) {
-            case BetStatusConstant::BETTING:
-            case BetStatusConstant::PENDING:
-                return [
+        case BetStatusConstant::BETTING:
+        case BetStatusConstant::PENDING:
+            return [
                     'id' => $match->id,
                     'hero_info' =>$match->hero_info,
                     'status'  => $match->status,
                     'start_time'  => $match->start_time,
                 ];
-            case BetStatusConstant::FIGHTING:
-                return $match;
+        case BetStatusConstant::FIGHTING:
+            return $match;
         }
     }
 }

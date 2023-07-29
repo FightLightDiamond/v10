@@ -113,11 +113,11 @@ const BettingMatch = ({id, items, start_time}: { id: number, items: any, start_t
                         </div>
 
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <label>Remaining: ${Intl.NumberFormat().format(user.balance - balance)}</label>
+                            <label>Remaining: ${Intl.NumberFormat().format(user?.balance - balance)}</label>
                             <Slider
                                 value={[balance]}
                                 defaultValue={[50]}
-                                max={user.balance}
+                                max={user?.balance}
                                 step={1}
 
                             />
@@ -126,32 +126,32 @@ const BettingMatch = ({id, items, start_time}: { id: number, items: any, start_t
                         <div className={'flex justify-between'}>
                             <div>
                                 <Button
-                                    onClick={() => setBalance(user.balance * 0.05)}
+                                    onClick={() => setBalance(user?.balance * 0.05)}
                                 >
                                     5%
                                 </Button>
                             </div>
                             <div>
                                 <Button
-                                    onClick={() => setBalance(user.balance * 0.25)}>
+                                    onClick={() => setBalance(user?.balance * 0.25)}>
                                     25%
                                 </Button>
                             </div>
                             <div>
                                 <Button
-                                    onClick={() => setBalance(user.balance * 0.5)}>
+                                    onClick={() => setBalance(user?.balance * 0.5)}>
                                     50%
                                 </Button>
                             </div>
                             <div>
                                 <Button
-                                    onClick={() => setBalance(user.balance * 0.75)}>
+                                    onClick={() => setBalance(user?.balance * 0.75)}>
                                     75%
                                 </Button>
                             </div>
                             <div>
                                 <Button
-                                    onClick={() => setBalance(user.balance)}>
+                                    onClick={() => setBalance(user?.balance)}>
                                     100%
                                 </Button>
                             </div>

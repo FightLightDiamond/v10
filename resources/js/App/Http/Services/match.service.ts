@@ -2,7 +2,7 @@ import AbstractService from "./_abstract.service";
 import Request from "./request";
 
 class MatchService extends AbstractService {
-  name = 'matches/'
+  name = 'the_matches/'
 
   async getCurrentMatch() {
     try {

@@ -3,20 +3,21 @@
 namespace App\Http\Services\Bet;
 
 use App\Const\BetStatusConstant;
+use App\Repositories\TheMatchRepository;
 
 class FightService
 {
-    //    public function __construct(protected TheMatchRepository $theMatchRepository)
-    //    {
-    //
-    //    }
-
-    public function execute($math): void
+    public function __construct(protected TheMatchRepository $theMatchRepository)
     {
-        $math->update(
+
+    }
+
+    public function execute($mathId): void
+    {
+        $this->theMatchRepository->update(
             [
-            'status' => BetStatusConstant::FIGHTING
-            ]
+                'status' => BetStatusConstant::FIGHTING
+            ], $mathId
         );
     }
 }

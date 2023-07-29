@@ -1,5 +1,7 @@
+// @ts-ignore
 import {io} from "socket.io-client";
 import Cookies from "js-cookie";
+import Echo from "laravel-echo";
 
 const wsEndpoint = '/';
 
@@ -30,12 +32,23 @@ export class WS {
 
         this.status = 1
 
-        this.client = await io(wsEndpoint, {
-            reconnection: true,
-            reconnectionDelay: 500,
-            extraHeaders: {
-                Authorization: `${this.token}`
-            },
+        // this.client = await io(wsEndpoint, {
+        //     reconnection: true,
+        //     reconnectionDelay: 500,
+        //     extraHeaders: {
+        //         Authorization: `${this.token}`
+        //     },
+        // });
+
+        this.client = new Echo({
+            broadcaster: 'redis',
+            // key: import.meta.env.VITE_PUSHER_APP_KEY,
+            // cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
+            // wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+            // wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
+            // wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
+            // forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+            // enabledTransports: ['ws', 'wss'],
         });
 
         this.status = 0;

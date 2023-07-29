@@ -82,7 +82,7 @@ const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, sta
         </div>
       </div>
 
-      <div className={" justify-content-xs-center"}>
+      <div className={"flex flex-row"}>
         <div >
           {home ? <HeroTurn hero={home} /> : <span className="loading loading-spinner loading-lg"></span>}
         </div>

@@ -22,14 +22,7 @@ function viewCurrent(c: number | undefined) {
 }
 
 const HeroTurn = ({hero}: { hero: IMatchLog }) => {
-  return <Tilt
-    options={{
-      scale: 1,
-      speed: 1000,
-      max: 10,
-    }}
-  >
-    <div>
+  return <div>
         {hero.current_hp}
         <Progress className={'text-red-600'} value={viewCurrent(hero.current_hp)} max={hero.hp}></Progress>
         {/*<Progress value={viewCurrent(hero.current_atk)} max={hero.atk * 3}></Progress>*/}
@@ -58,7 +51,7 @@ const HeroTurn = ({hero}: { hero: IMatchLog }) => {
           }}
           className="text-danger text-center">{hero.take_dmg ? "-" + hero.take_dmg : ''}&nbsp;</motion.h1>
       </div>
-      <motion.div
+      <motion.div className={'h-full'}
                   key={hero.name}
                   animate={{
                     scale: !hero.take_dmg ? [0.5, 0.7] : 0.7,
@@ -74,12 +67,11 @@ const HeroTurn = ({hero}: { hero: IMatchLog }) => {
         <img
           src={`/img/heroes/${hero?.name}.png`}
           alt="of the author"
-          className="img-fluid"
+          className="w-full h-full  object-cover"
         />
       </motion.div>
       <p className="text-light text-center">Nội tại: {skills[hero.name]}</p>
     </div>
-  </Tilt>
 }
 
 export default HeroTurn
