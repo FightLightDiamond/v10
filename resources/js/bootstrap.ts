@@ -32,27 +32,25 @@ if (typeof io !== 'undefined') {
 
     window.Echo.channel('chat-room')
         .listen('.created', (event: any) => {
-            alert(12)
+            console.log(12)
             // Xử lý dữ liệu nhận được từ event
             console.log('New message:', event);
         });
-    window.Echo.channel('match')
-        .listen('.bet', (event: any) => {
-            alert('bet')
-            // Xử lý dữ liệu nhận được từ event
-            console.log('New message:', event);
-        });
-    window.Echo.channel('match')
-        .listen('.fight', (event: any) => {
-            alert('fight')
-            // Xử lý dữ liệu nhận được từ event
-            console.log('New message:', event);
-        });
+    // window.Echo.channel('match')
+    //     .listen('.bet', (event: any) => {
+    //         console.log('bet')
+    //         // Xử lý dữ liệu nhận được từ event
+    //         console.log('New message:', event);
+    //     });
+    // window.Echo.channel('match')
+    //     .listen('.fight', (event: any) => {
+    //         console.log('fight')
+    //         // Xử lý dữ liệu nhận được từ event
+    //         console.log('New message:', event);
+    //     });
     window.Echo.channel('match')
         .listen('.reward', (event: any) => {
-            alert('reward')
-            // Xử lý dữ liệu nhận được từ event
-            console.log('New message:', event);
+            console.log('reward:', event);
         });
 }
 

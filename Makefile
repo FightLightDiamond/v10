@@ -33,3 +33,5 @@ start:
 	php artisan octane:start
 echo:
 	laravel-echo-server start
+pm2:
+	pm2 start processes.yaml
