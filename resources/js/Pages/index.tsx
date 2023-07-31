@@ -32,7 +32,7 @@ const Home = ({auth, laravelVersion, phpVersion}: PageProps<{ laravelVersion: st
         window.Echo.channel('match')
             .listen('.fight', (event: any) => {
                 setStatus(event.match.status);
-                setHeroInfo(JSON.parse(event.match.turns))
+                setTurns(JSON.parse(event.match.turns))
                 console.log('fight:', event);
             });
     });

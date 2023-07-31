@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Const\BetStatusConstant;
 use App\Events\FightEvent;
-use App\Http\Services\Bet\FightService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
