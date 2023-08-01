@@ -3,6 +3,7 @@ import { IMatchLog } from "@/App/interfaces/match-log.interface";
 import HeroTurn from "../hero/hero-select";
 import Countdown from "react-countdown";
 import { useEffectOnce } from "@/App/Hooks/useEffectOnce";
+import {Progress} from "@/shadcn/ui/progress";
 
 const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, start_time: number, type?: string }) => {
   /**
@@ -74,7 +75,7 @@ const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, sta
   return (
     <div>
       <div className="text-light">
-        <div   >
+        <div>
           FIGHT TIME: <Countdown date={start_time} />
         </div>
         <div >
@@ -84,10 +85,10 @@ const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, sta
 
       <div className={"flex flex-row"}>
         <div >
-          {home ? <HeroTurn hero={home} /> : <span className="loading loading-spinner loading-lg"></span>}
+          {home ? <HeroTurn hero={home} /> : <Progress data-state={"loading"} value={100} className="w-[60%]" />}
         </div>
         <div >
-          {away ? <HeroTurn hero={away} /> : <span className="loading loading-spinner loading-lg"></span>}
+          {away ? <HeroTurn hero={away} /> : <Progress data-state={"loading"} value={100} className="w-[60%]" />}
         </div>
       </div>
       {indexInterval > 0 && (<div className="text-light">

@@ -104,6 +104,7 @@ class RoundService
         $away->is_atk = false;
         $this->turnAtk($home, $away);
 
+        //Check hết máu
         if ($home->current_hp <= 0 || $away->current_hp <= 0) {
             return;
         }
@@ -112,8 +113,6 @@ class RoundService
         $away->is_atk = true;
         $home->is_atk = false;
         $this->turnAtk($away, $home);
-
-        return;
     }
 
     /**
@@ -134,17 +133,13 @@ class RoundService
         [$home, $away] = SkillFactory::create($home, $away);
 
         // Random xac suat ne'
-        $dodgeProbability = rand(1, 100);
-
-        if ($dodgeProbability > $away->dodge) {
+        if (rand(1, 100) > $away->dodge) {
             // Dame
             $dame = $home->current_atk;
             $dame -= $away->current_def;
 
             // Random xac suat crit
-            $bProbability = rand(1, 100);
-
-            if ($bProbability <= $home->current_crit_rate) {
+            if (rand(1, 100) <= $home->current_crit_rate) {
                 $dame = round(($dame * $home->current_crit_dmg) / 100);
                 $home->is_crit = true;
             }
@@ -156,7 +151,7 @@ class RoundService
 
             // Neu tuong la` Nezha
             $ratioHp = $home->current_hp / $home->hp;
-            if ($home->name == 'Nezha') {
+            if ($home->name === 'Nezha') {
                 if ($ratioHp <= 0.8) {
                     // Hoi HP tuong duong 50% dame
                     $home->current_hp += round($dame * 0.5);
@@ -175,7 +170,7 @@ class RoundService
             //TODO: xử lý hiển thị né
             //$away->take_dmg = -1;
         }
-        $this->turns[] = clone ($home);
-        $this->turns[] = clone ($away);
+        $this->turns[] = $home->toArray();
+        $this->turns[] = $away->toArray();
     }
 }

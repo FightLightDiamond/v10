@@ -58,28 +58,4 @@ class HeroLogService
 
         return $this;
     }
-
-    /**
-     * Hero atk
-     *
-     * @param $away
-     */
-    function attack($away)
-    {
-        // Turn 1
-        [$home2, $away2] = TurnService::turn($this, $away);
-
-        if ($away2->current_hp <= 0) {
-            return [$home2, $away2];
-        }
-
-        // Turn 2
-        [$away3, $home3] = TurnService::turn($away2, $home2);
-
-        if ($home3->current_hp <= 0) {
-            return [$home3, $away3];
-        }
-
-        return [$home2, $away2, $home3, $away3];
-    }
 }
