@@ -34,7 +34,12 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "ACL\\": "modules/ACL/src",
+            "Cuongpm\\Modularization\\": "modules/Cuongpm/Modularization/src",
+            "Cuongpm\\Uploader\\": "modules/Cuongpm/Uploader/src",
+            "English\\": "modules/English/src",
+            "Tutorial\\": "modules/Tutorial/src"
         }
     },
     "autoload-dev": {
