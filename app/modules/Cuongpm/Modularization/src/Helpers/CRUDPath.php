@@ -107,7 +107,7 @@ class CRUDPath
 
     static function inTransLabel()
     {
-        return (self::viewPath() . '/trans/label.php');
+        return (self::viewPath() . '/trans/label.txt');
     }
 
     static function outTransLabel()
@@ -117,7 +117,7 @@ class CRUDPath
 
     static function inTransTable()
     {
-        return (self::viewPath() . '/trans/table.php');
+        return (self::viewPath() . '/trans/table.txt');
     }
 
     static function outTransTable()

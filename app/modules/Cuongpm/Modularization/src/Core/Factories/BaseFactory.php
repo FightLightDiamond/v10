@@ -38,7 +38,7 @@ class BaseFactory
     }
 
 
-    protected function getSource($path, $auth)
+    public function getSource($path, $auth)
     {
         $segments = [$path, $this->sortPath];
 

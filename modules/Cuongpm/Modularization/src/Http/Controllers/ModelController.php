@@ -24,10 +24,10 @@ class ModelController extends Controller
     public function produce($table = 'users')
     {
         $this->factory->building($table);
-        return $this->show($table);
+        $this->show($table);
     }
 
-    public function show($table = 'users')
+    public function show($table = 'users'): void
     {
         echo $patch = $this->factory->getSource($table);
         echo '<pre>';
