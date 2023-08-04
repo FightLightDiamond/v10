@@ -12,13 +12,13 @@ use Cuongpm\Modularization\Core\Components\BaseComponent;
 
 class ResourceCollectionComponent extends BaseComponent
 {
-    public function building($input, $auth = 'API')
+    public function building($params, $auth = 'API')
     {
         $inPath = $this->getSource($auth);
         $this->source = file_get_contents($inPath);
 
-        $this->buildNameSpace($input['namespace']);
-        $this->buildClassName($input['table']);
+        $this->buildNameSpace($params['namespace']);
+        $this->buildClassName($params['table']);
 
         return $this->source;
     }

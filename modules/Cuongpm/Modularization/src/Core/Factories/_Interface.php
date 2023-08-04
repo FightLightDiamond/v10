@@ -13,5 +13,5 @@ interface _Interface
 {
     public function produce($material, $path);
 
-    public function building($input);
+    public function building($params);
 }

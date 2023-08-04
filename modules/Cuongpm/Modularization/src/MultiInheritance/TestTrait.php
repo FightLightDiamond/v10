@@ -56,8 +56,8 @@ trait TestTrait
 
     public function setAuth()
     {
-        $this->setUsername( config('modularization.test.user_account.username'));
-        $this->setPassword( config('modularization.test.user_account.username'));
+        $this->setUsername(config('modularization.test.user_account.username'));
+        $this->setPassword(config('modularization.test.user_account.username'));
         $this->setProvider('users');
     }
 
@@ -76,7 +76,7 @@ trait TestTrait
 
     private function cacheToken($client_id, $client_secret)
     {
-//        return cache()->remember('token', 0, function () use ($client_id, $client_secret) {
+        //        return cache()->remember('token', 0, function () use ($client_id, $client_secret) {
         $params = [
             "grant_type" => "password",
             "client_id" => $client_id,
@@ -89,7 +89,7 @@ trait TestTrait
         $res = $this->post('/oauth/token', $params);
 
         return json_decode($res->content(), true)['access_token'];
-//        });
+        //        });
     }
 
     protected function getOauthClient()

@@ -15,12 +15,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CrazySpeakHistoryTest extends TestCase
 {
-	use TestTrait;
+    use TestTrait;
 
-	public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct();
-    }
+
 
     public function setAuth()
     {

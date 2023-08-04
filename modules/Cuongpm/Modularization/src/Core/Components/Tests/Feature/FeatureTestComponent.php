@@ -49,20 +49,22 @@ class FeatureTestComponent extends BaseComponent
 
         $class = $this->class;
 
-        $this->model = FormatFa::mixUri([
+        $this->model = FormatFa::mixUri(
+            [
             "", $namespace, 'Models', $class
-        ], '\\');
+            ], '\\'
+        );
 
         $this->working(DecoHelper::MODEL, $this->model);
     }
 
-    public function building($input, $auth = 'API')
+    public function building($params, $auth = 'API')
     {
         $this->source = file_get_contents($this->getSource($auth));
 
-        $table = $input['table'];
-        $namespace = $input['namespace'];
-        $route = $input['route'];
+        $table = $params['table'];
+        $namespace = $params['namespace'];
+        $route = $params['route'];
 
         if ($namespace === 'App\\') {
             $this->buildNameSpace('');

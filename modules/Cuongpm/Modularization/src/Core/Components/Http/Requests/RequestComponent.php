@@ -42,13 +42,13 @@ class RequestComponent extends BaseComponent
         $this->buildNameSpace($namespace);
         $this->buildRule($table);
         $this->buildMessage();
-        $this->buildClassName(RequestComponent . phpStr::singular($table) . $action);
+        $this->buildClassName(Str::singular($table) . $action);
 
         return $this->source;
     }
 
     private function getSource($auth)
     {
-        return $this->getRequestPath( "/{$auth}/request.txt");
+        return $this->getRequestPath("/{$auth}/request.txt");
     }
 }

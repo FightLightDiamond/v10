@@ -25,9 +25,9 @@ class CrazySpeakHistoryUpdateRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-'crazy_id' => 'required',
-'score' => 'required',
-'audio' => 'required',
+        'crazy_id' => 'required',
+        'score' => 'required',
+        'audio' => 'required',
 
         ];
     }

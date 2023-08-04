@@ -13,7 +13,7 @@ class ServiceProviderComponent  extends BaseComponent
 {
     public function __construct()
     {
-        $this->source = file_get_contents( $this->getServiceProviderPath( '/ServiceProvider.txt'));
+        $this->source = file_get_contents($this->getServiceProviderPath('/ServiceProvider.txt'));
     }
 
     protected function buildPrefix($prefix)

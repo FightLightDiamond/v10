@@ -3,7 +3,6 @@
  * Created by cuongpm/modularization.
  * Author: Fight Light Diamond i.am.m.cuong@gmail.com
  * MIT: 2e566161fd6039c38070de2ac4e4eadd8024a825
- *
  */
 
 namespace English\Http\Services\Admin;
@@ -19,19 +18,19 @@ class CrazyService
         $this->repository = $repository;
     }
 
-    public function index($input)
+    public function index($params)
     {
-        $input['{relationship}'] = null;
-        $input['sort'] = 'id|desc';
+        $params['{relationship}'] = null;
+        $params['sort'] = 'id|desc';
 
-        return $this->repository->myPaginate($input);
+        return $this->repository->myPaginate($params);
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $crazy = $this->repository->store($input);
+        $crazy = $this->repository->store($params);
 
-        $crazy->details()->createMany($input['details']);
+        $crazy->details()->createMany($params['details']);
         return $crazy;
     }
 
@@ -42,13 +41,13 @@ class CrazyService
 
     public function edit($id)
     {
-       return $this->repository->find($id);
+        return $this->repository->find($id);
     }
 
-    public function update($input, $id)
+    public function update($params, $id)
     {
         $crazy = $this->repository->find($id);
-        $details = $input['details'];
+        $details = $params['details'];
         $detailIds = $crazy->details()->pluck('id')->toArray();
 
         $ids = [];
@@ -68,7 +67,7 @@ class CrazyService
         $diffIds = array_diff($detailIds, $ids);
         $crazy->details()->whereIn('id', $diffIds)->delete();
 
-        return $this->repository->change($input, $crazy);
+        return $this->repository->change($params, $crazy);
     }
 
     public function destroy($id)

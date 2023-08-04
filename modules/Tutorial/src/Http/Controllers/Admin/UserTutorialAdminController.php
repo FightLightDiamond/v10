@@ -21,9 +21,10 @@ class UserTutorialAdminController extends Controller
         $this->service = $service;
     }
 
-	/**
+    /**
      * Paginate
-     * @group UserTutorial
+     *
+     * @group         UserTutorial
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,10 +62,10 @@ class UserTutorialAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $user_tutorials = $this->service->index($input);
+            $params = $request->all();
+            $user_tutorials = $this->service->index($params);
             return view('tut::user-tutorial.index', compact('user_tutorials'));
-//           return new UserTutorialResourceCollection($data);
+            //           return new UserTutorialResourceCollection($data);
         } catch (\Exception $exception) {
             logger($exception);
             return response()->json($exception->getMessage(), 500);
@@ -76,9 +77,10 @@ class UserTutorialAdminController extends Controller
         return view('tut::user-tutorial.create');
     }
 
-	/**
+    /**
      * Create
-     * @group UserTutorial
+     *
+     * @group         UserTutorial
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -89,29 +91,28 @@ class UserTutorialAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(UserTutorialCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $userTutorial = $this->service->store($input);
+            $params = $request->all();
+            $userTutorial = $this->service->store($params);
             session()->flash('success', 'Assign success');
-//            return new UserTutorialResource($userTutorial);
+            //            return new UserTutorialResource($userTutorial);
         } catch (\Exception $exception) {
             logger($exception);
             session()->flash('error', $exception->getMessage());
-//            return response()->json($exception->getMessage(), 500);
+            //            return response()->json($exception->getMessage(), 500);
         }
 
         return back();
     }
 
-	/**
+    /**
      * Show
-     * @group UserTutorial
-     * @authenticated
      *
+     * @group         UserTutorial
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -119,7 +120,6 @@ class UserTutorialAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -133,9 +133,10 @@ class UserTutorialAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group UserTutorial
+     *
+     * @group         UserTutorial
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -146,13 +147,12 @@ class UserTutorialAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(UserTutorialUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         try {
-            $data = $this->service->update($input, $id);
+            $data = $this->service->update($params, $id);
 
             return new UserTutorialResource($data);
         } catch (\Exception $exception) {
@@ -161,9 +161,10 @@ class UserTutorialAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group UserTutorial
+     *
+     * @group         UserTutorial
      * @authenticated
      *
      * @response {
@@ -172,17 +173,16 @@ class UserTutorialAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {
         try {
             $this->service->destroy($id);
             session()->flash('success', 'Reject success');
-//            return new UserTutorialResource($data);
+            //            return new UserTutorialResource($data);
         } catch (\Exception $exception) {
             logger($exception);
-//            return response()->json($exception->getMessage(), 500);
+            //            return response()->json($exception->getMessage(), 500);
             session()->flash('error', $exception->getMessage());
         }
 

@@ -21,9 +21,10 @@ class CrazyCourseAdminController extends Controller
         $this->service = $service;
     }
 
-	/**
+    /**
      * Paginate
-     * @group CrazyCourse
+     *
+     * @group         CrazyCourse
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,19 +62,20 @@ class CrazyCourseAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $data = $this->service->index($input);
+            $params = $request->all();
+            $data = $this->service->index($params);
 
-           return  CrazyCourseResource::collection($data);
+            return  CrazyCourseResource::collection($data);
         } catch (\Exception $exception) {
             logger($exception);
             return response()->json($exception->getMessage(), 500);
         }
     }
 
-	/**
+    /**
      * Create
-     * @group CrazyCourse
+     *
+     * @group         CrazyCourse
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -84,13 +86,12 @@ class CrazyCourseAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(CrazyCourseCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $crazyCourse = $this->service->store($input);
+            $params = $request->all();
+            $crazyCourse = $this->service->store($params);
 
             return response()->json(new CrazyCourseResource($crazyCourse));
         } catch (\Exception $exception) {
@@ -99,11 +100,11 @@ class CrazyCourseAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Show
-     * @group CrazyCourse
-     * @authenticated
      *
+     * @group         CrazyCourse
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -111,7 +112,6 @@ class CrazyCourseAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -125,9 +125,10 @@ class CrazyCourseAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group CrazyCourse
+     *
+     * @group         CrazyCourse
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -138,14 +139,13 @@ class CrazyCourseAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(CrazyCourseUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
 
         try {
-            $crazyCourse = $this->service->update($input, $id);
+            $crazyCourse = $this->service->update($params, $id);
 
             return response()->json(new CrazyCourseResource($crazyCourse));
         } catch (\Exception $exception) {
@@ -154,9 +154,10 @@ class CrazyCourseAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group CrazyCourse
+     *
+     * @group         CrazyCourse
      * @authenticated
      *
      * @response {
@@ -165,7 +166,6 @@ class CrazyCourseAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {

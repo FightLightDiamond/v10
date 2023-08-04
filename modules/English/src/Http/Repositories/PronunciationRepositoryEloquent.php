@@ -11,6 +11,7 @@ use English\Models\Pronunciation;
 
 /**
  * Class NewsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class PronunciationRepositoryEloquent extends BaseRepository implements PronunciationRepository
@@ -27,20 +28,20 @@ class PronunciationRepositoryEloquent extends BaseRepository implements Pronunci
         return Pronunciation::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input[PER_PAGE]) ?: $input[PER_PAGE] = 10;
+
         return $this->makeModel()
-            ->filter($input)
-            ->orders(isset($input['orderBy']) ? $input['orderBy'] : [ 'id' => 'DESC' ])
-            ->paginate($input[PER_PAGE]);
+            ->filter($params)
+            ->orders(isset($params['orderBy']) ? $params['orderBy'] : [ 'id' => 'DESC' ])
+            ->paginate(10);
 
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input['created_by'] = auth()->id();
-        return $this->create($input);
+        $params['created_by'] = auth()->id();
+        return $this->create($params);
     }
 
     public function edit($id)
@@ -49,19 +50,19 @@ class PronunciationRepositoryEloquent extends BaseRepository implements Pronunci
         if (empty($pronunciation)) {
             return $pronunciation;
         }
-        return compact('Pronunciation');
+        return compact('pronunciation');
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        $input['updated_by'] = auth()->id();
+        $params['updated_by'] = auth()->id();
 
-        return $this->update($input, $data->id);
- }
+        return $this->update($params, $data->id);
+    }
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        return $data->uploads($input);
+        return $data->uploads($params);
     }
 
     public function destroy($data)

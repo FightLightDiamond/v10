@@ -30,7 +30,7 @@ class LessonCommentUpdateRequest extends FormRequest
 
     public function messages()
     {
-       return [
+        return [
                    ];
     }
 }

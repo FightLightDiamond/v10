@@ -15,38 +15,38 @@ class SectionTest extends Model implements Transformable
     public $table = 'section_tests';
     public $fillable = ['section_id', 'questions', 'reply1', 'reply2', 'reply3', 'reply4', 'answer', 'is_active', 'created_by', 'updated_by'];
 
-    public function scopeFilter($query, $input)
+    public function scopeFilter($query, $params)
     {
-        if(isset($input['section_id'])) {
-                $query->where('section_id', $input['section_id']);
-                }
-if(isset($input['questions'])) {
-                $query->where('questions', $input['questions']);
-                }
-if(isset($input['reply1'])) {
-                $query->where('reply1', $input['reply1']);
-                }
-if(isset($input['reply2'])) {
-                $query->where('reply2', $input['reply2']);
-                }
-if(isset($input['reply3'])) {
-                $query->where('reply3', $input['reply3']);
-                }
-if(isset($input['reply4'])) {
-                $query->where('reply4', $input['reply4']);
-                }
-if(isset($input['answer'])) {
-                $query->where('answer', $input['answer']);
-                }
-if(isset($input['is_active'])) {
-                $query->where('is_active', $input['is_active']);
-                }
-if(isset($input['created_by'])) {
-                $query->where('created_by', $input['created_by']);
-                }
-if(isset($input['updated_by'])) {
-                $query->where('updated_by', $input['updated_by']);
-                }
+        if(isset($params['section_id'])) {
+                $query->where('section_id', $params['section_id']);
+        }
+        if(isset($params['questions'])) {
+                $query->where('questions', $params['questions']);
+        }
+        if(isset($params['reply1'])) {
+                $query->where('reply1', $params['reply1']);
+        }
+        if(isset($params['reply2'])) {
+                $query->where('reply2', $params['reply2']);
+        }
+        if(isset($params['reply3'])) {
+                $query->where('reply3', $params['reply3']);
+        }
+        if(isset($params['reply4'])) {
+                $query->where('reply4', $params['reply4']);
+        }
+        if(isset($params['answer'])) {
+                $query->where('answer', $params['answer']);
+        }
+        if(isset($params['is_active'])) {
+                $query->where('is_active', $params['is_active']);
+        }
+        if(isset($params['created_by'])) {
+                $query->where('created_by', $params['created_by']);
+        }
+        if(isset($params['updated_by'])) {
+                $query->where('updated_by', $params['updated_by']);
+        }
 
         return $query;
     }

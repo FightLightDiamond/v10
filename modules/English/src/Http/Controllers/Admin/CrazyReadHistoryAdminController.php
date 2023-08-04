@@ -21,9 +21,10 @@ class CrazyReadHistoryAdminController extends Controller
         $this->service = $service;
     }
 
-	/**
+    /**
      * Paginate
-     * @group CrazyReadHistory
+     *
+     * @group         CrazyReadHistory
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,18 +62,19 @@ class CrazyReadHistoryAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $data = $this->service->index($input);
+            $params = $request->all();
+            $data = $this->service->index($params);
 
-           return new CrazyReadHistoryResourceCollection($data);
+            return new CrazyReadHistoryResourceCollection($data);
         } catch (\Exception $exception) {
             return response()->json($exception->getMessage(), 500);
         }
     }
 
-	/**
+    /**
      * Create
-     * @group CrazyReadHistory
+     *
+     * @group         CrazyReadHistory
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -83,13 +85,12 @@ class CrazyReadHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(CrazyReadHistoryCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $crazyReadHistory = $this->service->store($input);
+            $params = $request->all();
+            $crazyReadHistory = $this->service->store($params);
 
             return new CrazyReadHistoryResource($crazyReadHistory);
         } catch (\Exception $exception) {
@@ -97,11 +98,11 @@ class CrazyReadHistoryAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Show
-     * @group CrazyReadHistory
-     * @authenticated
      *
+     * @group         CrazyReadHistory
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -109,7 +110,6 @@ class CrazyReadHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -122,9 +122,10 @@ class CrazyReadHistoryAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group CrazyReadHistory
+     *
+     * @group         CrazyReadHistory
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -135,13 +136,12 @@ class CrazyReadHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(CrazyReadHistoryUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         try {
-            $data = $this->service->update($input, $id);
+            $data = $this->service->update($params, $id);
 
             return new CrazyReadHistoryResource($data);
         } catch (\Exception $exception) {
@@ -149,9 +149,10 @@ class CrazyReadHistoryAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group CrazyReadHistory
+     *
+     * @group         CrazyReadHistory
      * @authenticated
      *
      * @response {
@@ -160,7 +161,6 @@ class CrazyReadHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {

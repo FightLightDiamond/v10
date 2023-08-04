@@ -13,14 +13,16 @@ class CrazySpeakHistories extends Migration
      */
     public function up()
     {
-        Schema::create('crazy_speak_histories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->string('crazy_id');
-            $table->mediumInteger('score')->default(0);
-            $table->string('audio')->nullable();
-            $table->timestamps();
-        });
+        Schema::create(
+            'crazy_speak_histories', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->bigInteger('user_id');
+                $table->string('crazy_id');
+                $table->mediumInteger('score')->default(0);
+                $table->string('audio')->nullable();
+                $table->timestamps();
+            }
+        );
     }
 
     /**

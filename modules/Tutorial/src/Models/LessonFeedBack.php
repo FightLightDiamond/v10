@@ -15,23 +15,23 @@ class LessonFeedBack extends Model implements Transformable
     public $table = 'lesson_feed_backs';
     public $fillable = ['lesson_id', 'title', 'content', 'create_by', 'is_active'];
 
-    public function scopeFilter($query, $input)
+    public function scopeFilter($query, $params)
     {
-        if(isset($input['lesson_id'])) {
-                $query->where('lesson_id', $input['lesson_id']);
-                }
-if(isset($input['title'])) {
-                $query->where('title', $input['title']);
-                }
-if(isset($input['content'])) {
-                $query->where('content', $input['content']);
-                }
-if(isset($input['create_by'])) {
-                $query->where('create_by', $input['create_by']);
-                }
-if(isset($input['is_active'])) {
-                $query->where('is_active', $input['is_active']);
-                }
+        if(isset($params['lesson_id'])) {
+                $query->where('lesson_id', $params['lesson_id']);
+        }
+        if(isset($params['title'])) {
+                $query->where('title', $params['title']);
+        }
+        if(isset($params['content'])) {
+                $query->where('content', $params['content']);
+        }
+        if(isset($params['create_by'])) {
+                $query->where('create_by', $params['create_by']);
+        }
+        if(isset($params['is_active'])) {
+                $query->where('is_active', $params['is_active']);
+        }
 
         return $query;
     }

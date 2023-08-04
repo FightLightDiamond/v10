@@ -29,15 +29,17 @@ Route::middleware(['api'])
     ->namespace('English\Http\Controllers\Admin')
     ->prefix('api/v1/admin')
     ->name('api.admin.')
-    ->group(function () {
-        Route::resource('crazy-listen-histories' , 'CrazyListenHistoryAdminController');
+    ->group(
+        function () {
+            Route::resource('crazy-listen-histories', 'CrazyListenHistoryAdminController');
 
-        Route::get('/dashboard', 'DashboardController@index')->name('english.dashboard');
+            Route::get('/dashboard', 'DashboardController@index')->name('english.dashboard');
 
-        Route::resource('blogs' , 'BlogAdminController');
-        Route::resource('crazies', 'CrazyAdminController');
-        Route::resource('crazy-courses', 'CrazyCourseAdminController');
+            Route::resource('blogs', 'BlogAdminController');
+            Route::resource('crazies', 'CrazyAdminController');
+            Route::resource('crazy-courses', 'CrazyCourseAdminController');
 
-        Route::resource('crazy-listen-histories' , 'CrazyListenHistoryAdminController');
-        Route::resource('crazy-speak-histories' , 'CrazySpeakHistoryAdminController');
-    });
+            Route::resource('crazy-listen-histories', 'CrazyListenHistoryAdminController');
+            Route::resource('crazy-speak-histories', 'CrazySpeakHistoryAdminController');
+        }
+    );

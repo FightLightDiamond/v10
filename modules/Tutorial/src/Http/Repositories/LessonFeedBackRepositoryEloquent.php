@@ -12,6 +12,7 @@ use Tutorial\Models\LessonFeedBack;
 
 /**
  * Class NewsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class LessonFeedBackRepositoryEloquent extends BaseRepository implements LessonFeedBackRepository
@@ -27,32 +28,32 @@ class LessonFeedBackRepositoryEloquent extends BaseRepository implements LessonF
         return LessonFeedBack::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input['per_page']) ?: $input['per_page'] = 10;
+        isset($params['per_page']) ?: $params['per_page'] = 10;
         return $this->makeModel()
-            ->filter($input)
-            ->paginate($input['per_page']);
+            ->filter($params)
+            ->paginate($params['per_page']);
 
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input = $this->standardized($input, $this->makeModel());
-        $this->create($input);
+        $params = $this->standardized($params, $this->makeModel());
+        $this->create($params);
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        $input = $this->standardized($input, $data);
-        $this->update($input, $data->id);
+        $params = $this->standardized($params, $data);
+        $this->update($params, $data->id);
     }
 
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        $input = $data->uploads($input);
-        return $data->checkbox($input);
+        $params = $data->uploads($params);
+        return $data->checkbox($params);
     }
 
     public function destroy($data)

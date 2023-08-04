@@ -20,59 +20,73 @@ class BaseComponent
         return dirname(dirname(dirname(__DIR__))) . ('/resources/materials/');
     }
 
-    public function getViewPath($path) {
+    public function getViewPath($path)
+    {
         return $this->getPath() . 'resources' . $path;
     }
 
-    public function getCtrlPath($path) {
+    public function getCtrlPath($path)
+    {
         return $this->getPath() . ('Http/Controllers') . $path;
     }
 
-    public function getRequestPath($path) {
+    public function getRequestPath($path)
+    {
         return $this->getPath() . ('Http/Requests') . $path;
     }
 
-    public function getViewComposerPath($path) {
+    public function getViewComposerPath($path)
+    {
         return $this->getPath() . ('Http/ViewComposers') . $path;
     }
 
-    public function getServicePath($path) {
+    public function getServicePath($path)
+    {
         return $this->getPath() . ('Http/Services') . $path;
     }
 
-    public function getRepositoryPath($path) {
+    public function getRepositoryPath($path)
+    {
         return $this->getPath() . ('Http/Repositories') . $path;
     }
 
-    public function getModelPath($path) {
+    public function getModelPath($path)
+    {
         return $this->getPath() . ('Models') . $path;
     }
 
-    public function getTestPatch($path) {
+    public function getTestPatch($path)
+    {
         return $this->getPath() . ('Tests') . $path;
     }
 
-    public function getConstPath($path) {
+    public function getConstPath($path)
+    {
         return $this->getPath() . ('const') . $path;
     }
 
-    public function getObserverPath($path) {
+    public function getObserverPath($path)
+    {
         return $this->getPath() . ('Observers') . $path;
     }
 
-    public function getPolicyPath($path) {
+    public function getPolicyPath($path)
+    {
         return $this->getPath() . ('Policies') . $path;
     }
 
-    public function getServiceProviderPath($path) {
+    public function getServiceProviderPath($path)
+    {
         return $this->getPath() . $path;
     }
 
-    public function getRouterPath($path) {
+    public function getRouterPath($path)
+    {
         return $this->getPath() . ('routes') . $path;
     }
 
-    public function getResourcePath($path) {
+    public function getResourcePath($path)
+    {
         return $this->getPath() . ('Http/Resources') . $path;
     }
 

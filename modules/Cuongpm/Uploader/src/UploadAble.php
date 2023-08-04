@@ -14,35 +14,35 @@ use Cuongpm\Uploader\Facades\UploadFa;
 
 trait UploadAble
 {
-    private $input;
+    private $params;
 
     private function getBasePath()
     {
         return config('filesystems.disks.public.root');
     }
 
-    public function uploader($input)
+    public function uploader($params)
     {
         $uploader = $this->getModelUploadClass();
-        $u = new $uploader($this, $input);
+        $u = new $uploader($this, $params);
 
         return $u->handle();
     }
 
-    public function uploaderSave($input)
+    public function uploaderSave($params)
     {
-        $this->uploader($input);
-        $this->fill($input);
+        $this->uploader($params);
+        $this->fill($params);
         return $this->save();
     }
 
-    public function uploads($input)
+    public function uploads($params)
     {
-        $this->input = $input;
+        $this->input = $params;
 
         if (isset($this->fileUpload)) {
             foreach ($this->pathUpload as $name => $type) {
-                if (isset($input[$name]) && request()->hasFile($name)) {
+                if (isset($params[$name]) && request()->hasFile($name)) {
                     $this->doing($name, $type);
                 }
             }

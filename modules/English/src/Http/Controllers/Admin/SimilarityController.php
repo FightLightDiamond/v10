@@ -3,7 +3,7 @@
 namespace English\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Cuongpm\Modularization\Facades\InputFa;
+
 use English\Models\Similarity;
 use English\Http\Requests\SimilarityCreateRequest;
 use English\Http\Requests\SimilarityUpdateRequest;
@@ -23,8 +23,8 @@ class SimilarityController extends Controller
 
     public function index(Request $request)
     {
-        $input = $request->all();
-        $data['similarities'] = $this->repository->myPaginate($input);
+        $params = $request->all();
+        $data['similarities'] = $this->repository->myPaginate($params);
         if ($request->ajax()) {
             return view('en::admin.similarity.table', $data)->render();
         }
@@ -38,8 +38,8 @@ class SimilarityController extends Controller
 
     public function store(SimilarityCreateRequest $request)
     {
-        $input = $request->all();
-        $this->repository->store($input);
+        $params = $request->all();
+        $this->repository->store($params);
         session()->flash('success', 'create success');
         return redirect()->route('admin.similarities.index');
     }
@@ -66,13 +66,13 @@ class SimilarityController extends Controller
 
     public function update(SimilarityUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         $similarity = $this->repository->find($id);
         if (empty($similarity)) {
             session()->flash('error', 'not found');
             return back();
         }
-        $this->repository->change($input, $similarity);
+        $this->repository->change($params, $similarity);
         session()->flash('success', 'update success');
         return redirect()->route('admin.similarities.index');
     }

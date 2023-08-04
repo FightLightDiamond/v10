@@ -12,18 +12,18 @@ use Cuongpm\Modularization\Core\Components\BaseComponent;
 
 class ServiceComponent extends BaseComponent
 {
-    public function building($input, $auth = 'API')
+    public function building($params, $auth = 'API')
     {
         $materialPath = $this->inService($auth);
         $this->source = file_get_contents($materialPath);
 
-        $this->buildNameSpace($input['namespace']);
-        $this->buildClassName($input['table']);
-        $this->buildTable($input['table']);
-        $this->buildVariable($input['table']);
-        $this->buildView($input['table'], $input['prefix']);
-        $this->buildVariables($input['table']);
-        $this->buildRoute($input['route']);
+        $this->buildNameSpace($params['namespace']);
+        $this->buildClassName($params['table']);
+        $this->buildTable($params['table']);
+        $this->buildVariable($params['table']);
+        $this->buildView($params['table'], $params['prefix']);
+        $this->buildVariables($params['table']);
+        $this->buildRoute($params['route']);
 
         return $this->source;
     }

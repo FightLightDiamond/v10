@@ -3,7 +3,6 @@
  * Created by cuongpm/modularization.
  * Author: Fight Light Diamond i.am.m.cuong@gmail.com
  * MIT: 2e566161fd6039c38070de2ac4e4eadd8024a825
- *
  */
 
 namespace Tutorial\Http\Services\API;
@@ -20,18 +19,18 @@ class LessonService
         $this->repository = $repository;
     }
 
-    public function index($input)
+    public function index($params)
     {
-        $input['{relationship}'] = null;
-        $input['sort'] = 'id|desc';
+        $params['{relationship}'] = null;
+        $params['sort'] = 'id|desc';
 
-        return $this->repository->myPaginate($input);
+        return $this->repository->myPaginate($params);
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input['created_by'] = \auth('api')->id();
-        return $this->repository->store($input);
+        $params['created_by'] = \auth('api')->id();
+        return $this->repository->store($params);
     }
 
     public function show($id)
@@ -50,11 +49,11 @@ class LessonService
         return $this->repository->find($id);
     }
 
-    public function update($input, $id)
+    public function update($params, $id)
     {
         $lesson = $this->repository->find($id);
-        $input['updated_at'] = \auth('api')->id();
-        return $this->repository->change($input, $lesson);
+        $params['updated_at'] = \auth('api')->id();
+        return $this->repository->change($params, $lesson);
     }
 
     public function destroy($id)

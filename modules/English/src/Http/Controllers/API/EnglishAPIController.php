@@ -8,6 +8,7 @@ use English\Http\Services\EnglishService;
 
 /**
  * Class EnglishAPIController
+ *
  * @package English\Http\Controllers\API
  */
 class EnglishAPIController extends Controller
@@ -19,6 +20,7 @@ class EnglishAPIController extends Controller
 
     /**
      * EnglishAPIController constructor.
+     *
      * @param EnglishService $englishService
      */
     public function __construct(EnglishService $englishService)

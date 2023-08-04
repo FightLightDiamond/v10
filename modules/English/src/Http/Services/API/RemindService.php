@@ -3,7 +3,6 @@
  * Created by cuongpm/modularization.
  * Author: Fight Light Diamond i.am.m.cuong@gmail.com
  * MIT: 2e566161fd6039c38070de2ac4e4eadd8024a825
- *
  */
 
 namespace English\Http\Services\API;
@@ -19,26 +18,26 @@ class RemindService
         $this->repository = $repository;
     }
 
-    public function index($input)
+    public function index($params)
     {
-        $input['{relationship}'] = null;
-        $input['sort'] = 'id|desc';
+        $params['{relationship}'] = null;
+        $params['sort'] = 'id|desc';
 
-        return $this->repository->myPaginate($input);
+        return $this->repository->myPaginate($params);
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input['job'] = "{$input['minute']} {$input['hour']} * * * ";
+        $params['job'] = "{$params['minute']} {$params['hour']} * * * ";
 
-        $remind = $this->repository->filterFirst(['user_id' => $input['user_id']]);
+        $remind = $this->repository->filterFirst(['user_id' => $params['user_id']]);
 
         if ($remind) {
-            $remind->update($input);
+            $remind->update($params);
             return $remind->refresh();
         }
 
-        return $this->repository->store($input);
+        return $this->repository->store($params);
     }
 
     public function show($id)
@@ -51,11 +50,11 @@ class RemindService
         return $this->repository->find($id);
     }
 
-    public function update($input, $id)
+    public function update($params, $id)
     {
         $remind = $this->repository->find($id);
 
-        return $this->repository->change($input, $remind);
+        return $this->repository->change($params, $remind);
     }
 
     public function destroy($id)

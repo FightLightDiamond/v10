@@ -30,7 +30,7 @@ class FillInTheBlankUpdateRequest extends FormRequest
 
     public function messages()
     {
-       return [
+        return [
                    ];
     }
 }

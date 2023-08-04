@@ -19,14 +19,13 @@ class TestBuilder
 {
     public $repository, $historyRepository, $crazyWriteHistoryRepository;
     public $data, $details, $sentenceList, $score = 0;
-    public $crazy = NULL;
+    public $crazy = null;
 
     public function __construct(
         CrazyRepository $repository,
         CrazyHistoryRepository $historyRepository,
         CrazyWriteHistoryRepository $crazyWriteHistoryRepository
-    )
-    {
+    ) {
         $this->repository = $repository;
         $this->historyRepository = $historyRepository;
         $this->crazyWriteHistoryRepository = $crazyWriteHistoryRepository;

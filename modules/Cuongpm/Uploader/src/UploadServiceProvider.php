@@ -15,9 +15,11 @@ class UploadServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->publishes([
+        $this->publishes(
+            [
             __DIR__.'/../config/uploader.php' => config_path('uploader.php'),
-        ]);
+            ]
+        );
 
         $this->app->bind('UploadFa', UploadFun::class);
     }

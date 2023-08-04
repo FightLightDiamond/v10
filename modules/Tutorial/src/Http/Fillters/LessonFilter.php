@@ -13,7 +13,8 @@ use Tutorial\Models\Lesson;
 
 class LessonFilter
 {
-    private $fillable, $model;
+    private $fillable;
+    private Lesson $model;
 
     public function __construct()
     {
@@ -23,7 +24,7 @@ class LessonFilter
 
     public function scopeTitle($query, $title)
     {
-        if (isset($input['title'])) {
+        if (isset($params['title'])) {
             $query->where('title', 'LIKE', '%' . $title . '%');
         }
     }
@@ -31,7 +32,7 @@ class LessonFilter
     public function scopeFilter($query, $params)
     {
         foreach ($params as $field => $value) {
-//            $method = 'filter' . Str::studly($field);
+            //            $method = 'filter' . Str::studly($field);
 
             if ($value === '') {
                 continue;

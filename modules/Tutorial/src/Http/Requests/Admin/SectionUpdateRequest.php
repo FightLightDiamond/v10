@@ -25,11 +25,11 @@ class SectionUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-'img' => 'required',
-'is_active' => 'required',
-'description' => 'required',
-'tutorial_id' => 'required',
-'no' => 'required',
+        'img' => 'required',
+        'is_active' => 'required',
+        'description' => 'required',
+        'tutorial_id' => 'required',
+        'no' => 'required',
 
         ];
     }

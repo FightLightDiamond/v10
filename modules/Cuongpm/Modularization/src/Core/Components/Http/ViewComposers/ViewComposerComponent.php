@@ -19,6 +19,6 @@ class ViewComposerComponent extends BaseComponent
 
     private function getSource()
     {
-        return $this->getViewPath( '/form/update.html');
+        return $this->getViewPath('/form/update.html');
     }
 }

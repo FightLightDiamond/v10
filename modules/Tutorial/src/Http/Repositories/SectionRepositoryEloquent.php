@@ -11,6 +11,7 @@ use Tutorial\Models\Section;
 
 /**
  * Class NewsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class SectionRepositoryEloquent extends BaseRepository implements SectionRepository
@@ -26,25 +27,25 @@ class SectionRepositoryEloquent extends BaseRepository implements SectionReposit
         return Section::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input['per_page']) ?: $input['per_page'] = 10;
+        isset($params['per_page']) ?: $params['per_page'] = 10;
         return $this->makeModel()
-            ->filter($input)
-            ->paginate($input['per_page']);
+            ->filter($params)
+            ->paginate($params['per_page']);
 
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input = $this->standardized($input, $this->makeModel());
-        return $this->create($input);
+        $params = $this->standardized($params, $this->makeModel());
+        return $this->create($params);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $section = $this->find($id);
-        if(empty($section))
-        {
+        if(empty($section)) {
             return $section;
         }
         $tutorial = $section->tutorial;
@@ -54,34 +55,33 @@ class SectionRepositoryEloquent extends BaseRepository implements SectionReposit
         return compact('section', 'lessons', 'tutorial');
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        $input = $this->standardized($input, $data);
-        if(isset($input['lesson_ids']))
-        {
-            foreach ($input['lesson_ids'] as $k => $lesson_id)
+        $params = $this->standardized($params, $data);
+        if(isset($params['lesson_ids'])) {
+            foreach ($params['lesson_ids'] as $k => $lesson_id)
             {
                 if($lesson_id == 0) {
                     $lesson = [
                         'section_id' => $data->id,
                         'no' => $k + 1,
-                        'title' => $input['lesson_names'][$k],
+                        'title' => $params['lesson_names'][$k],
                         'created_by' => auth()->id()
                     ];
                     app(Lesson::class)->create($lesson);
                 } else {
-                    DB::table(LESSONS_TB)->where('id', $lesson_id)->update(['no' => $k + 1, 'title' => $input['lesson_names'][$k]]);
+                    DB::table('lessons')->where('id', $lesson_id)->update(['no' => $k + 1, 'title' => $params['lesson_names'][$k]]);
                 }
             }
         }
-        return $this->update($input, $data->id);
+        return $this->update($params, $data->id);
     }
 
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        $input = $data->uploads($input);
-        return $data->checkbox($input);
+        $params = $data->uploads($params);
+        return $data->checkbox($params);
     }
 
     public function destroy($id)
@@ -92,8 +92,7 @@ class SectionRepositoryEloquent extends BaseRepository implements SectionReposit
             session()->flash('error', 'Not Found');
             return false;
         }
-        if($section->lessons_count > 0)
-        {
+        if($section->lessons_count > 0) {
             session()->flash('error', 'Have lessons, please remove before');
             return false;
         }

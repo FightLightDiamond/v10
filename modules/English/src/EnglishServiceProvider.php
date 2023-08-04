@@ -15,6 +15,9 @@ use English\Http\Repositories\CrazyReadHistoryRepository;
 use English\Http\Repositories\CrazyReadHistoryRepositoryEloquent;
 use English\Http\Repositories\RemindRepository;
 use English\Http\Repositories\RemindRepositoryEloquent;
+use English\Http\ViewComposers\CrazyComposer;
+use English\Http\ViewComposers\CrazyCourseComposer;
+use English\Http\ViewComposers\CrazyNoCourseComposer;
 use English\Http\Repositories\CrazySpeakHistoryRepository;
 use English\Http\Repositories\CrazySpeakHistoryRepositoryEloquent;
 use English\Http\Repositories\CrazyListenHistoryRepository;
@@ -54,15 +57,20 @@ class EnglishServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/../routers/admin.php');
         $this->loadRoutesFrom(__DIR__ . '/../routers/api.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routers/web.php');
 
-        $this->commands([
+        $this->commands(
+            [
             RemindCommand::class
-        ]);
+            ]
+        );
 
-        $this->app->booted(function () {
-            $schedule = $this->app->make(Schedule::class);
-            $schedule->command('remind:english')->cron('0 * * * *');
-        });
+        $this->app->booted(
+            function () {
+                $schedule = $this->app->make(Schedule::class);
+                $schedule->command('remind:english')->cron('* * * * *');
+            }
+        );
     }
 
     /**
@@ -70,7 +78,7 @@ class EnglishServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register(): void
+    public function register()
     {
         $this->app->bind(BlogRepository::class, BlogRepositoryEloquent::class);
 

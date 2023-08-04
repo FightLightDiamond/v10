@@ -13,21 +13,23 @@ class SectionTests extends Migration
      */
     public function up()
     {
-        Schema::create('section_tests', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedInteger('section_id');
-            $table->text('question');
-            $table->text('reply1');
-            $table->text('reply2');
-            $table->text('reply3');
-            $table->text('reply4');
-            $table->unsignedTinyInteger('answer');
-            $table->tinyInteger('is_active');
-            $table->unsignedInteger('created_by');
-            $table->unsignedInteger('updated_by');
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::create(
+            'section_tests', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->unsignedInteger('section_id');
+                $table->text('question');
+                $table->text('reply1');
+                $table->text('reply2');
+                $table->text('reply3');
+                $table->text('reply4');
+                $table->unsignedTinyInteger('answer');
+                $table->tinyInteger('is_active');
+                $table->unsignedInteger('created_by');
+                $table->unsignedInteger('updated_by');
+                $table->timestamps();
+                $table->softDeletes();
+            }
+        );
     }
 
     /**

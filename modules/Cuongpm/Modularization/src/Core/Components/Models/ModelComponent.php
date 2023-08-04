@@ -37,8 +37,8 @@ class ModelComponent extends BaseComponent
         $filter = '';
 
         foreach ($fields as $field) {
-            $filter .= "if(isset(\$input['{$field}'])) {
-                \$query->where('{$field}', \$input['{$field}']); 
+            $filter .= "if(isset(\$params['{$field}'])) {
+                \$query->where('{$field}', \$params['{$field}']);
                 }\n";
         }
 

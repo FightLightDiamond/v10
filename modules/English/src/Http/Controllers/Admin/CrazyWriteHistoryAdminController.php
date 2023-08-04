@@ -14,16 +14,17 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CrazyWriteHistoryAdminController extends Controller
 {
-    private CrazyWriteHistoryService $service;
+    private $service;
 
     public function __construct(CrazyWriteHistoryService $service)
     {
         $this->service = $service;
     }
 
-	/**
+    /**
      * Paginate
-     * @group CrazyWriteHistory
+     *
+     * @group         CrazyWriteHistory
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,18 +62,19 @@ class CrazyWriteHistoryAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $data = $this->service->index($input);
+            $params = $request->all();
+            $data = $this->service->index($params);
 
-           return new CrazyWriteHistoryResourceCollection($data);
+            return new CrazyWriteHistoryResourceCollection($data);
         } catch (\Exception $exception) {
             return response()->json($exception->getMessage(), 500);
         }
     }
 
-	/**
+    /**
      * Create
-     * @group CrazyWriteHistory
+     *
+     * @group         CrazyWriteHistory
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -83,13 +85,12 @@ class CrazyWriteHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(CrazyWriteHistoryCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $crazyWriteHistory = $this->service->store($input);
+            $params = $request->all();
+            $crazyWriteHistory = $this->service->store($params);
 
             return new CrazyWriteHistoryResource($crazyWriteHistory);
         } catch (\Exception $exception) {
@@ -97,11 +98,11 @@ class CrazyWriteHistoryAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Show
-     * @group CrazyWriteHistory
-     * @authenticated
      *
+     * @group         CrazyWriteHistory
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -109,7 +110,6 @@ class CrazyWriteHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -122,9 +122,10 @@ class CrazyWriteHistoryAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group CrazyWriteHistory
+     *
+     * @group         CrazyWriteHistory
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -135,13 +136,12 @@ class CrazyWriteHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(CrazyWriteHistoryUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         try {
-            $data = $this->service->update($input, $id);
+            $data = $this->service->update($params, $id);
 
             return new CrazyWriteHistoryResource($data);
         } catch (\Exception $exception) {
@@ -149,9 +149,10 @@ class CrazyWriteHistoryAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group CrazyWriteHistory
+     *
+     * @group         CrazyWriteHistory
      * @authenticated
      *
      * @response {
@@ -160,7 +161,6 @@ class CrazyWriteHistoryAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {

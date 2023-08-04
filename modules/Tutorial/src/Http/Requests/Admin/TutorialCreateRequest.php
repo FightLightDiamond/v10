@@ -25,9 +25,9 @@ class TutorialCreateRequest extends FormRequest
     {
         return [
             'name' => 'required',
-'img' => 'required',
-'is_active' => 'required',
-'description' => 'required',
+        'img' => 'required',
+        'is_active' => 'required',
+        'description' => 'required',
 
         ];
     }

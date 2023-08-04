@@ -25,9 +25,9 @@ class CrazyReadHistoryUpdateRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-'crazy_id' => 'required',
-'score' => 'required',
-'type' => 'required',
+        'crazy_id' => 'required',
+        'score' => 'required',
+        'type' => 'required',
 
         ];
     }

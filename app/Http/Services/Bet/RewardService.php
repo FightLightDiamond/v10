@@ -42,9 +42,11 @@ class RewardService
             $this->userGemService->drop($bet->user_id);
         }
 
-        $match->update([
+        $match->update(
+            [
             'status' => BetStatusConstant::END
-        ]);
+            ]
+        );
 
         RewardEvent::dispatch($bets);
     }

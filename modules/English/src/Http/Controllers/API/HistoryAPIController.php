@@ -23,8 +23,7 @@ class HistoryAPIController extends Controller
         CrazyListenHistoryRepository $crazyListenHistoryRepository,
         CrazySpeakHistoryRepository $crazySpeakHistoryRepository,
         CrazyReadHistoryRepository $crazyReadHistoryRepository
-    )
-    {
+    ) {
         $this->crazyListenHistoryRepository = $crazyListenHistoryRepository;
         $this->crazyWriteHistoryRepository = $crazyWriteHistoryRepository;
         $this->crazySpeakHistoryRepository = $crazySpeakHistoryRepository;

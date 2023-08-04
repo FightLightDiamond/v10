@@ -8,17 +8,18 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface CrazyListenHistoryRepository
+ *
  * @package namespace App\Repositories;
  */
 interface CrazyListenHistoryRepository extends RepositoryInterface, RepositoryInterfaceExtra
 {
-    public function myPaginate($input);
+    public function myPaginate($params);
 
-    public function store($input);
+    public function store($params);
 
-    public function change($input, $data);
+    public function change($params, $data);
 
-    public function delete($data);
+    public function delete($id);
 
     public function import($file);
 }

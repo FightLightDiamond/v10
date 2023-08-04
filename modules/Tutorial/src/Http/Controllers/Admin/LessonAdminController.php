@@ -21,9 +21,10 @@ class LessonAdminController extends Controller
         $this->service = $service;
     }
 
-	/**
+    /**
      * Paginate
-     * @group Lesson
+     *
+     * @group         Lesson
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,19 +62,20 @@ class LessonAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $lesson = $this->service->index($input);
+            $params = $request->all();
+            $lesson = $this->service->index($params);
 
-           return new LessonResourceCollection($lesson);
+            return new LessonResourceCollection($lesson);
         } catch (\Exception $exception) {
             logger($exception);
             return response()->json($exception->getMessage(), 500);
         }
     }
 
-	/**
+    /**
      * Create
-     * @group Lesson
+     *
+     * @group         Lesson
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -84,13 +86,12 @@ class LessonAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(LessonCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $lesson = $this->service->store($input);
+            $params = $request->all();
+            $lesson = $this->service->store($params);
 
             return response()->json(new LessonResource($lesson));
         } catch (\Exception $exception) {
@@ -99,11 +100,11 @@ class LessonAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Show
-     * @group Lesson
-     * @authenticated
      *
+     * @group         Lesson
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -111,7 +112,6 @@ class LessonAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -125,9 +125,10 @@ class LessonAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group Lesson
+     *
+     * @group         Lesson
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -138,13 +139,12 @@ class LessonAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(LessonUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         try {
-            $lesson = $this->service->update($input, $id);
+            $lesson = $this->service->update($params, $id);
 
             return response()->json(new LessonResource($lesson));
         } catch (\Exception $exception) {
@@ -153,9 +153,10 @@ class LessonAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group Lesson
+     *
+     * @group         Lesson
      * @authenticated
      *
      * @response {
@@ -164,7 +165,6 @@ class LessonAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {

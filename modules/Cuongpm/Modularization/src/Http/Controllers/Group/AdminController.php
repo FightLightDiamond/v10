@@ -18,24 +18,24 @@ class AdminController extends RenderController
 {
     public function store(Request $request)
     {
-        $input = $request->all();
-        $input = $this->fix($input);
-        $prefix = $input['prefix'];
-        $table = $input['table'];
-        $namespace = $input['namespace'];
-        $path = $input['path'];
+        $params = $request->all();
+        $params = $this->fix($params);
+        $prefix = $params['prefix'];
+        $table = $params['table'];
+        $namespace = $params['namespace'];
+        $path = $params['path'];
 
         if($request->provider) {
             app(ServiceProviderFactory::class)->building($namespace, $path, $prefix);
         }
         if($request->view) {
-            app(FormFactory::class)->building($input);
+            app(FormFactory::class)->building($params);
         }
         if($request->controller) {
-            app(AdminCtrlFactory::class)->building($input);
+            app(AdminCtrlFactory::class)->building($params);
         }
 
-        $this->extraRender($input);
+        $this->extraRender($params);
 
         $mgs = $this->buildMessage($table);
         $menu = $this->buildMenu($table, $namespace);

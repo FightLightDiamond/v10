@@ -25,7 +25,7 @@ class RemindNotification extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -36,24 +36,24 @@ class RemindNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
         logger(__METHOD__);
         return (new MailMessage)
-//                    ->cc(User::pluck('email')->toArray())
-                    ->greeting('Hi, i\'m Bot' . rand(0, 99) )
-                    ->line('The introduction to the remind English.')
-                    ->action('Start study now', route('english.index'))
-                    ->line('Thank you for using our application!');
+        //                    ->cc(User::pluck('email')->toArray())
+            ->greeting('Hi, i\'m Bot' . rand(0, 99))
+            ->line('The introduction to the remind English.')
+            ->action('Start study now', route('english.index'))
+            ->line('Thank you for using our application!');
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param  mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)

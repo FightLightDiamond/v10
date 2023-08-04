@@ -36,9 +36,9 @@ class UpdateFormComponent extends BaseComponent
         return $this->$type($column, $type);
     }
 
-    private function getSourceUpdate($input)
+    private function getSourceUpdate($params)
     {
-        return $this->getViewPath('/form/update/' . $input . '.html');
+        return $this->getViewPath('/form/update/' . $params . '.html');
     }
 
     public function string($column)
@@ -124,15 +124,15 @@ class UpdateFormComponent extends BaseComponent
         $this->working(DecoHelper::CONTENT, config('modularization.content'));
     }
 
-    public function building($input)
+    public function building($params)
     {
-        $this->buildNameSpace($input['namespace']);
+        $this->buildNameSpace($params['namespace']);
         $this->buildContent();
         $this->buildExtend();
-        $this->buildFields($input['table']);
-        $this->buildRoute($input['route']);
-        $this->buildVariable($input['table']);
-        $this->buildTable($input['table']);
+        $this->buildFields($params['table']);
+        $this->buildRoute($params['route']);
+        $this->buildVariable($params['table']);
+        $this->buildTable($params['table']);
         return $this->source;
     }
 }

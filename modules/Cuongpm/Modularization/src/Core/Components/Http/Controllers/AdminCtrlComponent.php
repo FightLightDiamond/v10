@@ -18,20 +18,20 @@ class AdminCtrlComponent extends BaseComponent
         $this->source = file_get_contents($this->getSource());
     }
 
-    public function building($input)
+    public function building($params)
     {
-        $this->buildNameSpace($input['namespace']);
-        $this->buildClassName($input['table']);
-        $this->buildTable($input['table']);
-        $this->buildVariable($input['table']);
-        $this->buildView($input['table'], $input['prefix']);
-        $this->buildVariables($input['table']);
-        $this->buildRoute($input['route']);
+        $this->buildNameSpace($params['namespace']);
+        $this->buildClassName($params['table']);
+        $this->buildTable($params['table']);
+        $this->buildVariable($params['table']);
+        $this->buildView($params['table'], $params['prefix']);
+        $this->buildVariables($params['table']);
+        $this->buildRoute($params['route']);
         return $this->source;
     }
 
     private function getSource()
     {
-        return $this->getCtrlPath( '/Admin/controller.txt');
+        return $this->getCtrlPath('/Admin/controller.txt');
     }
 }

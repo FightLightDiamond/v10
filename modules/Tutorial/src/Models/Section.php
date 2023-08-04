@@ -15,19 +15,19 @@ class Section extends Model implements Transformable
     public $table = 'sections';
     public $fillable = ['name', 'img', 'tutorial_id', 'description', 'is_active'];
 
-    public function scopeFilter($query, $input)
+    public function scopeFilter($query, $params)
     {
-        if (isset($input['name'])) {
-            $query->where('name', 'LIKE', '%' . $input['name'] . '%');
+        if (isset($params['name'])) {
+            $query->where('name', 'LIKE', '%' . $params['name'] . '%');
         }
-        if (isset($input['img'])) {
-            $query->where('img', $input['img']);
+        if (isset($params['img'])) {
+            $query->where('img', $params['img']);
         }
-        if (isset($input['is_active'])) {
-            $query->where('is_active', $input['is_active']);
+        if (isset($params['is_active'])) {
+            $query->where('is_active', $params['is_active']);
         }
-        if (isset($input['tutorial_id'])) {
-            $query->where('tutorial_id', $input['tutorial_id']);
+        if (isset($params['tutorial_id'])) {
+            $query->where('tutorial_id', $params['tutorial_id']);
         }
         return $query;
     }

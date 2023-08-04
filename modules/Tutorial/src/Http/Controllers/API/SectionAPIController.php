@@ -23,7 +23,8 @@ class SectionAPIController extends Controller
 
     /**
      * Paginate
-     * @group Section
+     *
+     * @group         Section
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,8 +62,8 @@ class SectionAPIController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $data = $this->service->index($input);
+            $params = $request->all();
+            $data = $this->service->index($params);
 
             return new SectionResourceCollection($data);
         } catch (\Exception $exception) {
@@ -71,9 +72,10 @@ class SectionAPIController extends Controller
         }
     }
 
-	/**
+    /**
      * Create
-     * @group Section
+     *
+     * @group         Section
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -84,13 +86,12 @@ class SectionAPIController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(SectionCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $section = $this->service->store($input);
+            $params = $request->all();
+            $section = $this->service->store($params);
 
             return new SectionResource($section);
         } catch (\Exception $exception) {
@@ -99,11 +100,11 @@ class SectionAPIController extends Controller
         }
     }
 
-	/**
+    /**
      * Show
-     * @group Section
-     * @authenticated
      *
+     * @group         Section
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -111,7 +112,6 @@ class SectionAPIController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -125,9 +125,10 @@ class SectionAPIController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group Section
+     *
+     * @group         Section
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -138,13 +139,12 @@ class SectionAPIController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(SectionUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         try {
-            $data = $this->service->update($input, $id);
+            $data = $this->service->update($params, $id);
 
             return new SectionResource($data);
         } catch (\Exception $exception) {
@@ -153,9 +153,10 @@ class SectionAPIController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group Section
+     *
+     * @group         Section
      * @authenticated
      *
      * @response {
@@ -164,7 +165,6 @@ class SectionAPIController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {

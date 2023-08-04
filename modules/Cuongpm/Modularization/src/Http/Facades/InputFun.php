@@ -16,24 +16,24 @@ class InputFun
         return $this->loopNormalization($request->all());
     }
 
-    public function loopNormalization($input)
+    public function loopNormalization($params)
     {
-        foreach ($input as $k => $v) {
+        foreach ($params as $k => $v) {
             if (is_string($v)) {
-                $input[$k] = trim($v);
-                if ($input[$k] === '') {
-                    unset($input[$k]);
+                $params[$k] = trim($v);
+                if ($params[$k] === '') {
+                    unset($params[$k]);
                 }
             } elseif (is_array($v)) {
-                $input[$k] = $this->loopNormalization($v);
+                $params[$k] = $this->loopNormalization($v);
             }
         }
-        return $input;
+        return $params;
     }
 
-    public function runInput($input)
+    public function runInput($params)
     {
-        foreach ($input as $key => $val) {
+        foreach ($params as $key => $val) {
             $this->{$key}($val);
         }
     }

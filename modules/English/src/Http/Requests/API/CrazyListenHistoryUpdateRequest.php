@@ -25,8 +25,8 @@ class CrazyListenHistoryUpdateRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-'crazy_id' => 'required',
-'count' => 'required',
+        'crazy_id' => 'required',
+        'count' => 'required',
 
         ];
     }

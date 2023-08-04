@@ -25,7 +25,7 @@ class RemindUpdateRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-'job' => 'required',
+        'job' => 'required',
 
         ];
     }

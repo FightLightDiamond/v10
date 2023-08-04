@@ -13,15 +13,17 @@ class Blogs extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
-            $table->text('intro');
-            $table->longText('content');
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
-            $table->timestamps();
-        });
+        Schema::create(
+            'blogs', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('title');
+                $table->text('intro');
+                $table->longText('content');
+                $table->unsignedInteger('created_by')->nullable();
+                $table->unsignedInteger('updated_by')->nullable();
+                $table->timestamps();
+            }
+        );
     }
 
     /**

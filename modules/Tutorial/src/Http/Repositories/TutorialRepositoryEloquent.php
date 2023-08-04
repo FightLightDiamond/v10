@@ -14,6 +14,7 @@ use Tutorial\Models\Tutorial;
 
 /**
  * Class NewsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class TutorialRepositoryEloquent extends BaseRepository implements TutorialRepository
@@ -30,58 +31,58 @@ class TutorialRepositoryEloquent extends BaseRepository implements TutorialRepos
         return Tutorial::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input['per_page']) ?: $input['per_page'] = 10;
+        isset($params['per_page']) ?: $params['per_page'] = 10;
         return $this->makeModel()
             ->with(['sections:id,name', 'creator:id,email', 'updater:id,email'])
-            ->filter($input)
-            ->paginate($input['per_page']);
+            ->filter($params)
+            ->paginate($params['per_page']);
 
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input = $this->standardized($input, $this->makeModel());
-        $model = $this->create($input);
-        if (isset($input['section_names'])) {
+        $params = $this->standardized($params, $this->makeModel());
+        $model = $this->create($params);
+        if (isset($params['section_names'])) {
             $data = [];
             $now = now();
-            foreach ($input['section_names'] as $value) {
-                array_push($data, ['name' => $value, 'tutorial_id' => $model->id, CREATED_AT_COL => $now, UPDATED_AT_COL => $now]);
+            foreach ($params['section_names'] as $value) {
+                array_push($data, ['name' => $value, 'tutorial_id' => $model->id, ]);
             }
             DB::table('sections')->insert($data);
         }
         return $model;
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        $input = $this->standardized($input, $data);
-        if(isset($input['section_ids'])) {
-            foreach ($input['section_ids'] as $k => $section_id)
+        $params = $this->standardized($params, $data);
+        if(isset($params['section_ids'])) {
+            foreach ($params['section_ids'] as $k => $section_id)
             {
                 if($section_id == 0) {
                     $lesson = [
                         'tutorial_id' => $data->id,
                         'no' => $k,
-                        'name' => $input['section_names'][$k],
+                        'name' => $params['section_names'][$k],
                         'create_by' => auth()->id()
                     ];
                     app(Section::class)->create($lesson);
                 } else {
-                    DB::table(SECTIONS_TB)->where('id', $section_id)->update(['no' => $k, 'name' => $input['section_names'][$k]]);
+                    DB::table('sections')->where('id', $section_id)->update(['no' => $k, 'name' => $params['section_names'][$k]]);
                 }
             }
         }
 
-        return $this->update($input, $data->id);
+        return $this->update($params, $data->id);
     }
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        $input = $data->uploads($input);
-        return $data->checkbox($input);
+        $params = $data->uploads($params);
+        return $data->checkbox($params);
     }
 
     public function destroy($id)

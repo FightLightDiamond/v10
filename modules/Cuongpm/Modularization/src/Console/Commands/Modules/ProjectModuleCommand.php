@@ -79,9 +79,9 @@ class ProjectModuleCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $this->input();
 
@@ -93,17 +93,17 @@ class ProjectModuleCommand extends Command
                 continue;
             }
 
-            $input = $this->fix($table);
-//            app(RouteAPIFactory::class)->building($namespace, $path);
-//            app(RouterFactory::class)->building($namespace, $path);
+            $params = $this->fix($table);
+            //            app(RouteAPIFactory::class)->building($namespace, $path);
+            //            app(RouterFactory::class)->building($namespace, $path);
 
-            $this->HTTP($input, $table);
+            $this->HTTP($params, $table);
             $this->MRP($table);
-            $this->admin($input);
+            $this->admin($params);
 
-            $input = $this->fixTestInput($input);
+            $params = $this->fixTestInput($params);
 
-            app(FeatureTestFactory::class)->building($input);
+            app(FeatureTestFactory::class)->building($params);
 
             $class = BuildInput::classe($table);
             $bar->advance(2);
@@ -119,13 +119,13 @@ class ProjectModuleCommand extends Command
         $this->msg();
     }
 
-    private function fixTestInput($input)
+    private function fixTestInput($params)
     {
-        if ($input['path'] === 'app') {
-            $input['path'] = '';
+        if ($params['path'] === 'app') {
+            $params['path'] = '';
         }
 
-        return $input;
+        return $params;
     }
 
     private function getTables($table)
@@ -148,12 +148,12 @@ class ProjectModuleCommand extends Command
         $this->info($this->repositoryMsg);
     }
 
-    private function HTTP($input, $table)
+    private function HTTP($params, $table)
     {
-        app(APICtrlFactory::class)->building($input);
-        app(ResourceFactory::class)->building($input);
+        app(APICtrlFactory::class)->building($params);
+        app(ResourceFactory::class)->building($params);
         app(RequestFactory::class)->building($table, $this->namespace, $this->path);
-        app(ServiceFactory::class)->building($input);
+        app(ServiceFactory::class)->building($params);
     }
 
     private function MRP($table)
@@ -172,16 +172,16 @@ class ProjectModuleCommand extends Command
         Artisan::call("make:factory {$class}Factory --model={$class}");
     }
 
-    private function admin($input)
+    private function admin($params)
     {
-        $table = $input['table'];
-        $namespace = $input['namespace'];
-        $path = $input['path'];
+        $table = $params['table'];
+        $namespace = $params['namespace'];
+        $path = $params['path'];
 
-        app(AdminCtrlFactory::class)->building($input);
+        app(AdminCtrlFactory::class)->building($params);
         app(ServiceFactory::class)
             ->setAuth('Admin')
-            ->building($input);
+            ->building($params);
 
         app(RequestFactory::class)
             ->setAuth('Admin')
@@ -189,25 +189,25 @@ class ProjectModuleCommand extends Command
 
         app(ResourceFactory::class)
             ->setAuth('Admin')
-            ->building($input);
+            ->building($params);
 
-        $input = $this->fixTestInput($input);
+        $params = $this->fixTestInput($params);
 
         app(FeatureTestFactory::class)
             ->setAuth('Admin')
-            ->building($input);
+            ->building($params);
     }
 
     private function fix($table)
     {
-        $input['path'] = $this->path;
-        $input['table'] = $table;
-        $input['prefix'] = '';
-        $input['namespace'] = $this->namespace;
-        $input['route'] = BuildInput::route($table);
-//        $input['viewFolder'] = Str::kebab(Str::camel(Str::singular($table)));
+        $params['path'] = $this->path;
+        $params['table'] = $table;
+        $params['prefix'] = '';
+        $params['namespace'] = $this->namespace;
+        $params['route'] = BuildInput::route($table);
+        //        $params['viewFolder'] = Str::kebab(Str::camel(Str::singular($table)));
 
-        return $input;
+        return $params;
     }
 
     private function buildMessage($table)

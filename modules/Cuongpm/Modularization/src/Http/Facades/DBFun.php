@@ -22,9 +22,9 @@ class DBFun
         return Schema::getColumnListing($table);
     }
 
-    public function table($dbName = NULL)
+    public function table($dbName = null)
     {
-        if ($dbName == NULL) {
+        if ($dbName == null) {
             $dbName = config('database.connections.mysql.database');
         }
         $dbTables = DB::select('SHOW TABLES');
@@ -37,12 +37,12 @@ class DBFun
         return $this->tables;
     }
 
-    public function seed($dbName = NULL)
+    public function seed($dbName = null)
     {
         ini_set('memory_limit', '-1');
         $tableExcept = ['roles', 'role_user', 'role_permission', 'roles', 'user_id'];
 
-        if ($dbName == NULL) {
+        if ($dbName == null) {
             $dbName = env('DB_DATABASE');
         }
 
@@ -57,7 +57,8 @@ class DBFun
                 foreach ($tables as $column) {
                     $dataType = Schema::getColumnType($table, $column);
                     if ($column !== 'id' && $column !== 'created_at' && $column !== 'updated_at'
-                        && $dataType !== 'datetime' && $dataType !== 'date' && $dataType !== 'time') {
+                        && $dataType !== 'datetime' && $dataType !== 'date' && $dataType !== 'time'
+                    ) {
                         $data[$column] = rand(1, 99);
                     }
                 }
@@ -80,7 +81,8 @@ class DBFun
             foreach (Schema::getColumnListing($table) as $column) {
                 $dataType = Schema::getColumnType($table, $column);
                 if ($column !== 'id' && $column !== 'created_at' && $column !== 'updated_at'
-                    && $dataType !== 'datetime' && $dataType !== 'date' && $dataType !== 'time') {
+                    && $dataType !== 'datetime' && $dataType !== 'date' && $dataType !== 'time'
+                ) {
                     $data[$column] = rand(1, 9);
                 }
             }

@@ -19,8 +19,8 @@ class VocabularyController extends Controller
 
     public function index(Request $request)
     {
-        $input = $request->all();
-        $data['vocabularies'] = $this->repository->myPaginate($input);
+        $params = $request->all();
+        $data['vocabularies'] = $this->repository->myPaginate($params);
         if ($request->ajax()) {
             return view('en::admin.vocabularies.table', $data)->render();
         }
@@ -34,8 +34,8 @@ class VocabularyController extends Controller
 
     public function store(VocabularyCreateRequest $request)
     {
-        $input = $request->all();
-        $this->repository->store($input);
+        $params = $request->all();
+        $this->repository->store($params);
         return redirect(route('admin.vocabularies.index'));
     }
 
@@ -61,13 +61,13 @@ class VocabularyController extends Controller
 
     public function update(VocabularyUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         $vocabulary = $this->repository->find($id);
         if (empty($vocabulary)) {
             session()->flash('error', 'Not Found');
             return back();
         }
-        $this->repository->change($input, $vocabulary);
+        $this->repository->change($params, $vocabulary);
         return redirect(route('admin.vocabularies.index'));
     }
 
@@ -78,7 +78,7 @@ class VocabularyController extends Controller
             session()->flash('error', 'Not Found');
             return back();
         }
-        $this->repository->delete($id);
+        return $this->repository->delete($id);
     }
 
 
@@ -95,8 +95,8 @@ class VocabularyController extends Controller
 
     public function export(Request $request)
     {
-        $input = $request->all();
-        $this->repository->export($input);
+        $params = $request->all();
+        $this->repository->export($params);
     }
 
 }

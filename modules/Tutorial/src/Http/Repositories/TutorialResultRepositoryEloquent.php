@@ -13,6 +13,7 @@ use Tutorial\Models\TutorialResult;
 
 /**
  * Class NewsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class TutorialResultRepositoryEloquent extends BaseRepository implements TutorialResultRepository
@@ -28,42 +29,41 @@ class TutorialResultRepositoryEloquent extends BaseRepository implements Tutoria
         return TutorialResult::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input['per_page']) ?: $input['per_page'] = 10;
+        isset($params['per_page']) ?: $params['per_page'] = 10;
         return $this->makeModel()
             ->with(['creator:id,email', 'tutorial:id,name'])
-            ->filter($input)
-            ->paginate($input['per_page']);
+            ->filter($params)
+            ->paginate($params['per_page']);
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input = $this->standardized($input, $this->makeModel());
-        $this->create($input);
+        $params = $this->standardized($params, $this->makeModel());
+        $this->create($params);
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        $input = $this->standardized($input, $data);
-        $this->update($input, $data->id);
+        $params = $this->standardized($params, $data);
+        $this->update($params, $data->id);
     }
 
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        if(isset($input['section_names']))
-        {
+        if(isset($params['section_names'])) {
             $sectionIds= [];
-            foreach ($input['section_names'] as $name)
+            foreach ($params['section_names'] as $name)
             {
                 $section = $this->app(Section::class)->firstOrCreate(compact('name'));
                 $sectionIds[] = $section->id;
             }
             $data->sections()->sync($sectionIds);
         }
-        $input = $data->uploads($input);
-        return $data->checkbox($input);
+        $params = $data->uploads($params);
+        return $data->checkbox($params);
     }
 
     public function destroy($id)

@@ -25,8 +25,8 @@ class BlogCreateRequest extends FormRequest
     {
         return [
             'title' => 'required',
-'intro' => 'required',
-'content' => 'required',
+        'intro' => 'required',
+        'content' => 'required',
 
 
         ];

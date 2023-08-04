@@ -25,10 +25,10 @@ class APICtrlFactory extends BaseFactory implements _Interface
         $this->component = $component;
     }
 
-    public function building($input)
+    public function building($params)
     {
-        $this->table = $input['table'];
-        $material = $this->component->building($input);
-        $this->produce($material, $input['path']);
+        $this->table = $params['table'];
+        $material = $this->component->building($params);
+        $this->produce($material, $params['path']);
     }
 }

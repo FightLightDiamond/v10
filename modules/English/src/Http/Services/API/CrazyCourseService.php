@@ -46,10 +46,18 @@ class CrazyCourseService
             $filter['crazy_id'] = $item->id;
             $item->no_read = CrazyReadHistory::filter($filter)->count();
             $item->avg_score_read = round(CrazyReadHistory::filter($filter)->avg('score') / 100, 2);
-//            $item->no_write = CrazyWriteHistory::filter($filter)->count();
-//            $item->avg_score_write = round(CrazyWriteHistory::filter($filter)->avg('score') / 100, 2);
+            //            $item->no_write = CrazyWriteHistory::filter($filter)->count();
+            //            $item->avg_score_write = round(CrazyWriteHistory::filter($filter)->avg('score') / 100, 2);
         }
 
         return $crazies;
+    }
+
+    public function store(array $params)
+    {
+    }
+
+    public function destroy($id)
+    {
     }
 }

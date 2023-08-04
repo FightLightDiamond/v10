@@ -23,34 +23,33 @@ class APIController extends RenderController
         APICtrlFactory $APICtrlFactory,
         ResourceFactory $resourceFactory,
         RouteAPIFactory $routeAPIFactory
-    )
-    {
+    ) {
         $this->APICtrlFactory = $APICtrlFactory;
         $this->resourceFactory = $resourceFactory;
         $this->routeAPIFactory = $routeAPIFactory;
     }
 
-    public function produce($inputFix)
+    public function produce($paramsFix)
     {
-        $inputFix = $this->fix($inputFix);
+        $paramsFix = $this->fix($paramsFix);
 
-        $this->APICtrlFactory->building($inputFix);
-        $this->resourceFactory->building($inputFix);
-        $this->routeAPIFactory->building($inputFix['namespace'], $inputFix['path']);
-        $this->extraRender($inputFix);
+        $this->APICtrlFactory->building($paramsFix);
+        $this->resourceFactory->building($paramsFix);
+        $this->routeAPIFactory->building($paramsFix['namespace'], $paramsFix['path']);
+        $this->extraRender($paramsFix);
     }
 
     public function store(Request $request)
     {
-        $input = $request->all();
-        $inputFix = $this->fix($input);
-        $table = $inputFix['table'];
-        $this->produce($inputFix);
-        $moduleContent = $this->buildRoute($inputFix['namespace']) . "\n\n" . $this->buildMessage($table);
+        $params = $request->all();
+        $paramsFix = $this->fix($params);
+        $table = $paramsFix['table'];
+        $this->produce($paramsFix);
+        $moduleContent = $this->buildRoute($paramsFix['namespace']) . "\n\n" . $this->buildMessage($table);
 
         session()->flash('moduleContent', $moduleContent);
 
-        return redirect()->back()->withInput($input);
+        return redirect()->back()->withInput($params);
     }
 
     private function buildMessage($table)
@@ -63,14 +62,15 @@ class APIController extends RenderController
         return $mgs;
     }
 
-    private function buildRoute($namespace) {
+    private function buildRoute($namespace)
+    {
         return
             "Route::name('api.')
                 ->namespace('{$namespace}Http\Controllers\API')
                 ->prefix('api')
                 ->middleware(['api'])
                 ->group( function () {
-                    
+
                 });";
     }
 }

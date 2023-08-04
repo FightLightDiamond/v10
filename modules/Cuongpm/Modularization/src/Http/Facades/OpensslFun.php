@@ -89,21 +89,22 @@ class OpensslFun implements OpensslInterface
         return $decrypted;
     }
 
-    public function setKey($input)
+    public function setKey($params)
     {
         $rsa = new OpensslFun();
 
-        $input['private_key'] = $rsa->getPrivateKey();
-        $input['public_key'] = $rsa->getPublicKey();
+        $params['private_key'] = $rsa->getPrivateKey();
+        $params['public_key'] = $rsa->getPublicKey();
 
-        return $input;
+        return $params;
     }
 
     public function saveKeyFiles($path)
     {
         try {
             mkdir(storage_path($path));
-        } catch (\Exception $exception) {}
+        } catch (\Exception $exception) {
+        }
 
         $rsa = new OpensslFun();
 

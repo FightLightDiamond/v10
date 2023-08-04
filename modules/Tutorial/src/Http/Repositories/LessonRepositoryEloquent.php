@@ -11,6 +11,7 @@ use Tutorial\Models\Lesson;
 
 /**
  * ClassLessonRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class LessonRepositoryEloquent extends BaseRepository implements LessonRepository
@@ -27,18 +28,18 @@ class LessonRepositoryEloquent extends BaseRepository implements LessonRepositor
         return Lesson::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input['per_page']) ?: $input['per_page'] = 10;
+        isset($params['per_page']) ?: $params['per_page'] = 10;
 
         return $this->makeModel()
-            ->filter($input)
-            ->paginate($input['per_page']);
+            ->filter($params)
+            ->paginate($params['per_page']);
     }
 
-    public function store($input)
+    public function store($params)
     {
-        return $this->create($input);
+        return $this->create($params);
     }
 
     public function edit($id)
@@ -47,9 +48,9 @@ class LessonRepositoryEloquent extends BaseRepository implements LessonRepositor
         return compact('lesson');
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        return $this->update($input, $data->id);
+        return $this->update($params, $data->id);
     }
 
     public function import($file)
@@ -60,9 +61,9 @@ class LessonRepositoryEloquent extends BaseRepository implements LessonRepositor
         return $this->importing($path);
     }
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        return $data->uploads($input);
+        return $data->uploads($params);
     }
 
     public function destroy($data)

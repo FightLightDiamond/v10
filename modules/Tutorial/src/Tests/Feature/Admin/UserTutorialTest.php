@@ -15,14 +15,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTutorialTest extends TestCase
 {
-	use TestTrait;
+    use TestTrait;
 
-	public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct();
-    }
 
-    public function setAuth()
+
+    public function setAuth(): void
     {
         $this->setUsername(config('modularization.test.admin_account.username'));
         $this->setPassword(config('modularization.test.admin_account.password'));

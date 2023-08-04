@@ -28,15 +28,15 @@ class ResourceFactory extends BaseFactory
         $this->collectionComponent = $collectionComponent;
     }
 
-    public function building($input)
+    public function building($params)
     {
-        $this->table = $input['table'];
+        $this->table = $params['table'];
 
-        $material = $this->component->building($input, $this->auth);
-        $this->produce($material, $input['path']);
+        $material = $this->component->building($params, $this->auth);
+        $this->produce($material, $params['path']);
 
         $this->fileName = 'ResourceCollection.php';
-        $material = $this->collectionComponent->building($input, $this->auth);
-        $this->produce($material, $input['path']);
+        $material = $this->collectionComponent->building($params, $this->auth);
+        $this->produce($material, $params['path']);
     }
 }

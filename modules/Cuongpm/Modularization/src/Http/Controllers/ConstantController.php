@@ -19,7 +19,7 @@ class ConstantController
         $this->factory = $factory;
     }
 
-    public function produce($database = NULL)
+    public function produce($database = null)
     {
         $this->factory->building($database);
         $this->show($database);

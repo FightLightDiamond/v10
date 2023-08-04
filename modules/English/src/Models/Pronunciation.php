@@ -17,13 +17,13 @@ class Pronunciation extends Model implements Transformable
         'pronunciation_a', 'pronunciation_b',  'pronunciation_c',  'pronunciation_d',
         'answer', 'is_active'];
 
-    public function filterQuestion($query, $input)
+    public function filterQuestion($query, $params)
     {
 
-        $query->where('a', $input['question'])
-            ->orWhere('b', $input['question'])
-            ->orWhere('c', $input['question'])
-            ->orWhere('d', $input['question']);
+        $query->where('a', $params['question'])
+            ->orWhere('b', $params['question'])
+            ->orWhere('c', $params['question'])
+            ->orWhere('d', $params['question']);
 
         return $query;
     }

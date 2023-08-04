@@ -13,20 +13,22 @@ class Similarities extends Migration
      */
     public function up()
     {
-        Schema::create('similarities', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('question');
-            $table->string('replacement');
-            $table->string('a');
-            $table->string('b');
-            $table->string('c');
-            $table->string('d');
-            $table->tinyInteger('answer');
-            $table->text('reason')->nullable();
-            $table->tinyInteger('is_active')->default(0);
-            $table->timestamps();
-            $table->softDeletes();
-        });
+        Schema::create(
+            'similarities', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('question');
+                $table->string('replacement');
+                $table->string('a');
+                $table->string('b');
+                $table->string('c');
+                $table->string('d');
+                $table->tinyInteger('answer');
+                $table->text('reason')->nullable();
+                $table->tinyInteger('is_active')->default(0);
+                $table->timestamps();
+                $table->softDeletes();
+            }
+        );
     }
 
     /**

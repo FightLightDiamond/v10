@@ -15,17 +15,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CrazyListenHistoryTest extends TestCase
 {
-	use TestTrait;
+    use TestTrait;
 
-	public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct();
-    }
+
 
     public function setAuth()
     {
-        $this->setUsername( config('modularization.test.user_account.username'));
-        $this->setPassword( config('modularization.test.user_account.password'));
+        $this->setUsername(config('modularization.test.user_account.username'));
+        $this->setPassword(config('modularization.test.user_account.password'));
         $this->setProvider('users');
     }
 
@@ -47,11 +44,11 @@ class CrazyListenHistoryTest extends TestCase
     public function testIndex()
     {
         $server = $this->getServer();
-		$params = [
+        $params = [
 
-		];
+        ];
 
-		$response = $this->call('GET', route('api.crazy-listen-histories.index'), $params, [], [], $server);
+        $response = $this->call('GET', route('api.crazy-listen-histories.index'), $params, [], [], $server);
 
         $response->assertStatus(200);
     }

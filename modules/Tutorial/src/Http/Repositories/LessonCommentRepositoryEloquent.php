@@ -12,6 +12,7 @@ use Tutorial\Models\LessonComment;
 
 /**
  * Class NewsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class LessonCommentRepositoryEloquent extends BaseRepository implements LessonCommentRepository
@@ -27,33 +28,33 @@ class LessonCommentRepositoryEloquent extends BaseRepository implements LessonCo
         return LessonComment::class;
     }
 
-    public function myPaginate($input)
+    public function myPaginate($params)
     {
-        isset($input['per_page']) ?: $input['per_page'] = 10;
+        isset($params['per_page']) ?: $params['per_page'] = 10;
         return $this->makeModel()
             ->with('lesson:id,title')
-            ->filter($input)
-            ->paginate($input['per_page']);
+            ->filter($params)
+            ->paginate($params['per_page']);
 
     }
 
-    public function store($input)
+    public function store($params)
     {
-        $input['created_by'] = auth()->check() ? auth()->id() : NULL;
-        $input['is_active'] = 1;
-        return $this->create($input);
+        $params['created_by'] = auth()->check() ? auth()->id() : null;
+        $params['is_active'] = 1;
+        return $this->create($params);
     }
 
-    public function change($input, $data)
+    public function change($params, $data)
     {
-        $input = $this->standardized($input, $data);
-        $this->update($input, $data->id);
+        $params = $this->standardized($params, $data);
+        $this->update($params, $data->id);
     }
 
-    private function standardized($input, $data)
+    private function standardized($params, $data)
     {
-        $input = $data->uploads($input);
-        return $data->checkbox($input);
+        $params = $data->uploads($params);
+        return $data->checkbox($params);
     }
 
     public function destroy($data)

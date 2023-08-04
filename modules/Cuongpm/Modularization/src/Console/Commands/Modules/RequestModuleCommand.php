@@ -41,7 +41,7 @@ class RequestModuleCommand extends Command
         $path = $this->option('path');
 
         if($table === '*') {
-            $tables = DBFa::table($dbName = NULL);
+            $tables = DBFa::table($dbName = null);
         } else {
             $tables = [$table];
         }

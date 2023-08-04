@@ -21,9 +21,10 @@ class RemindAdminController extends Controller
         $this->service = $service;
     }
 
-	/**
+    /**
      * Paginate
-     * @group Remind
+     *
+     * @group         Remind
      * @authenticated
      *
      * @queryParam id required The fund id. Example: 1
@@ -61,19 +62,20 @@ class RemindAdminController extends Controller
     public function index(Request $request)
     {
         try {
-            $input = $request->all();
-            $data = $this->service->index($input);
+            $params = $request->all();
+            $data = $this->service->index($params);
 
-           return new RemindResourceCollection($data);
+            return new RemindResourceCollection($data);
         } catch (\Exception $exception) {
             logger($exception);
             return response()->json($exception->getMessage(), 500);
         }
     }
 
-	/**
+    /**
      * Create
-     * @group Remind
+     *
+     * @group         Remind
      * @authenticated
      *
      * @bodyParam is_active int required The is active. Example: 1
@@ -84,13 +86,12 @@ class RemindAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function store(RemindCreateRequest $request)
     {
         try {
-            $input = $request->all();
-            $remind = $this->service->store($input);
+            $params = $request->all();
+            $remind = $this->service->store($params);
 
             return new RemindResource($remind);
         } catch (\Exception $exception) {
@@ -99,11 +100,11 @@ class RemindAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Show
-     * @group Remind
-     * @authenticated
      *
+     * @group         Remind
+     * @authenticated
      *
      * @response {
      *  "is_active": 0,
@@ -111,7 +112,6 @@ class RemindAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function show($id)
     {
@@ -125,9 +125,10 @@ class RemindAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Update
-     * @group Remind
+     *
+     * @group         Remind
      * @authenticated
      *
      * @bodyParam is_active int optional The is active. Example: 1
@@ -138,13 +139,12 @@ class RemindAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function update(RemindUpdateRequest $request, $id)
     {
-        $input = $request->all();
+        $params = $request->all();
         try {
-            $data = $this->service->update($input, $id);
+            $data = $this->service->update($params, $id);
 
             return new RemindResource($data);
         } catch (\Exception $exception) {
@@ -153,9 +153,10 @@ class RemindAdminController extends Controller
         }
     }
 
-	/**
+    /**
      * Destroy
-     * @group Remind
+     *
+     * @group         Remind
      * @authenticated
      *
      * @response {
@@ -164,7 +165,6 @@ class RemindAdminController extends Controller
      *  "created_at": "2019-09-05 02:34:34",
      *  "id": 11
      * }
-     *
      */
     public function destroy($id)
     {
