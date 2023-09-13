@@ -5,7 +5,7 @@ import {memo, useEffect, useState} from "react";
 import BettingMatch from "../Components/Match/betting.match";
 import {PageProps} from "@/types";
 
-const Home = ({auth, currentMatch}: PageProps<{ currentMatch: any }>) => {
+const Home = ({currentMatch}: PageProps<{ currentMatch: any }>) => {
     const {start_time, id} = currentMatch
 
     const [turns, setTurns] = useState([])

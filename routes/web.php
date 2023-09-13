@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SpeakController;
 use App\Http\Controllers\TheMatchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -52,30 +53,6 @@ Route::get('/shooter', function () {
     return Inertia::render('shooter');
 });
 
-
-Route::get('a', function () {
-    $fiber = new Fiber(function (): void {
-        Fiber::suspend(); // Tạm dừng fiber
-        echo 'bfsjf';
-    });
-    $fiber->start();
-    echo "Taken control back...\n";
-    echo "Resuming Fiber...\n";
-    $fiber->resume(); // tiếp tục thực hiện fiber
-    echo "Program exits...\n";
-});
-
-require __DIR__.'/auth.php';
-
-//
-//// Hàm custom để xử lý các thông báo lỗi
-//function customErrorHandler($errno, $errstr, $errfile, $errline) {
-//    // Tạo thông báo lỗi
-//    $message = date("Y-m-d H:i:s") . " - Error: [$errno] $errstr in $errfile on line $errline" . PHP_EOL;
-//
-//    // Ghi thông báo lỗi vào tệp tin log
-//    error_log($message, 3, "error_log.txt");
-//}
-//
-//// Đặt "default error handler" thành hàm customErrorHandler
-//set_error_handler("customErrorHandler");
+Route::get('speak', [SpeakController::class, 'getAlphabet']);
+Route::post('speak', [SpeakController::class, 'generateSpeech']);
+Route::get('speaks', [SpeakController::class, 'generateSpeech']);

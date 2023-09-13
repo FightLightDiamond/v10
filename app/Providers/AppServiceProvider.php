@@ -2,11 +2,8 @@
 
 namespace App\Providers;
 
-use Cuongpm\Modularization\ModularizationServiceProvider;
-use Cuongpm\Uploader\UploadServiceProvider;
-use English\EnglishServiceProvider;
 use Illuminate\Support\ServiceProvider;
-use Tutorial\TutorialServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,9 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->register(UploadServiceProvider::class);
-        $this->app->register(ModularizationServiceProvider::class);
-        $this->app->register(EnglishServiceProvider::class);
-        $this->app->register(TutorialServiceProvider::class);
+
     }
 }

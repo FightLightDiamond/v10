@@ -170,7 +170,8 @@ class RoundService
             //TODO: xử lý hiển thị né
             //$away->take_dmg = -1;
         }
-        $this->turns[] = $home->toArray();
-        $this->turns[] = $away->toArray();
+
+        $this->turns[] = (array)$home;
+        $this->turns[] = (array)$away;
     }
 }
