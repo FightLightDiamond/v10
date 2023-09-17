@@ -53,6 +53,7 @@ Route::get('/shooter', function () {
     return Inertia::render('shooter');
 });
 
+Route::get('python', [SpeakController::class, 'python']);
 Route::get('speak', [SpeakController::class, 'getAlphabet']);
 Route::post('speak', [SpeakController::class, 'generateSpeech']);
 Route::get('speaks', [SpeakController::class, 'generateSpeech']);

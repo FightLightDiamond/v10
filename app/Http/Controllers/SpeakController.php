@@ -15,6 +15,11 @@ class SpeakController extends Controller
         return Inertia::render('Speak/Alphabet');
     }
 
+    public function python()
+    {
+        return Inertia::render('Speak/Python');
+    }
+
     public function generateSpeech(Request $request)
     {
         $text = $request->text;
