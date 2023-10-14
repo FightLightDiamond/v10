@@ -6,9 +6,11 @@ use App\Events\BetEvent;
 use App\Events\FightEvent;
 use App\Listeners\BetListen;
 use App\Listeners\FightListen;
+use App\Listeners\QueryListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         FightEvent::class => [
             FightListen::class
-        ]
+        ],
+        'Illuminate\Database\Events\QueryExecuted' => [
+            QueryListener::class,
+        ],
     ];
 
     /**
@@ -34,7 +39,12 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen('Illuminate\Events\Dispatcher::firing', function ($event, $payload) {
+            logger(json_encode($event), );
+            logger(json_encode($payload), );
+            // Xử lý sự kiện ở đây
+            // $event là tên sự kiện, $payload là dữ liệu liên quan
+        });
     }
 
     /**

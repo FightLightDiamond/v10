@@ -4,6 +4,7 @@ use App\Http\Controllers\BetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpeakController;
 use App\Http\Controllers\TheMatchController;
+use App\Http\Controllers\WiseController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -57,3 +58,5 @@ Route::get('python', [SpeakController::class, 'python']);
 Route::get('speak', [SpeakController::class, 'getAlphabet']);
 Route::post('speak', [SpeakController::class, 'generateSpeech']);
 Route::get('speaks', [SpeakController::class, 'generateSpeech']);
+
+Route::get('wise', [WiseController::class, 'exec']);

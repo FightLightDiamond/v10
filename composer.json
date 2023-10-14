@@ -20,7 +20,8 @@
         "prettus/l5-repository": "^2.9",
         "spiral/roadrunner-cli": "^2.5.0",
         "spiral/roadrunner-http": "^3.0.1",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "transferwise/wise-php": "^0.2.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
