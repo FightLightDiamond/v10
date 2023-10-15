@@ -8,19 +8,40 @@ use App\Http\Services\Wise\WiseAbstract;
 
 class CreateBatchGroupTransfer extends WiseAbstract
 {
+    public string $method = 'POST';
 
-    public function getUrl()
+    public function getUrl(): string
     {
-        return "POST";
+        return "{{host}}/v3/profiles/{{active-profile-id}}/batch-groups/{{batch_group_id}}/transfers";
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        dump('123');
+        dd($this->method);
+//        $data = parent::call();
+        dd($data);
     }
 
-    public function getMethod()
+    public function getBody(): array
     {
-        // TODO: Implement getMethod() method.
+        return [
+            "targetAccount" => $this->getNewRecipientId(),
+            "quoteUuid" => "{{new-quote-id}}",
+            "customerTransactionId" => "{{idempotency-guid}}",
+            "details" => [
+                "reference" => "{{new-recipient-id}}",
+                "transferPurpose" => "Other",
+                "sourceOfFunds" => "Salary"
+            ]
+        ];
+    }
+
+    public function getQuery(): array
+    {
+        return [];
     }
 }

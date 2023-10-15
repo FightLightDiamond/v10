@@ -22,8 +22,12 @@ class FundBatchGroup extends WiseAbstract
         ];
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
     }
 }

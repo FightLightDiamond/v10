@@ -8,14 +8,26 @@ use App\Http\Services\Wise\WiseAbstract;
 
 class UpdateQuoteWithSelectedRecipient extends WiseAbstract
 {
+    public string $method = 'PATCH';
 
     public function getUrl()
     {
-        // TODO: Implement getUrl() method.
+        return "{{host}}/v3/profiles/{{active-profile-id}}/quotes/{{new-quote-id}}";
     }
 
+    public function getBody()
+    {
+        return [
+            "targetAccount" => $this->getNewRecipientId()
+        ];
+    }
+
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
     }
 }

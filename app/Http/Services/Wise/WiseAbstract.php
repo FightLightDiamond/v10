@@ -16,8 +16,15 @@ abstract class WiseAbstract implements WiseInterface
     protected string $batchVersionGroup;
     protected string $sourceCurrency = "GBP";
     protected string $targetCurrency = "EUR";
-
     public string $method = 'GET';
+    protected string $newRecipientId;
+    protected string $quoteId;
+
+    public array $actions = [
+        'GET' => 'get',
+        'POST' => 'post',
+        'PATCH' => 'patch',
+    ];
 
     #[ArrayShape(['Authorization' => "string"])] protected function getHeader()
     {
@@ -37,6 +44,11 @@ abstract class WiseAbstract implements WiseInterface
     }
 
 
+    public function patch()
+    {
+        return $this->http()->patch($this->getUrl(), $this->getBody());
+    }
+
     public function get()
     {
         return $this->http()->get($this->getUrl(), [
@@ -44,7 +56,16 @@ abstract class WiseAbstract implements WiseInterface
         ]);
     }
 
-    public function getMethod()
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
+    public function call()
+    {
+        $action = $this->actions[$this->getMethod()];
+        return call_user_func([$this, $action]);
+    }
+
+    public function getMethod(): string
     {
         return $this->method;
     }
@@ -92,5 +113,25 @@ abstract class WiseAbstract implements WiseInterface
     public function getTargetCurrency(): string
     {
         return $this->targetCurrency;
+    }
+
+    public function getNewRecipientId(): string
+    {
+        return $this->newRecipientId;
+    }
+
+    public function setNewRecipientId($newRecipientId)
+    {
+        return $this->newRecipientId = $newRecipientId;
+    }
+
+    public function getQuoteId(): string
+    {
+        return $this->quoteId;
+    }
+
+    public function setQuoteId($quoteId)
+    {
+        return $this->quoteId = $quoteId;
     }
 }

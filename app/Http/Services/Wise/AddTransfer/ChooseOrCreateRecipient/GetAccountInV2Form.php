@@ -6,12 +6,12 @@ namespace App\Http\Services\Wise\AddTransfer\ChooseOrCreateRecipient;
 
 use App\Http\Services\Wise\WiseAbstract;
 
-class LoadAccount extends WiseAbstract
+class GetAccountInV2Form extends WiseAbstract
 {
 
     public function getUrl()
     {
-        return "{{host}}/v2/accounts/?currency={$this->getTargetCurrency()}";
+        return "{{host}}/v2/accounts/{{new-recipient-id}}";
     }
 
     /**

@@ -11,11 +11,28 @@ class GenerateGUIDForIdempotency extends WiseAbstract
 
     public function getUrl()
     {
-        // TODO: Implement getUrl() method.
+        return "https://www.uuidgenerator.net/api/guid";
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
+    }
+
+    public function getBody(): array
+    {
+        // TODO: Implement getBody() method.
+    }
+
+  public function getQuery(): array
+
+    {
+
+        return [];
+
     }
 }

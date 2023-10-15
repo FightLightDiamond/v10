@@ -1,21 +1,39 @@
 <?php
 
 
-namespace App\Http\Services\Wise\AddTransfer\AddTransfer\ChooseOrCreateRecipient;
+namespace App\Http\Services\Wise\AddTransfer\ChooseOrCreateRecipient;
 
 
 use App\Http\Services\Wise\WiseAbstract;
 
 class UpdateFormIfAnyFieldRequireRefresh extends WiseAbstract
 {
+    public string $method = 'POST';
 
     public function getUrl()
     {
-        // TODO: Implement getUrl() method.
+        return "{{host}}/v1/quotes/{{new-quote-id}}/account-requirements";
     }
 
+    public function getBody()
+    {
+        return [
+            "type" => "aba",
+            "details" => [
+                "legalType" => "PRIVATE",
+                "address" => [
+                        "country" => "US"
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
     }
 }

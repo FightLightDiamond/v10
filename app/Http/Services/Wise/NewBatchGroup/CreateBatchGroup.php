@@ -8,6 +8,8 @@ use App\Http\Services\Wise\WiseAbstract;
 
 class CreateBatchGroup extends WiseAbstract
 {
+    public string $method = 'POST';
+
     public function getUrl(): string
     {
         return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-groups";
@@ -26,8 +28,17 @@ class CreateBatchGroup extends WiseAbstract
         return $this->http()->post($this->getUrl(), $this->getBody());
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $res = parent::call();
+        $this->setBatchGroupId($res->json('id'));
+    }
+
+    public function getQuery(): array
+    {
+        return [];
     }
 }

@@ -8,14 +8,24 @@ use App\Http\Services\Wise\WiseAbstract;
 
 class GetTransferExtraInfoDynamicForm extends WiseAbstract
 {
+    public string $method = 'POST';
+
+    public function __construct()
+    {
+
+    }
 
     public function getUrl()
     {
-        // TODO: Implement getUrl() method.
+        return "{{host}}/v1/transfer-requirements";
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
     }
 }

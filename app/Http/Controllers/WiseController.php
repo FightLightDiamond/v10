@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\Wise\NewBatchGroup\CreateBatchGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use JetBrains\PhpStorm\ArrayShape;
@@ -21,8 +22,8 @@ class WiseController extends Controller
 
     public function exec()
     {
-        Http::withHeaders($this->getHeader())
-            ->get();
+        $c = new CreateBatchGroup();
+        $res = $c->call();
     }
 
     public function getProfileUrl(): string

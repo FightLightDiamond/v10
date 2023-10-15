@@ -13,8 +13,12 @@ class GetBatchGroupVersion extends WiseAbstract
         return "{{host}}/v3/profiles/{{active-profile-id}}/batch-groups/{{batch_group_id}}";
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
     }
 }

@@ -9,23 +9,41 @@ use App\Http\Services\Wise\WiseAbstract;
 class CreateAccount extends WiseAbstract
 {
 
-    public function getUrl()
+    public function getUrl(): string
     {
-        return "{{host}}/v3/profiles/{{active-profile-id}}/quotes";
+        return "{{host}}/v1/accounts";
     }
 
     public function getBody()
     {
         return [
-            "sourceCurrency" => $this->getSourceCurrency(),
-            "targetCurrency" => $this->getTargetCurrency(),
-            "sourceAmount" => 100,
-            "targetAmount" => null
+            "accountHolderName" => "Person USD",
+            "currency" => "USD",
+            "type" => "ABA",
+            "details" => [
+                "address" => [
+                    "city" => "New York",
+                    "countryCode" => "US",
+                    "postCode" => "10025",
+                    "state" => "NY",
+                    "firstLine" => "158 Wall Street"
+                ],
+                "legalType" => "PRIVATE",
+                "abartn" => "064000020",
+                "accountType" => "CHECKING",
+                "accountNumber" => "40000000000",
+                "email" => "example@foobar.com"
+            ]
+
         ];
     }
 
+    /**
+     * @throws \Laravel\Octane\Exceptions\DdException
+     */
     public function call()
     {
-        // TODO: Implement call() method.
+        $data = parent::call();
+        dd($data);
     }
 }
