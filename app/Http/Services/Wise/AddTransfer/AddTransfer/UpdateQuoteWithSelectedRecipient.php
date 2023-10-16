@@ -12,7 +12,7 @@ class UpdateQuoteWithSelectedRecipient extends WiseAbstract
 
     public function getUrl()
     {
-        return "{{host}}/v3/profiles/{{active-profile-id}}/quotes/{{new-quote-id}}";
+        return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/quotes/{$this->getQuoteId()}";
     }
 
     public function getBody()

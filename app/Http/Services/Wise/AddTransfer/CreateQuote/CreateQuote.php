@@ -10,7 +10,7 @@ class CreateQuote extends WiseAbstract
 {
     public function getUrl(): string
     {
-        return "{$this->host}/v3/profiles/{$this->activeProfileId}/quotes";
+        return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/quotes";
     }
 
     public function getBody(): array

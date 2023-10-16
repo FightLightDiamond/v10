@@ -10,7 +10,7 @@ class GetBatchGroupVersion extends WiseAbstract
 {
     public function getUrl()
     {
-        return "{{host}}/v3/profiles/{{active-profile-id}}/batch-groups/{{batch_group_id}}";
+        return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-groups/{$this->getBatchGroupId()}";
     }
 
     /**

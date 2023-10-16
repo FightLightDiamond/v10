@@ -11,7 +11,7 @@ class LoadAccount extends WiseAbstract
 
     public function getUrl()
     {
-        return "{{host}}/v2/accounts/?currency={$this->getTargetCurrency()}";
+        return "{$this->getHost()}/v2/accounts/?currency={$this->getTargetCurrency()}";
     }
 
     /**

@@ -11,7 +11,7 @@ class GetAccountInV2Form extends WiseAbstract
 
     public function getUrl()
     {
-        return "{{host}}/v2/accounts/{{new-recipient-id}}";
+        return "{$this->getHost()}/v2/accounts/{$this->getNewRecipientId()}";
     }
 
     /**

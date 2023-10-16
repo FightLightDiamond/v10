@@ -17,7 +17,7 @@ class GetTransferExtraInfoDynamicForm extends WiseAbstract
 
     public function getUrl()
     {
-        return "{{host}}/v1/transfer-requirements";
+        return "{$this->getHost()}/v1/transfer-requirements";
     }
 
     /**

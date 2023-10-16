@@ -12,7 +12,7 @@ class FundBatchGroup extends WiseAbstract
 
     public function getUrl()
     {
-        return "{$this->getHost()}/v3/profiles/{{active-profile-id}}/batch-payments/{{batch_group_id}}/payments";
+        return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-payments/{$this->getBatchGroupId()}/payments";
     }
 
     public function getBody()

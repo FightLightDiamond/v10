@@ -12,14 +12,14 @@ class UpdateTransferExtraInfoDynamicForm extends WiseAbstract
 
     public function getUrl()
     {
-        return "{{host}}/v1/transfer-requirements";
+        return "{$this->getHost()}/v1/transfer-requirements";
     }
 
     public function getBody(): array
     {
         return [
             "targetAccount" => $this->getNewRecipientId(),
-            "quoteUuid" => "{{new-quote-id}}",
+            "quoteUuid" => "{$this->getQuoteId()}",
             "details" => [
                 "reference" => "my ref",
                 "sourceOfFunds" => "verification.source.of.funds.other"
@@ -36,11 +36,8 @@ class UpdateTransferExtraInfoDynamicForm extends WiseAbstract
         dd($data);
     }
 
-  public function getQuery(): array
-
+    public function getQuery(): array
     {
-
         return [];
-
     }
 }

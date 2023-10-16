@@ -11,7 +11,7 @@ class CreateAccount extends WiseAbstract
 
     public function getUrl(): string
     {
-        return "{{host}}/v1/accounts";
+        return "{$this->getHost()}/v1/accounts";
     }
 
     public function getBody()

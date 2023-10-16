@@ -72,7 +72,7 @@ abstract class WiseAbstract implements WiseInterface
 
     public function getProfileUrl(): string
     {
-        return "{$this->host}/v2/profiles";
+        return "$this->getHost()/v2/profiles";
     }
 
     public function getHost(): string

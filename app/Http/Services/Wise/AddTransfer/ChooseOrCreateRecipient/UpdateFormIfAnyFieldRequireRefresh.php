@@ -12,7 +12,7 @@ class UpdateFormIfAnyFieldRequireRefresh extends WiseAbstract
 
     public function getUrl()
     {
-        return "{{host}}/v1/quotes/{{new-quote-id}}/account-requirements";
+        return "{$this->getHost()}/v1/quotes/{$this->getQuoteId()}/account-requirements";
     }
 
     public function getBody()

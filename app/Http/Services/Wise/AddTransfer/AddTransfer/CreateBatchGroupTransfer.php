@@ -12,7 +12,7 @@ class CreateBatchGroupTransfer extends WiseAbstract
 
     public function getUrl(): string
     {
-        return "{{host}}/v3/profiles/{{active-profile-id}}/batch-groups/{{batch_group_id}}/transfers";
+        return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-groups/{$this->getBatchGroupId()}/transfers";
     }
 
     /**
@@ -30,10 +30,10 @@ class CreateBatchGroupTransfer extends WiseAbstract
     {
         return [
             "targetAccount" => $this->getNewRecipientId(),
-            "quoteUuid" => "{{new-quote-id}}",
+            "quoteUuid" => "{$this->getQuoteId()}",
             "customerTransactionId" => "{{idempotency-guid}}",
             "details" => [
-                "reference" => "{{new-recipient-id}}",
+                "reference" => "{$this->getNewRecipientId()}",
                 "transferPurpose" => "Other",
                 "sourceOfFunds" => "Salary"
             ]

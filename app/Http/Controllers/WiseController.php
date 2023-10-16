@@ -33,7 +33,7 @@ class WiseController extends Controller
 
     public function getCreateBatchGroupUrl(): string
     {
-        return "{$this->uri}/v3/profiles/{$this->activeProfileId}/batch-groups";
+        return "{$this->uri}/v3/profiles/{$this->getActiveProfileId()}/batch-groups";
     }
 
     public function getCreateBatchGroupBody(): array
@@ -46,7 +46,7 @@ class WiseController extends Controller
 
     public function getCreateQuoteUrl(): string
     {
-        return "{$this->uri}/v3/profiles/{$this->activeProfileId}/quotes";
+        return "{$this->uri}/v3/profiles/{$this->getActiveProfileId()}/quotes";
     }
 
     public function getCreateQuoteBody(): array
