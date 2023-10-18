@@ -10,14 +10,17 @@ class GetTransferExtraInfoDynamicForm extends WiseAbstract
 {
     public string $method = 'POST';
 
-    public function __construct()
-    {
-
-    }
-
     public function getUrl()
     {
         return "{$this->getHost()}/v1/transfer-requirements";
+    }
+
+    public function getBody()
+    {
+        return [
+            "targetAccount" => $this->getNewRecipientId(),
+            "quoteUuid" => $this->getQuoteId()
+        ];
     }
 
     /**
@@ -26,6 +29,6 @@ class GetTransferExtraInfoDynamicForm extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+//        dd($data->json());
     }
 }

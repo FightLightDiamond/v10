@@ -34,6 +34,6 @@ class UpdateFormIfAnyFieldRequireRefresh extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        dd($data->json());
     }
 }

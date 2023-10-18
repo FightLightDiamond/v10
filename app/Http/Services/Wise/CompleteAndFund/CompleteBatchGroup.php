@@ -21,7 +21,7 @@ class CompleteBatchGroup extends WiseAbstract
     {
         return [
             "status" =>  "COMPLETED",
-	        "version" => $this->getBatchVersionGroup()
+	        "version" => $this->getBatchGroupVersion()
         ];
     }
 
@@ -31,6 +31,6 @@ class CompleteBatchGroup extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        dd($data->json());
     }
 }

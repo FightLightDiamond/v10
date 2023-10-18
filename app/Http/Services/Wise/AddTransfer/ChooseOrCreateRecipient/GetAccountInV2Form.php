@@ -20,6 +20,6 @@ class GetAccountInV2Form extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        dd($data->json());
     }
 }

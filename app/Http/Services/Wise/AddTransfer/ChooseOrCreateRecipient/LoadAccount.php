@@ -14,12 +14,24 @@ class LoadAccount extends WiseAbstract
         return "{$this->getHost()}/v2/accounts/?currency={$this->getTargetCurrency()}";
     }
 
+    public function getQuery()
+    {
+        return [];
+    }
+
     /**
      * @throws \Laravel\Octane\Exceptions\DdException
      */
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        $accounts = $data->json();
+
+        foreach ($accounts['content'] as $account) {
+            if ($account['currency'] === 'USD' && $account['legalEntityType'] === 'PERSON') {
+                $this->setNewRecipientId($account['id']);
+                break;
+            }
+        }
     }
 }

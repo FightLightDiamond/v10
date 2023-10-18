@@ -2,6 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\Wise\AddTransfer\AddTransfer\CreateBatchGroupTransfer;
+use App\Http\Services\Wise\AddTransfer\AddTransfer\GenerateGUIDForIdempotency;
+use App\Http\Services\Wise\AddTransfer\AddTransfer\GetTransferExtraInfoDynamicForm;
+use App\Http\Services\Wise\AddTransfer\AddTransfer\UpdateQuoteWithSelectedRecipient;
+use App\Http\Services\Wise\AddTransfer\ChooseOrCreateRecipient\LoadAccount;
+use App\Http\Services\Wise\AddTransfer\CreateQuote\CreateQuote;
+use App\Http\Services\Wise\CompleteAndFund\CompleteBatchGroup;
+use App\Http\Services\Wise\CompleteAndFund\FundBatchGroup;
+use App\Http\Services\Wise\CompleteAndFund\GetBatchGroupVersion;
 use App\Http\Services\Wise\NewBatchGroup\CreateBatchGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -22,45 +31,20 @@ class WiseController extends Controller
 
     public function exec()
     {
-        $c = new CreateBatchGroup();
-        $res = $c->call();
+        (new CreateBatchGroup())->call();
+        (new CreateQuote())->call();
+        (new LoadAccount())->call();
+        (new GenerateGUIDForIdempotency())->call();
+        (new UpdateQuoteWithSelectedRecipient())->call();
+        (new GetTransferExtraInfoDynamicForm())->call();
+        (new CreateBatchGroupTransfer())->call();
+        (new GetBatchGroupVersion())->call();
+        (new CompleteBatchGroup())->call();
+        (new FundBatchGroup())->call();
     }
 
     public function getProfileUrl(): string
     {
         return "{$this->uri}/v2/profiles";
-    }
-
-    public function getCreateBatchGroupUrl(): string
-    {
-        return "{$this->uri}/v3/profiles/{$this->getActiveProfileId()}/batch-groups";
-    }
-
-    public function getCreateBatchGroupBody(): array
-    {
-        return [
-            "sourceCurrency" => "GBP",
-            "name" => "Test Batch"
-        ];
-    }
-
-    public function getCreateQuoteUrl(): string
-    {
-        return "{$this->uri}/v3/profiles/{$this->getActiveProfileId()}/quotes";
-    }
-
-    public function getCreateQuoteBody(): array
-    {
-        return [
-            "sourceCurrency" => "GBP",
-            "targetCurrency" => "EUR",
-            "sourceAmount" => 100,
-            "targetAmount" => null
-        ];
-    }
-
-    public function getLoadAccountUrl()
-    {
-
     }
 }

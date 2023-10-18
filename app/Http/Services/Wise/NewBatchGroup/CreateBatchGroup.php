@@ -5,6 +5,7 @@ namespace App\Http\Services\Wise\NewBatchGroup;
 
 
 use App\Http\Services\Wise\WiseAbstract;
+use Illuminate\Support\Carbon;
 
 class CreateBatchGroup extends WiseAbstract
 {
@@ -19,7 +20,7 @@ class CreateBatchGroup extends WiseAbstract
     {
         return [
             "sourceCurrency" => $this->getSourceCurrency(),
-            "name" => "Test Batch"
+            "name" => "Test Batch: " . Carbon::now()->format('Y-m-d H:i:s')
         ];
     }
 

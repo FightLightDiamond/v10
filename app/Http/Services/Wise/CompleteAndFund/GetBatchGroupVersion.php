@@ -13,12 +13,18 @@ class GetBatchGroupVersion extends WiseAbstract
         return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-groups/{$this->getBatchGroupId()}";
     }
 
+    public function getQuery()
+    {
+        return [];
+    }
+
     /**
      * @throws \Laravel\Octane\Exceptions\DdException
      */
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        $this->setBatchGroupVersion($data->json('version'));
+        dump($data->json());
     }
 }
