@@ -35,11 +35,7 @@ class CreateBatchGroup extends WiseAbstract
     public function call()
     {
         $res = parent::call();
+        dump($res->json());
         $this->setBatchGroupId($res->json('id'));
-    }
-
-    public function getQuery(): array
-    {
-        return [];
     }
 }

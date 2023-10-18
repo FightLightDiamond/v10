@@ -15,7 +15,7 @@ class GetTransferExtraInfoDynamicForm extends WiseAbstract
         return "{$this->getHost()}/v1/transfer-requirements";
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         return [
             "targetAccount" => $this->getNewRecipientId(),
@@ -29,6 +29,6 @@ class GetTransferExtraInfoDynamicForm extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-//        dd($data->json());
+        dump($data->json());
     }
 }

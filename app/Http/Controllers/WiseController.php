@@ -12,8 +12,8 @@ use App\Http\Services\Wise\CompleteAndFund\CompleteBatchGroup;
 use App\Http\Services\Wise\CompleteAndFund\FundBatchGroup;
 use App\Http\Services\Wise\CompleteAndFund\GetBatchGroupVersion;
 use App\Http\Services\Wise\NewBatchGroup\CreateBatchGroup;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use App\Http\Services\Wise\TransferStatus\GetTransferStatus;
+use App\Http\Services\Wise\TransferStatus\GetUpdatedDeliveryEstimation;
 use JetBrains\PhpStorm\ArrayShape;
 
 class WiseController extends Controller
@@ -32,15 +32,24 @@ class WiseController extends Controller
     public function exec()
     {
         (new CreateBatchGroup())->call();
+
         (new CreateQuote())->call();
+
         (new LoadAccount())->call();
-        (new GenerateGUIDForIdempotency())->call();
+
         (new UpdateQuoteWithSelectedRecipient())->call();
         (new GetTransferExtraInfoDynamicForm())->call();
+        (new UpdateQuoteWithSelectedRecipient())->call();
+
+        (new GenerateGUIDForIdempotency())->call();
         (new CreateBatchGroupTransfer())->call();
+
         (new GetBatchGroupVersion())->call();
         (new CompleteBatchGroup())->call();
         (new FundBatchGroup())->call();
+
+        (new GetTransferStatus())->call();
+        (new GetUpdatedDeliveryEstimation())->call();
     }
 
     public function getProfileUrl(): string

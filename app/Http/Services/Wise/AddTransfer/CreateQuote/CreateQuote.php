@@ -31,6 +31,7 @@ class CreateQuote extends WiseAbstract
     public function call()
     {
         $data = parent::call();
+        dump($data->json());
         $this->setQuoteId($data->json('id'));
     }
 }

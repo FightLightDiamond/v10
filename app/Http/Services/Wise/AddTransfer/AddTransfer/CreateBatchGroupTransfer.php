@@ -37,9 +37,4 @@ class CreateBatchGroupTransfer extends WiseAbstract
             ]
         ];
     }
-
-    public function getQuery(): array
-    {
-        return [];
-    }
 }

@@ -13,7 +13,7 @@ abstract class WiseAbstract implements WiseInterface
     protected string $token = 'ddeedb14-c4e4-4293-bbf3-a9afa6288fc6';
     protected string $activeProfileId = '16969701';
     protected static string $batchGroupId;
-    protected string $sourceCurrency = "SGD";
+    protected string $sourceCurrency = "USD";
     protected string $targetCurrency = "USD";
     public string $method = 'GET';
     protected static string $newRecipientId = '';
@@ -55,6 +55,16 @@ abstract class WiseAbstract implements WiseInterface
         return $this->http()->get($this->getUrl(), [
             'query' => $this->getQuery(),
         ]);
+    }
+
+    public function getBody(): array
+    {
+        return [];
+    }
+
+    public function getQuery(): array
+    {
+        return [];
     }
 
     /**

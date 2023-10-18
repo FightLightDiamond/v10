@@ -15,7 +15,7 @@ class FundBatchGroup extends WiseAbstract
         return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-payments/{$this->getBatchGroupId()}/payments";
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         return [
             'type' => "BALANCE"
@@ -28,6 +28,6 @@ class FundBatchGroup extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data->json());
+        dump($data->json());
     }
 }

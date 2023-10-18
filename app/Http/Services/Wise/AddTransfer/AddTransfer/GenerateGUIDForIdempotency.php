@@ -22,14 +22,4 @@ class GenerateGUIDForIdempotency extends WiseAbstract
         $data = parent::call();
         $this->setIdempotencyGuid($data->body());
     }
-
-    public function getBody(): array
-    {
-        return [];
-    }
-
-    public function getQuery(): array
-    {
-        return [];
-    }
 }

@@ -15,10 +15,15 @@ class UpdateQuoteWithSelectedRecipient extends WiseAbstract
         return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/quotes/{$this->getQuoteId()}";
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         return [
-            "targetAccount" => $this->getNewRecipientId()
+            "targetAccount" => $this->getNewRecipientId(),
+            "quoteUuid" => $this->getQuoteId(),
+            "details" => [
+                "reference" => "my ref",
+                "sourceOfFunds" => "verification.source.of.funds.other"
+            ]
         ];
     }
 
@@ -28,6 +33,6 @@ class UpdateQuoteWithSelectedRecipient extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-//        dd($data->json());
+        dump($data->json());
     }
 }

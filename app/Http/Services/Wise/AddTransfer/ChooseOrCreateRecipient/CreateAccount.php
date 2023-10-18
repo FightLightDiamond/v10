@@ -14,7 +14,7 @@ class CreateAccount extends WiseAbstract
         return "{$this->getHost()}/v1/accounts";
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         return [
             "accountHolderName" => "Person USD",

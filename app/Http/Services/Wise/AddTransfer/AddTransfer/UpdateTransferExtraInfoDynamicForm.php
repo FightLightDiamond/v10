@@ -35,9 +35,4 @@ class UpdateTransferExtraInfoDynamicForm extends WiseAbstract
         $data = parent::call();
         dd($data->json());
     }
-
-    public function getQuery(): array
-    {
-        return [];
-    }
 }

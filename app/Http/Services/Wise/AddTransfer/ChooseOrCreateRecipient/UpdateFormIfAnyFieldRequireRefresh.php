@@ -15,7 +15,7 @@ class UpdateFormIfAnyFieldRequireRefresh extends WiseAbstract
         return "{$this->getHost()}/v1/quotes/{$this->getQuoteId()}/account-requirements";
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         return [
             "type" => "aba",
