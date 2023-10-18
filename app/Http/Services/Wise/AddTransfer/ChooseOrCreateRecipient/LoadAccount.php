@@ -22,13 +22,16 @@ class LoadAccount extends WiseAbstract
         $data = parent::call();
         $accounts = $data->json();
 
-        dump($accounts);
-
+        $ids = [];
         foreach ($accounts['content'] as $account) {
             if ($account['currency'] === 'USD' && $account['legalEntityType'] === 'PERSON') {
-                $this->setNewRecipientId($account['id']);
-                break;
+//                $this->setNewRecipientId($account['id']);
+//                break;
+                $ids[] = $account['id'];
             }
         }
+
+        dump($ids);
+        $this->setNewRecipientIds($ids);
     }
 }

@@ -17,6 +17,7 @@ abstract class WiseAbstract implements WiseInterface
     protected string $targetCurrency = "USD";
     public string $method = 'GET';
     protected static string $newRecipientId = '';
+    protected static array $newRecipientIds = [];
     public static string $quoteId = '';
     public static string $idempotencyGuid = '';
     public static string $batchGroupVersion = '';
@@ -129,6 +130,16 @@ abstract class WiseAbstract implements WiseInterface
     public function setNewRecipientId($newRecipientId)
     {
         return static::$newRecipientId = $newRecipientId;
+    }
+
+    public function getNewRecipientIds(): array
+    {
+        return static::$newRecipientIds;
+    }
+
+    public function setNewRecipientIds($newRecipientIds)
+    {
+        return static::$newRecipientIds = $newRecipientIds;
     }
 
     public function getQuoteId(): string

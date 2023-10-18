@@ -6,6 +6,7 @@ use App\Http\Services\Wise\AddTransfer\AddTransfer\CreateBatchGroupTransfer;
 use App\Http\Services\Wise\AddTransfer\AddTransfer\GenerateGUIDForIdempotency;
 use App\Http\Services\Wise\AddTransfer\AddTransfer\GetTransferExtraInfoDynamicForm;
 use App\Http\Services\Wise\AddTransfer\AddTransfer\UpdateQuoteWithSelectedRecipient;
+use App\Http\Services\Wise\AddTransfer\AddTransfer\UpdateTransferExtraInfoDynamicForm;
 use App\Http\Services\Wise\AddTransfer\ChooseOrCreateRecipient\LoadAccount;
 use App\Http\Services\Wise\AddTransfer\CreateQuote\CreateQuote;
 use App\Http\Services\Wise\CompleteAndFund\CompleteBatchGroup;
@@ -33,23 +34,26 @@ class WiseController extends Controller
     {
         (new CreateBatchGroup())->call();
 
-        (new CreateQuote())->call();
-
         (new LoadAccount())->call();
+        $ids = (new LoadAccount())->getNewRecipientIds();
 
-        (new UpdateQuoteWithSelectedRecipient())->call();
-        (new GetTransferExtraInfoDynamicForm())->call();
-        (new UpdateQuoteWithSelectedRecipient())->call();
+        foreach ($ids as $newRecipientId) {
+            (new LoadAccount())->setNewRecipientId($newRecipientId);
 
-        (new GenerateGUIDForIdempotency())->call();
-        (new CreateBatchGroupTransfer())->call();
+            (new CreateQuote())->call();
+
+            (new UpdateQuoteWithSelectedRecipient())->call();
+
+            (new GetTransferExtraInfoDynamicForm())->call();
+            (new UpdateTransferExtraInfoDynamicForm())->call();
+
+            (new GenerateGUIDForIdempotency())->call();
+            (new CreateBatchGroupTransfer())->call();
+        }
 
         (new GetBatchGroupVersion())->call();
         (new CompleteBatchGroup())->call();
         (new FundBatchGroup())->call();
-
-        (new GetTransferStatus())->call();
-        (new GetUpdatedDeliveryEstimation())->call();
     }
 
     public function getProfileUrl(): string
