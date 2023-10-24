@@ -35,3 +35,9 @@ echo:
 	laravel-echo-server start
 pm2:
 	pm2 start processes.yaml
+
+swarm:
+	docker swarm init && docker stack deploy -c swarm-docker-compose.yml laravel-stack
+
+leave:
+	docker swarm leave --force

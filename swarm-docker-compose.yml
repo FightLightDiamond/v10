@@ -1,0 +1,97 @@
+version: '3'
+services:
+    app:
+        build:
+            context: ./docker/8.2
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: v10-8.2/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${APP_PORT:-80}:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_v10: 1
+            XDEBUG_MODE: '${v10_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${v10_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - backend
+        depends_on:
+            - mysql
+            - redis
+        deploy:
+            replicas: 2
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+#        volumes:
+#            - 'v10-mysql:/var/lib/mysql'
+#            - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+        networks:
+            - backend
+        healthcheck:
+            test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '-p${DB_PASSWORD}'
+            retries: 3
+            timeout: 5s
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'v10-redis:/data'
+        networks:
+            - backend
+        healthcheck:
+            test:
+                - CMD
+                - redis-cli
+                - ping
+            retries: 3
+            timeout: 5s
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - '${FORWARD_MAILHOG_PORT:-1029}:1025'
+            - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8029}:8025'
+        networks:
+            - backend
+    echo-server:
+        image: "lagun4ik/laravel-echo-server"
+        ports:
+            - "6001:6001"
+        volumes:
+            - .:/app
+        links:
+            - redis
+            - laravel.test
+        networks:
+            - backend
+networks:
+  backend:
+    driver: overlay
+    ipam:
+      config:
+        - subnet: 192.168.18.0/24
+volumes:
+    v10-mysql:
+        driver: local
+    v10-redis:
+        driver: local
