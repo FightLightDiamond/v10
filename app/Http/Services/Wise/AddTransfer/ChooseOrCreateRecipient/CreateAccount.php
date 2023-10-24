@@ -14,7 +14,7 @@ class CreateAccount extends WiseAbstract
         return "{$this->getHost()}/v1/accounts";
     }
 
-    public function getBody()
+    public function getBody(): array
     {
         return [
             "accountHolderName" => "Person USD",
@@ -44,6 +44,6 @@ class CreateAccount extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        dd($data->json());
     }
 }

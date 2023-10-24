@@ -12,13 +12,15 @@ abstract class WiseAbstract implements WiseInterface
     protected string $host = 'https://api.sandbox.transferwise.tech';
     protected string $token = 'ddeedb14-c4e4-4293-bbf3-a9afa6288fc6';
     protected string $activeProfileId = '16969701';
-    protected string $batchGroupId;
-    protected string $batchVersionGroup;
-    protected string $sourceCurrency = "GBP";
-    protected string $targetCurrency = "EUR";
+    protected static string $batchGroupId;
+    protected string $sourceCurrency = "USD";
+    protected string $targetCurrency = "USD";
     public string $method = 'GET';
-    protected string $newRecipientId;
-    protected string $quoteId;
+    protected static string $newRecipientId = '';
+    protected static array $newRecipientIds = [];
+    public static string $quoteId = '';
+    public static string $idempotencyGuid = '';
+    public static string $batchGroupVersion = '';
 
     public array $actions = [
         'GET' => 'get',
@@ -56,6 +58,16 @@ abstract class WiseAbstract implements WiseInterface
         ]);
     }
 
+    public function getBody(): array
+    {
+        return [];
+    }
+
+    public function getQuery(): array
+    {
+        return [];
+    }
+
     /**
      * @throws \Laravel\Octane\Exceptions\DdException
      */
@@ -72,7 +84,7 @@ abstract class WiseAbstract implements WiseInterface
 
     public function getProfileUrl(): string
     {
-        return "$this->getHost()/v2/profiles";
+        return "{$this->getHost()}/v2/profiles";
     }
 
     public function getHost(): string
@@ -92,17 +104,12 @@ abstract class WiseAbstract implements WiseInterface
 
     public function getBatchGroupId(): string
     {
-        return $this->batchGroupId;
+        return static::$batchGroupId;
     }
 
     public function setBatchGroupId($batchGroupId)
     {
-        return $this->batchGroupId = $batchGroupId;
-    }
-
-    public function getBatchVersionGroup(): string
-    {
-        return $this->batchVersionGroup;
+        return static::$batchGroupId = $batchGroupId;
     }
 
     public function getSourceCurrency(): string
@@ -117,21 +124,51 @@ abstract class WiseAbstract implements WiseInterface
 
     public function getNewRecipientId(): string
     {
-        return $this->newRecipientId;
+        return static::$newRecipientId;
     }
 
     public function setNewRecipientId($newRecipientId)
     {
-        return $this->newRecipientId = $newRecipientId;
+        return static::$newRecipientId = $newRecipientId;
+    }
+
+    public function getNewRecipientIds(): array
+    {
+        return static::$newRecipientIds;
+    }
+
+    public function setNewRecipientIds($newRecipientIds)
+    {
+        return static::$newRecipientIds = $newRecipientIds;
     }
 
     public function getQuoteId(): string
     {
-        return $this->quoteId;
+        return static::$quoteId;
     }
 
     public function setQuoteId($quoteId)
     {
-        return $this->quoteId = $quoteId;
+        return static::$quoteId = $quoteId;
+    }
+
+    public function getIdempotencyGuid(): string
+    {
+        return static::$idempotencyGuid;
+    }
+
+    public function setIdempotencyGuid($idempotencyGuid)
+    {
+        return static::$idempotencyGuid = $idempotencyGuid;
+    }
+
+    public function getBatchGroupVersion(): string
+    {
+        return static::$batchGroupVersion;
+    }
+
+    public function setBatchGroupVersion($batchGroupVersion)
+    {
+        return static::$batchGroupVersion = $batchGroupVersion;
     }
 }

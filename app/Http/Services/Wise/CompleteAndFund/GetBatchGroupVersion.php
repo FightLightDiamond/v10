@@ -19,6 +19,7 @@ class GetBatchGroupVersion extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        $this->setBatchGroupVersion($data->json('version'));
+        dump($data->json());
     }
 }

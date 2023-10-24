@@ -8,6 +8,8 @@ use App\Http\Services\Wise\WiseAbstract;
 
 class CreateQuote extends WiseAbstract
 {
+    public string $method = 'POST';
+
     public function getUrl(): string
     {
         return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/quotes";
@@ -29,6 +31,7 @@ class CreateQuote extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        dump($data->json());
+        $this->setQuoteId($data->json('id'));
     }
 }

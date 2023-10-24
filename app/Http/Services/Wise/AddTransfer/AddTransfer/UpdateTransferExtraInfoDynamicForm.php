@@ -33,11 +33,6 @@ class UpdateTransferExtraInfoDynamicForm extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
-    }
-
-    public function getQuery(): array
-    {
-        return [];
+        dump($data->json());
     }
 }

@@ -17,11 +17,11 @@ class CompleteBatchGroup extends WiseAbstract
         return "{$this->getHost()}/v3/profiles/{$this->getActiveProfileId()}/batch-groups/{$this->getBatchGroupId()}";
     }
 
-    #[ArrayShape(["status" => "string", "version" => "string"])] public function getBody()
+    #[ArrayShape(["status" => "string", "version" => "string"])] public function getBody(): array
     {
         return [
             "status" =>  "COMPLETED",
-	        "version" => $this->getBatchVersionGroup()
+	        "version" => $this->getBatchGroupVersion()
         ];
     }
 
@@ -31,6 +31,6 @@ class CompleteBatchGroup extends WiseAbstract
     public function call()
     {
         $data = parent::call();
-        dd($data);
+        dump($data->json());
     }
 }

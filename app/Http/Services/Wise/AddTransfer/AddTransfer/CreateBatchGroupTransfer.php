@@ -20,28 +20,21 @@ class CreateBatchGroupTransfer extends WiseAbstract
      */
     public function call()
     {
-        dump('123');
-        dd($this->method);
-//        $data = parent::call();
-        dd($data);
+        $data = parent::call();
+        dump($data->json());
     }
 
     public function getBody(): array
     {
         return [
             "targetAccount" => $this->getNewRecipientId(),
-            "quoteUuid" => "{$this->getQuoteId()}",
-            "customerTransactionId" => "{{idempotency-guid}}",
+            "quoteUuid" => $this->getQuoteId(),
+            "customerTransactionId" => $this->getIdempotencyGuid(),
             "details" => [
                 "reference" => "{$this->getNewRecipientId()}",
                 "transferPurpose" => "Other",
                 "sourceOfFunds" => "Salary"
             ]
         ];
-    }
-
-    public function getQuery(): array
-    {
-        return [];
     }
 }
