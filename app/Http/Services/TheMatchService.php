@@ -20,6 +20,7 @@ class TheMatchService
     public function getCurrent()
     {
         $currentMatchId = Cache::get('currentMatchId') ?? 1;
+
         $match = $this->theMatchRepository->find($currentMatchId);
 
         if (!$match) {
@@ -38,5 +39,7 @@ class TheMatchService
         case BetStatusConstant::FIGHTING:
             return $match;
         }
+
+        return $match;
     }
 }

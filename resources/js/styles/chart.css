@@ -136,7 +136,7 @@
     font-size: 13px;
     line-height: 15px;
     text-transform: uppercase;
-  
+
     color: #0f0f0f;
   }
   .name-rank {
@@ -159,7 +159,7 @@
     line-height: 130%;
     color: #0f0f0f;
   }
-  
+
   .peak {
     display: flex;
     justify-content: space-between;
@@ -179,7 +179,7 @@
     line-height: 15px;
     text-align: center;
     text-transform: uppercase;
-  
+
     color: #0f0f0f;
     margin-top: 8px;
   }
@@ -201,7 +201,7 @@
     display: inline-block;
     text-align: center;
   }
-  
+
   .person {
     display: flex;
     justify-content: space-between;

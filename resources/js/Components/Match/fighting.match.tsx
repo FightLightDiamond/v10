@@ -83,11 +83,11 @@ const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, sta
         </div>
       </div>
 
-      <div className={"flex flex-row"}>
-        <div >
+      <div className={"flex columns-2"}>
+        <div className="flex flex-col w-full mr-2">
           {home ? <HeroTurn hero={home} /> : <Progress data-state={"loading"} value={100} className="w-[60%]" />}
         </div>
-        <div >
+        <div className="flex flex-col w-full ml-2">
           {away ? <HeroTurn hero={away} /> : <Progress data-state={"loading"} value={100} className="w-[60%]" />}
         </div>
       </div>

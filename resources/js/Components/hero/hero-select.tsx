@@ -2,10 +2,11 @@ import {Tilt} from "../Tilt";
 import {motion} from "framer-motion";
 import {IMatchLog} from "@/App/interfaces/match-log.interface";
 import {Progress} from "@/shadcn/ui/progress";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/shadcn/ui/card";
 
 const skills: any = {
     Chiron: "+Atk = 80% máu bị mất. Ví dụ máu giảm 50% tăng 40% ATK, giảm về 90% tăng 72% dame",
-    Hell: "1. Đối thủ chết luôn nếu HP <= 30%. 2. HP < 70% và máu ít đối thủ, +ATK 10% bằng lượng (hp đối phương - hp bản thân) ",
+    Hell: "1. Kết liễu đối thủ nếu HP <= 30%. 2. HP < 70% và máu ít hơn đối thủ, +ATK 10% = hp đối phương - hp bản thân",
     Valkyrie: "mỗi turn đốt 2% máu cộng dồn tối đa 5 lần",
     Hera: "1. -20% ATK đối phương khi kích hoạt nội tại. 2. 30% cấm nội tại đối phương, ngược lại 70% +15% crit dmg",
     Darklord: "HP <= 65% HP, +60% ATK và +50% def",
@@ -22,15 +23,18 @@ function viewCurrent(c: number | undefined) {
 }
 
 const HeroTurn = ({hero}: { hero: IMatchLog }) => {
-    return <div>
-        {hero.current_hp}
-        <Progress className={'text-red-600'} value={viewCurrent(hero.current_hp)} max={hero.hp}></Progress>
-        {/*<Progress value={viewCurrent(hero.current_atk)} max={hero.atk * 3}></Progress>*/}
-        {/*<Progress value={viewCurrent(hero.current_def)} max={hero.def * 3}></Progress>*/}
-        {/*<Progress value={viewCurrent(hero.current_crit_rate)} max={100}></Progress>*/}
-        {/*<Progress value={viewCurrent(hero.current_crit_dmg)} max={400}></Progress>*/}
-        <div>
-            <motion.h1
+    const containerStyle = {
+        // padding: "20px",
+        // margin: "20px",
+    };
+    return <Card>
+        <CardHeader>
+            <CardTitle>{hero.name}</CardTitle>
+            <CardDescription>HP: {hero.current_hp}, ATK: {hero.atk}, DEF: {hero.def},
+                CRIT RATE: {hero.current_crit_rate}, CRIT DMG: {hero.current_crit_dmg}</CardDescription>
+        </CardHeader>
+        <CardContent>
+            <motion.h3 style={containerStyle}
                 animate={{
                     opacity: hero.take_dmg ? 1 : 0,
                 }}
@@ -38,8 +42,8 @@ const HeroTurn = ({hero}: { hero: IMatchLog }) => {
                     duration: 3,
                     delay: 1,
                 }}
-                className="text-warning text-center">{hero.take_skill_dmg ? "-" + hero.take_skill_dmg : ''}&nbsp;</motion.h1>
-            <motion.h1
+                className="text-warning text-center">{hero.take_skill_dmg ? "-" + hero.take_skill_dmg : ''}&nbsp;</motion.h3>
+            <motion.h3 style={containerStyle}
                 animate={{
                     opacity: hero.take_dmg ? 1 : 0,
                 }}
@@ -49,29 +53,31 @@ const HeroTurn = ({hero}: { hero: IMatchLog }) => {
                     delay: 1.1,
                     duration: 3,
                 }}
-                className="text-danger text-center">{hero.take_dmg ? "-" + hero.take_dmg : ''}&nbsp;</motion.h1>
-        </div>
-        <motion.div
-                    key={hero.name}
-                    animate={{
-                        scale: !hero.take_dmg ? [0.5, 0.7] : 0.7,
-                        opacity: !hero.take_dmg ? [0.5, 1] : 1,
-                    }}
-                    transition={{
-                        duration: 1,
-                    }}
-                    exit={{
-                        scale: 1,
-                    }}
-        >
-            <img
-                src={`/img/heroes/${hero?.name}.png`}
-                alt="of the author"
-                className="w-full h-full  object-cover"
-            />
-        </motion.div>
-        <p className="text-light text-center">Nội tại: {skills[hero.name]}</p>
-    </div>
+                className="text-danger text-center">{hero.take_dmg ? "-" + hero.take_dmg : ''}&nbsp;</motion.h3>
+            <motion.div style={containerStyle}
+                key={hero.name}
+                animate={{
+                    scale: !hero.take_dmg ? [0.5, 0.7] : 0.7,
+                    opacity: !hero.take_dmg ? [0.5, 1] : 1,
+                }}
+                transition={{
+                    duration: 1,
+                }}
+                exit={{
+                    scale: 1,
+                }}
+            >
+                <img
+                    src={`/img/heroes/${hero?.name}.png`}
+                    alt="of the author"
+                    // className="w-full h-full  object-cover"
+                />
+            </motion.div>
+        </CardContent>
+        <CardFooter>
+            <p className="text-light text-center">{skills[hero.name]}</p>
+        </CardFooter>
+    </Card>
 }
 
 export default HeroTurn

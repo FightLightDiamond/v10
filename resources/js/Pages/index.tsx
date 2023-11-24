@@ -26,7 +26,6 @@ const Home = ({currentMatch}: PageProps<{ currentMatch: any }>) => {
             });
     });
 
-
     useEffect(() => {
         setStatus(currentMatch.status);
         if (currentMatch.status === BETTING_STATUS) {

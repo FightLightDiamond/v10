@@ -24,9 +24,11 @@ class PreMatchService
     public function execute(): void
     {
         $match = $this->roundService->bet();
-        Cache::set('currentMatchId', $match->id, 60 * 3);
         $match->status = BetStatusConstant::BETTING;
         $match->save();
+
+        Cache::set('currentMatchId', $match->id, 60 * 3);
+
         BetEvent::dispatch($match);
         FightJob::dispatch($match)->delay(60);
         RewardJob::dispatch($match)->delay(180);
