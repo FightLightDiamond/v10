@@ -60,3 +60,10 @@ Route::post('speak', [SpeakController::class, 'generateSpeech']);
 Route::get('speaks', [SpeakController::class, 'generateSpeech']);
 
 Route::get('wise', [WiseController::class, 'exec']);
+Route::get('enhance', function () {
+    return Inertia::render('Dev/enhance');
+});
+
+Route::get('table', function () {
+    return Inertia::render('bet');
+});
