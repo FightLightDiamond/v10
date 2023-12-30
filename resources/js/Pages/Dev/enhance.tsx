@@ -8,11 +8,15 @@ import {
     CardHeader,
     CardTitle,
 } from "@/shadcn/ui/card"
+import {Checkbox} from "@/shadcn/ui/checkbox";
+import axios from "axios";
 
-const Enhance = () => {
-    const dmgVK = 1331;
-    const [level, setLevel] = useState(1)
-    const [dmg, setDmg] = useState(dmgVK)// 1100, 1210, 1331, -<//1464 -<//1771 // 2143
+const Enhance = (props) => {
+    const dmgVK = 1000;
+    const [level, setLevel] = useState(props.item.level)
+    const [dmg, setDmg] = useState(props.item.value)// 1100, 1210, 1331, -<//1464 -<//1771 // 2143
+    const [x2Lucky, setX2Lucky] = useState(0)
+    const [x2Up, setX2Up] = useState(0)
 
     const [items, setItems] = useState<any>({
         sun: 0,
@@ -39,9 +43,22 @@ const Enhance = () => {
     }
 
     const onSuccess = () => {
-        const newLevel = level + 1;
+        let newLevel = level + 1;
+        if (x2Up && items.sUpStore) {
+            newLevel += 1;
+            setItems({
+                ...items, sUpStore: items.sUpStore - 1
+            })
+        }
+
         setLevel(newLevel)
-        setDmg(parseInt(String(1.1 ** level * dmgVK)))
+        const newDame = parseInt(String(1.1 ** level * dmgVK));
+        setDmg(newDame)
+
+        axios.put(route('items.update', [props.item.id]), {
+            value: newDame,
+            level: newLevel
+        })
     }
 
     const onFail = () => {
@@ -51,10 +68,21 @@ const Enhance = () => {
                 setLevel(newLevel)
             }
 
-            setDmg(parseInt(String(1.1 ** (newLevel - 1) * dmgVK)))
+            const newDame = parseInt(String(1.1 ** (newLevel - 1) * dmgVK))
+            setDmg(newDame)
+
+            axios.put(route('items.update', [props.item.id]), {
+                value: newDame,
+                level: newLevel
+            })
         } else {
             setLevel(1)
             setDmg(dmgVK)
+
+            axios.put(route('items.update', [props.item.id]), {
+                value: dmgVK,
+                level: 1
+            })
         }
     }
 
@@ -66,6 +94,9 @@ const Enhance = () => {
         let rateExtra = 0;
         if (items.luckyStore) {
             rateExtra = 50
+            if (items.sLuckyStore && x2Lucky) {
+                rateExtra += 50
+            }
         }
         return parseInt(String(((0.9 ** (level) * 1000) + rateExtra) / 10))
     }
@@ -111,9 +142,15 @@ const Enhance = () => {
             luckyStore = 1
         }
 
-
         if (luckyStore) {
-            numberRate += 50
+            if (x2Lucky && items.sLuckyStore) {
+                numberRate += 100
+                setItems({
+                    ...items, sLuckyStore: items.sLuckyStore - 1
+                })
+            } else {
+                numberRate += 50
+            }
         }
 
         setItems({...items,
@@ -150,16 +187,16 @@ const Enhance = () => {
             setItem('sos', 1)
             return;
         }
-        if (number < 200) {
+        if (number < 300) {
             setItem('sUpStore', 1)
             return;
         }
-        if (number < 400) {
+        if (number < 500) {
             setItem('sLuckyStore', 1)
             return;
         }
-        if (number < 600) {
-            setItem('gold', 1000)
+        if (number < 700) {
+            setItem('gold', 2000)
             return;
         }
         if (number < 2000) {
@@ -187,14 +224,40 @@ const Enhance = () => {
         <div>
             <Card>
                 <CardHeader>
-                    <CardTitle>Nâng cấp vũ khí</CardTitle>
-                    <CardDescription>Cấp: +{level}</CardDescription>
+                    <CardTitle>{props.item.name}</CardTitle>
+                    <CardDescription>{props.item.description}</CardDescription>
+                    <p>Cấp: +{level}</p>
                     <p>Sức mạnh: {dmg}</p>
                     <p>Tiền: {items.gold}</p>
                     <p>Đá bảo vệ: {items.protectStore}</p>
                     <p>Đá may mắn: {items.luckyStore}</p>
                     <p>Tỉ lệ thành công: {onRateNex()}%</p>
+                    <p>x2Up: {x2Up}</p>
+                    <p>x2Lucky: {x2Lucky}</p>
                     <p>{JSON.stringify(items)}</p>
+                    <div className="flex items-center space-x-2">
+                        <Checkbox onCheckedChange={(value) => {
+                            // console.log(value)
+                            setX2Up(+value)
+                        }} id="sUp" />
+                        <label
+                            htmlFor="sUp"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            UP + 2
+                        </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Checkbox onCheckedChange={(value) => {
+                            setX2Lucky(+value)
+                        }} id="sLucky" />
+                        <label
+                            htmlFor="sLucky"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            x2 Lucky
+                        </label>
+                    </div>
                 </CardHeader>
                 <CardContent>
                     <img
@@ -208,7 +271,6 @@ const Enhance = () => {
                     <Button onClick={onGacha}>Gacha</Button>
                 </CardFooter>
             </Card>
-
         </div>
     )
 }
