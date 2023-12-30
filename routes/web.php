@@ -44,13 +44,13 @@ Route::post('bets', [BetController::class, 'execute'])->name('bets.bet');
 Route::get('the_matches/current', [TheMatchController::class, 'current'])
     ->name('the_matches.current');
 
-
-
 Route::get('g', function () {
     return Inertia::render('G');
 });
 
 Route::get('/shooter', function () {
+
+    //dd(Route::current()->uri());
     return Inertia::render('shooter');
 });
 
@@ -62,7 +62,9 @@ Route::get('speaks', [SpeakController::class, 'generateSpeech']);
 Route::get('wise', [WiseController::class, 'exec']);
 Route::get('enhance', function () {
     return Inertia::render('Dev/enhance');
-});
+})->name('enhance');
+
+Route::resource('items', \App\Http\Controllers\ItemController::class);
 
 Route::get('table', function () {
     return Inertia::render('bet');
