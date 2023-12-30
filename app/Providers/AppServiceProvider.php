@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -31,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
                     'time' => $query->time
                 ]
             );
+        });
+
+        RateLimiter::for('login', function (Request $request) {
+            $account = 1;
+            $time = 5;
+            return Limit::perMinute($time)->by($account)>response(function () use ($time) {
+                    return response(__('validation.ip-active', ['time' => $time]), 429);
+                });
         });
     }
 }
