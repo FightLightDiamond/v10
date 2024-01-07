@@ -9,7 +9,7 @@ const Alphabet = () => {
      * Method
      * @param text
      */
-    const onSpeak = (text) => {
+    const onSpeak = (text: string) => {
         const audio = new Audio('http://localhost:8000/speaks?text=' + text);
         audio.play();
     }
@@ -182,7 +182,7 @@ const Alphabet = () => {
                 ))}
             </ul>
             <ul>
-                {Array.from(Array(101), (e, letter) =>  (
+                {Array.from(Array(101), (e: any, letter: any) =>  (
                     <Button onClick={() => onSpeak(letter)} key={letter}>{letter}</Button>
                 ))}
             </ul>

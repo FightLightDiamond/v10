@@ -39,6 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+require __DIR__.'/auth.php';
+
 Route::get('bets', [BetController::class, 'index'])->name('bets.index');
 Route::post('bets', [BetController::class, 'execute'])->name('bets.bet');
 Route::get('the_matches/current', [TheMatchController::class, 'current'])

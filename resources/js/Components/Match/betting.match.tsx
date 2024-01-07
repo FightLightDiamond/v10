@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {IMatchLog} from "@/App/interfaces/match-log.interface";
-import Countdown from "react-countdown";
 import {currentBet, IBetState, placeBet} from "@/App/Http/Store/Reducers/bet.slice";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/App/Http/Store";
@@ -70,7 +69,7 @@ const BettingMatch = ({id, items, start_time}: { id: number, items: any, start_t
         <div>
             <div className="grid grid-rows-2 grid-flow-col gap-4">
                 <div>
-                    BET TIME: <Countdown date={start_time}/>
+                    BET TIME: {start_time}
                 </div>
             </div>
             <div className="flex flex-row">

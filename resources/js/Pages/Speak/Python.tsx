@@ -9,7 +9,7 @@ const Python = () => {
      * Method
      * @param text
      */
-    const onSpeak = (text) => {
+    const onSpeak = (text: string) => {
         const audio = new Audio('http://localhost:8000/speaks?text=' + text);
         audio.play();
     }

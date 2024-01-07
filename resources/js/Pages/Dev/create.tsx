@@ -16,7 +16,7 @@ const Create = () => {
         description: "",
     })
 
-    function handleChange(e) {
+    function handleChange(e: any) {
         const key = e.target.id;
         const value = e.target.value
         setValues(values => ({
@@ -25,7 +25,7 @@ const Create = () => {
         }))
     }
 
-    function handleSubmit(e) {
+    function handleSubmit(e: any) {
         e.preventDefault()
         router.post('/items', values)
     }

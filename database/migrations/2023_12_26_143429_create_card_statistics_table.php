@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('card_id');
             $table->unsignedMediumInteger('attack_points')->default(0);
-            $table->unsignedMediumInteger('attack_points')->default(0);
+            $table->unsignedMediumInteger('turn')->default(0);
             $table->unsignedTinyInteger('level')->default(1);
             $table->timestamps();
         });

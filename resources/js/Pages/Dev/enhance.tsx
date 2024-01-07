@@ -11,10 +11,10 @@ import {
 import {Checkbox} from "@/shadcn/ui/checkbox";
 import axios from "axios";
 
-const Enhance = (props) => {
+const Enhance = (props: any) => {
     const dmgVK = 1000;
-    const [level, setLevel] = useState(props.item.level)
-    const [dmg, setDmg] = useState(props.item.value)// 1100, 1210, 1331, -<//1464 -<//1771 // 2143
+    const [level, setLevel] = useState(props.item?.level)
+    const [dmg, setDmg] = useState(props.item?.value)// 1100, 1210, 1331, -<//1464 -<//1771 // 2143
     const [x2Lucky, setX2Lucky] = useState(0)
     const [x2Up, setX2Up] = useState(0)
 
@@ -55,7 +55,7 @@ const Enhance = (props) => {
         const newDame = parseInt(String(1.1 ** level * dmgVK));
         setDmg(newDame)
 
-        axios.put(route('items.update', [props.item.id]), {
+        axios.put(route('items.update', [props.item?.id]), {
             value: newDame,
             level: newLevel
         })
@@ -71,7 +71,7 @@ const Enhance = (props) => {
             const newDame = parseInt(String(1.1 ** (newLevel - 1) * dmgVK))
             setDmg(newDame)
 
-            axios.put(route('items.update', [props.item.id]), {
+            axios.put(route('items.update', [props.item?.id]), {
                 value: newDame,
                 level: newLevel
             })
@@ -79,7 +79,7 @@ const Enhance = (props) => {
             setLevel(1)
             setDmg(dmgVK)
 
-            axios.put(route('items.update', [props.item.id]), {
+            axios.put(route('items.update', [props.item?.id]), {
                 value: dmgVK,
                 level: 1
             })
@@ -167,13 +167,13 @@ const Enhance = (props) => {
         }
     }
 
-    const setItem = (key, no) => {
+    const setItem = (key: string, no: number) => {
         items[key] += no;
         items.gold -= 60;
         setItems({...items})
     }
 
-    const gacha = number => {
+    const gacha = (number: number) => {
         //10.000
         if (number < 2) {
             setItem('sun', 1)
@@ -224,8 +224,8 @@ const Enhance = (props) => {
         <div>
             <Card>
                 <CardHeader>
-                    <CardTitle>{props.item.name}</CardTitle>
-                    <CardDescription>{props.item.description}</CardDescription>
+                    <CardTitle>{props.item?.name}</CardTitle>
+                    <CardDescription>{props.item?.description}</CardDescription>
                     <p>Cấp: +{level}</p>
                     <p>Sức mạnh: {dmg}</p>
                     <p>Tiền: {items.gold}</p>

@@ -1,7 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { IMatchLog } from "@/App/interfaces/match-log.interface";
 import HeroTurn from "../hero/hero-select";
-import Countdown from "react-countdown";
 import { useEffectOnce } from "@/App/Hooks/useEffectOnce";
 import {Progress} from "@/shadcn/ui/progress";
 
@@ -76,7 +75,7 @@ const FightingMatch = ({ items, start_time, type = "normal" }: { items: any, sta
     <div>
       <div className="text-light">
         <div>
-          FIGHT TIME: <Countdown date={start_time} />
+          FIGHT TIME: {start_time}
         </div>
         <div >
           ROUND: {home?.turn_number}
