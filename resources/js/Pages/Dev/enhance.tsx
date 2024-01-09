@@ -10,6 +10,7 @@ import {
 } from "@/shadcn/ui/card"
 import {Checkbox} from "@/shadcn/ui/checkbox";
 import axios from "axios";
+import MasterLayout from "@/Layouts/MasterLayout";
 
 const Enhance = (props: any) => {
     const dmgVK = 1000;
@@ -221,7 +222,7 @@ const Enhance = (props: any) => {
     }
 
     return (
-        <div>
+        <MasterLayout>
             <Card>
                 <CardHeader>
                     <CardTitle>{props.item?.name}</CardTitle>
@@ -271,7 +272,7 @@ const Enhance = (props: any) => {
                     <Button onClick={onGacha}>Gacha</Button>
                 </CardFooter>
             </Card>
-        </div>
+        </MasterLayout>
     )
 }
 
