@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\English\Crazy;
 use App\Models\English\CrazyCourse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class EnglishController extends Controller
@@ -34,5 +33,14 @@ class EnglishController extends Controller
             ->find($id);
 
         return Inertia::render('English/Course/Read', compact('crazy'));
+    }
+
+    public function story($id)
+    {
+        $crazy = Crazy::query()
+            ->with('details', 'crazyCourse.crazies')
+            ->find($id);
+
+        return Inertia::render('English/Course/Story', compact('crazy'));
     }
 }

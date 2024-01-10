@@ -78,3 +78,4 @@ Route::get('table', function () {
 Route::get('english', [\App\Http\Controllers\EnglishController::class, 'index']);
 Route::get('course/{id}', [\App\Http\Controllers\EnglishController::class, 'show'])->name('crazy-course.show');
 Route::get('read/{id}', [\App\Http\Controllers\EnglishController::class, 'read'])->name('crazy-course.read');
+Route::get('story/{id}', [\App\Http\Controllers\EnglishController::class, 'story'])->name('crazy-course.story');

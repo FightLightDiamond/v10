@@ -10,7 +10,7 @@ import {
     TableRow,
 } from "@/shadcn/ui/table"
 
-export default function Index(props: any) {
+export default function Show(props: any) {
     const {courses, course} = props
 
     console.log(courses, course)

@@ -11,7 +11,7 @@ import {
 } from "@/shadcn/ui/table"
 import {useRef, useState} from "react";
 
-export default function Index(props: any) {
+export default function Read(props: any) {
     const {crazy} = props
 
     const [people, setPeople] = useState(crazy.details)
@@ -28,7 +28,7 @@ export default function Index(props: any) {
         peopleClone[draggedOverPerson.current] = temp
         setPeople(peopleClone)
     }
-    
+
     return (
         <MasterLayout>
             <h2 className={'text-xl font-semibold text-gray-900'}>{crazy.name}</h2>
