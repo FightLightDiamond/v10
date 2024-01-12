@@ -1,5 +1,5 @@
 import MasterLayout from "@/Layouts/MasterLayout";
-import {useRef, useState} from "react";
+import {useState} from "react";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider, useDrag, useDrop} from "react-dnd";
 import {ItemsConstant} from "@/constants/items.constant";
@@ -7,11 +7,14 @@ import {ItemsConstant} from "@/constants/items.constant";
 export default function Story(props: any) {
     const {crazy} = props
 
+    const [people, setPeople] = useState(crazy.details)
+    const [abc, setAbc] = useState([])
+
     function MyDropTarget(props) {
         const [collectedProps, drop] = useDrop(() => ({
             accept: 'accept',
             canDrop: () => true,
-            drop: () => {console.log('props', props)},
+            drop: (item, monitor) => {console.log('props', item, monitor)},
             collect: monitor => ({
                 isOver: !!monitor.isOver(),
                 canDrop: !!monitor.canDrop()
@@ -22,19 +25,23 @@ export default function Story(props: any) {
     }
 
     function DraggableComponent(props) {
-        const {id} = props
+        const {detail} = props
         const [collected, drag, dragPreview] = useDrag(() => ({
             type: 'accept',
-            item: { id },
+            item: { detail_id: detail.id },
             collect: monitor => ({
                 isDragging: monitor.isDragging(),
             }),
-        }), [id])
+            end: (draggedItem, monitor) => {
+                console.log("END", draggedItem, monitor)
+            }
+        }))
         return collected.isDragging ? (
             <div ref={dragPreview} />
         ) : (
+
             <div ref={drag} {...collected}>
-                Drag
+                {detail.sentence}
             </div>
         )
     }
@@ -48,8 +55,16 @@ export default function Story(props: any) {
             <audio src={crazy.audio} controls/>
             <div>
                 <DndProvider backend={HTML5Backend}>
-                    <MyDropTarget k={3}></MyDropTarget>
-                    <DraggableComponent id={1}></DraggableComponent>
+                    <MyDropTarget k={3}>
+                        {abc.map((detail, index: number) => (
+                            <DraggableComponent key={index} detail={detail}></DraggableComponent>
+                        ))}
+                    </MyDropTarget>
+
+                    {people.map((detail, index: number) => (
+                        <DraggableComponent key={index} detail={detail}></DraggableComponent>
+                    ))}
+
                 </DndProvider>
             </div>
 

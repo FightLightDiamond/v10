@@ -16,8 +16,6 @@ export default function Read(props: any) {
 
     const [people, setPeople] = useState(crazy.details)
 
-    console.log(crazy)
-
     const dragPerson = useRef<number>(0)
     const draggedOverPerson = useRef<number>(0)
 
