@@ -3,13 +3,15 @@
 namespace App\Models\English;
 
 
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Vocabulary extends Model
 {
+    use ModelsTrait;
 
     public $table = VOCABULARIES_TB;
-    public $fillable = [WORD_COL, 'type', PRONOUNCE_COL, 'meaning', IMAGE_COL, DESCRIPTION_COL, 'is_active'];
+    public $fillable = ['word', 'type', 'pronounce', 'meaning', 'image', 'description', 'is_active'];
 
     public function scopeFilter($query, $input)
     {
@@ -19,14 +21,14 @@ class Vocabulary extends Model
         if (isset($input['type'])) {
             $query->where('type', 'LIKE', '%' . $input['type'] . '%');
         }
-        if (isset($input[PRONOUNCE_COL])) {
-            $query->where(PRONOUNCE_COL, 'LIKE', '%' . $input[PRONOUNCE_COL] . '%');
+        if (isset($input['pronounce'])) {
+            $query->where('pronounce', 'LIKE', '%' . $input['pronounce'] . '%');
         }
         if (isset($input['meaning'])) {
             $query->where('meaning', 'LIKE', '%' . $input['meaning'] . '%');
         }
-        if (isset($input[WORD_COL])) {
-            $query->where(WORD_COL, 'LIKE', '%' . $input[WORD_COL] . '%');
+        if (isset($input['word'])) {
+            $query->where('word', 'LIKE', '%' . $input['word'] . '%');
         }
         return $query;
     }

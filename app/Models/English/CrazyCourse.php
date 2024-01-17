@@ -3,6 +3,7 @@
 namespace App\Models\English;
 
 
+use App\Models\ModelsTrait;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
@@ -12,7 +13,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class CrazyCourse extends Model implements Transformable
 {
     use TransformableTrait;
-
+    use ModelsTrait;
 
     public $table = 'crazy_courses';
     public $fillable = ['name', 'img', 'description', 'is_active', 'created_by', 'updated_by'];

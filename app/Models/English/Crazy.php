@@ -2,6 +2,7 @@
 
 namespace App\Models\English;
 
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 use Prettus\Repository\Contracts\Transformable;
@@ -10,6 +11,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Crazy extends Model implements Transformable
 {
     use TransformableTrait;
+    use ModelsTrait;
 
     public $table = 'crazies';
     public $fillable = [

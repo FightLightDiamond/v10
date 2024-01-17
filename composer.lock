@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a012917eb2f302b7ff89016ceb44c29b",
+    "content-hash": "d476460e38220af6fb0484733af6da14",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -436,6 +436,110 @@
                 }
             ],
             "time": "2023-08-31T09:50:34+00:00"
+        },
+        {
+            "name": "cuongpm/modularization",
+            "version": "v2.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FightLightDiamond/Modularization.git",
+                "reference": "06d9a08a3ab3e25793a708f48909af1ed357bf3a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FightLightDiamond/Modularization/zipball/06d9a08a3ab3e25793a708f48909af1ed357bf3a",
+                "reference": "06d9a08a3ab3e25793a708f48909af1ed357bf3a",
+                "shasum": ""
+            },
+            "require": {
+                "cuongpm/uploader": "^1.0",
+                "intervention/image": "^2.3",
+                "prettus/l5-repository": "^2.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Modularization\\": "./src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fight Light Diamond",
+                    "email": "i.am.m.cuong@gmail.com",
+                    "homepage": "http://cuongpm.portalbeanzvn.com/"
+                }
+            ],
+            "keywords": [
+                "crud",
+                "editor",
+                "html",
+                "javascript",
+                "laravel",
+                "module",
+                "repository",
+                "richtext",
+                "text"
+            ],
+            "support": {
+                "issues": "https://github.com/FightLightDiamond/Modularization/issues",
+                "source": "https://github.com/FightLightDiamond/Modularization/tree/master"
+            },
+            "time": "2019-08-14T03:05:44+00:00"
+        },
+        {
+            "name": "cuongpm/uploader",
+            "version": "v1.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FightLightDiamond/Uploader.git",
+                "reference": "cacd6e37b459feed7e4e5f949e57afbb5d65366b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FightLightDiamond/Uploader/zipball/cacd6e37b459feed7e4e5f949e57afbb5d65366b",
+                "reference": "cacd6e37b459feed7e4e5f949e57afbb5d65366b",
+                "shasum": ""
+            },
+            "require": {
+                "intervention/image": "^2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Uploader\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fight Light Diamond",
+                    "email": "i.am.m.cuong@gmail.com",
+                    "homepage": "http://cuongpm.portalbeanzvn.com/"
+                }
+            ],
+            "keywords": [
+                "crud",
+                "file",
+                "html",
+                "image",
+                "javascript",
+                "laravel",
+                "repository",
+                "text",
+                "upload"
+            ],
+            "support": {
+                "issues": "https://github.com/FightLightDiamond/Uploader/issues",
+                "source": "https://github.com/FightLightDiamond/Uploader/tree/master"
+            },
+            "time": "2020-01-05T07:10:05+00:00"
         },
         {
             "name": "darkaonline/l5-swagger",

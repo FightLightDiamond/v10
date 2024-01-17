@@ -3,6 +3,7 @@
 namespace App\Models\English;
 
 
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -10,33 +11,33 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Mistake extends Model implements Transformable
 {
     use TransformableTrait;
-
+    use ModelsTrait;
 
     public $table = 'mistakes';
-    public $fillable = [QUESTION_COL, A_COL, B_COL, C_COL, D_COL, ANSWER_COL, REPAIR_COL, 'is_active'];
+    public $fillable = ['question', 'a', 'b', 'c', 'd', 'answer', 'repair', 'is_active'];
 
     public function scopeFilter($query, $input)
     {
-        if (isset($input[QUESTION_COL])) {
-            $query->where(QUESTION_COL, 'LIKE', '%' . $input[QUESTION_COL] . '%');
+        if (isset($input['question'])) {
+            $query->where('question', 'LIKE', '%' . $input['question'] . '%');
         }
-        if (isset($input[A_COL])) {
-            $query->where(A_COL, $input[A_COL]);
+        if (isset($input['a'])) {
+            $query->where('a', $input['a']);
         }
-        if (isset($input[B_COL])) {
-            $query->where(B_COL, $input[B_COL]);
+        if (isset($input['b'])) {
+            $query->where('b', $input['b']);
         }
-        if (isset($input[C_COL])) {
-            $query->where(C_COL, $input[C_COL]);
+        if (isset($input['c'])) {
+            $query->where('c', $input['c']);
         }
-        if (isset($input[D_COL])) {
-            $query->where(D_COL, $input[D_COL]);
+        if (isset($input['d'])) {
+            $query->where('d', $input['d']);
         }
-        if (isset($input[ANSWER_COL])) {
-            $query->where(ANSWER_COL, $input[ANSWER_COL]);
+        if (isset($input['answer'])) {
+            $query->where('answer', $input['answer']);
         }
-        if (isset($input[REPAIR_COL])) {
-            $query->where(REPAIR_COL, $input[REPAIR_COL]);
+        if (isset($input['repair'])) {
+            $query->where('repair', $input['repair']);
         }
         if (isset($input['is_active'])) {
             $query->where('is_active', $input['is_active']);

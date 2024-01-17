@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use English\EnglishServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
         $this->app->register(RepositoryProvider::class);
+        $this->app->register(EnglishServiceProvider::class);
     }
 
     /**
