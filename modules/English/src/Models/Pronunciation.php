@@ -2,7 +2,8 @@
 
 namespace English\Models;
 
-use Modularization\MultiInheritance\ModelsTrait;
+
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -45,5 +46,15 @@ class Pronunciation extends Model implements Transformable
         }
         return $query;
     }
+
+    public $fileUpload = ['image' => 1];
+    protected $pathUpload = ['image' => '/images/pronunciations'];
+    protected $thumbImage = [
+        'image' => [
+            '/thumbs/' => [
+                [200, 200], [300, 300], [400, 400]
+            ]
+        ]
+    ];
 }
 

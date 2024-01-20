@@ -9,11 +9,12 @@
 namespace English\Http\Controllers;
 
 use English\Http\Repositories\CrazyCourseRepository;
+use Inertia\Inertia;
 
 class CrazyCourseController
 {
 
-    private $repository;
+    private CrazyCourseRepository $repository;
 
     public function __construct(CrazyCourseRepository $repository)
     {
@@ -24,11 +25,6 @@ class CrazyCourseController
     {
         $data = $this->repository->getList($id);
 
-        if (empty($data)) {
-            session()->flash('error', 'not found');
-            return back();
-        }
-
-        return view('en::english.crazy-course.list', $data);
+        return Inertia::render('English/Course/Index', $data);
     }
 }

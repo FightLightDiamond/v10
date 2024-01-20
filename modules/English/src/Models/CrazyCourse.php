@@ -2,11 +2,13 @@
 
 namespace English\Models;
 
-use Modularization\MultiInheritance\ModelsTrait;
+
+use App\Models\ModelsTrait;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Uploader\Facades\UploadFun;
+
 
 class CrazyCourse extends Model implements Transformable
 {
@@ -21,6 +23,16 @@ class CrazyCourse extends Model implements Transformable
         'medium_thumb',
         'large_thumb',
     ];
+
+    public function crazies()
+    {
+        return $this->hasMany(Crazy::class, 'crazy_course_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 
     public function getImgAttribute($value)
     {
@@ -50,10 +62,6 @@ class CrazyCourse extends Model implements Transformable
         return url("{$imgThumbs}");
     }
 
-    public function crazies()
-    {
-        return $this->hasMany(Crazy::class, 'crazy_course_id');
-    }
 
     public $fileUpload = ['img' => 1];
     protected $pathUpload = ['img' => '/images/crazy_courses'];

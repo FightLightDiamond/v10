@@ -6,7 +6,7 @@
  * Time: 4:37 PM
  */
 
-Route::middleware(['web', 'auth:admin', 'role:admin'])
+Route::middleware(['web'])
     ->namespace('English\Http\Controllers\Admin')
     ->prefix('admin')
     ->name('admin.')

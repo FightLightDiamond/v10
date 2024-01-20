@@ -3,6 +3,7 @@
 namespace English\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 use Modularization\Facades\InputFa;
 use English\Models\CrazyDetail;
 use English\Http\Requests\CrazyDetailCreateRequest;
@@ -24,67 +25,50 @@ class CrazyDetailController extends Controller
     public function index(Request $request)
     {
         $input = $request->all();
-        $data['crazies.etails'] = $this->repository->myPaginate($input);
-        if ($request->ajax()) {
-            return view('en::admin.crazy-detail.table', $data)->render();
-        }
-        return view('en::admin.crazy-detail.index', $data);
+        $data['crazy_details'] = $this->repository->myPaginate($input);
+        return Inertia::render('Admin/English/CrazyDetail/Update', $data);
     }
 
     public function create()
     {
-        return view('en::admin.crazy-detail.create');
+        return Inertia::render('Admin/English/CrazyDetail/Update');
     }
 
     public function store(CrazyDetailCreateRequest $request)
     {
         $input = $request->all();
         $this->repository->store($input);
-        session()->flash('success', 'create success');
         return redirect()->route('admin.crazies.detail.index');
     }
 
     public function show($id)
     {
-        $crazyDetail = $this->repository->find($id);
-        if (empty($crazyDetail)) {
-            session()->flash('error', 'not found');
-            return back();
-        }
-        return view('en::admin.crazy-detail.show', compact('crazies.etail'));
+        $data['crazy_detail'] = $this->repository->find($id);
+        return Inertia::render('Admin/English/CrazyDetail/Show', $data);
     }
 
     public function edit($id)
     {
-        $crazyDetail = $this->repository->find($id);
-        if (empty($crazyDetail)) {
-            session()->flash('error', 'not found');
-            return back();
-        }
-        return view('en::admin.crazy-detail.update', compact('crazies.etail'));
+        $data['crazy_detail'] = $this->repository->find($id);
+        return Inertia::render('Admin/English/CrazyDetail/Show', $data);
     }
 
     public function update(CrazyDetailUpdateRequest $request, $id)
     {
         $input = $request->all();
-        $crazyDetail = $this->repository->find($id);
-        if (empty($crazyDetail)) {
-            session()->flash('error', 'not found');
-            return back();
-        }
-        $this->repository->change($input, $crazyDetail);
-        session()->flash('success', 'update success');
+        $this->repository->update($input, $id);
         return redirect()->route('admin.crazies.detail.index');
     }
 
     public function destroy($id)
     {
-        $crazyDetail = $this->repository->find($id);
-        if (empty($crazyDetail)) {
-            session()->flash('error', 'not found');
+        $res = $this->repository->delete($id);
+        if($res) {
+            session()->flash('success', 'delete success');
+        } else {
+            session()->flash('error', 'delete fails');
         }
-        $this->repository->delete($id);
-        session()->flash('success', 'delete success');
+
         return back();
     }
 }

@@ -2,8 +2,9 @@
 
 namespace English\Models;
 
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
-use Modularization\MultiInheritance\ModelsTrait;
+
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -30,6 +31,17 @@ class Crazy extends Model implements Transformable
         'large_thumb',
     ];
 
+    public function details()
+    {
+        return $this->hasMany(CrazyDetail::class, 'crazy_id');
+    }
+
+    public function crazyCourse()
+    {
+        return $this->belongsTo(CrazyCourse::class, 'crazy_course_id');
+    }
+
+
     public function getImgAttribute($value)
     {
         return url('storage' . $value);
@@ -55,18 +67,9 @@ class Crazy extends Model implements Transformable
         $img = $this->$field;
         $sizeImage = '_' . implode('_', $sizes) . '.';
         $imgThumbs = str_replace('.', $sizeImage, $img);
-        return url("{$imgThumbs}");
+        return assert("{$imgThumbs}");
     }
 
-    public function details()
-    {
-        return $this->hasMany(CrazyDetail::class, 'crazy_id');
-    }
-
-    public function crazyCourse()
-    {
-        return $this->belongsTo(CrazyCourse::class, 'crazy_course_id');
-    }
 
     public function getAudioPath()
     {
@@ -77,7 +80,6 @@ class Crazy extends Model implements Transformable
     {
         return url('storage' . $value);
     }
-
 
     public $fileUpload = [
         'audio' => 0,

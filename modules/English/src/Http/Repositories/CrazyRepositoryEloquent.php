@@ -63,12 +63,12 @@ class CrazyRepositoryEloquent extends BaseRepository implements CrazyRepository
 
     public function edit($id)
     {
-        $crazy = $this->find($id);
-        if (empty($crazy)) {
-            return $crazy;
-        }
-        $details = $crazy->details()->orderBy('no')->get();
-        return compact('crazy', 'details');
+        $crazy = $this
+            ->with(['details' => function($q) {
+                $q->orderBy('no');
+             }])
+            ->find($id);
+        return compact('crazy');
     }
 
     public function change($input, $crazy)

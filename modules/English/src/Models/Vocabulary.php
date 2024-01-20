@@ -2,12 +2,15 @@
 
 namespace English\Models;
 
-use Modularization\MultiInheritance\ModelsTrait;
+
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Vocabulary extends Model
 {
     use ModelsTrait;
+
+    public $table = 'vocabularies';
     public $fillable = ['word', 'type', 'pronounce', 'meaning', 'image', 'description', 'is_active'];
 
     public function scopeFilter($query, $input)

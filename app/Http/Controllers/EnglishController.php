@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\English\Crazy;
-use App\Models\English\CrazyCourse;
 use Inertia\Inertia;
 
 class EnglishController extends Controller

@@ -2,8 +2,9 @@
 
 namespace English\Models;
 
+use App\Models\ModelsTrait;
 use Illuminate\Database\Eloquent\Model;
-use Modularization\MultiInheritance\ModelsTrait;
+
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
