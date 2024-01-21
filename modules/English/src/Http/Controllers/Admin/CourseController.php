@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\English;
 
 use App\Http\Controllers\Controller;
+use English\Models\CrazyCourse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 

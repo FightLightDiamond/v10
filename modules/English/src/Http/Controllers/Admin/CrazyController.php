@@ -46,14 +46,14 @@ class CrazyController extends Controller
 
     public function show($id)
     {
-        $crazy = $this->repository->find($id);
-        return Inertia::render('Admin/English/Crazy/Show', compact('crazy'));
+        $data = $this->repository->find($id);
+        return Inertia::render('Admin/English/Crazy/Show', $data);
     }
 
     public function edit($id)
     {
-        $crazy = $this->repository->edit($id);
-        return Inertia::render('Admin/English/Crazy/Update', compact('crazy'));
+        $data = $this->repository->edit($id);
+        return Inertia::render('Admin/English/Crazy/Update', $data);
     }
 
     public function update(CrazyUpdateRequest $request, $id)

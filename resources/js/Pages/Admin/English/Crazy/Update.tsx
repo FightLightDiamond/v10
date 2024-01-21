@@ -5,33 +5,29 @@ import {Input, Button} from "@material-tailwind/react";
 
 import {Card, Typography} from "@material-tailwind/react";
 
-const TABLE_HEAD = ["#", "Time", "Sentence", "Meaning", "API", "-"];
+const TABLE_HEAD = ["#", "Time", "Sentence", "Meaning", "IPA", ""];
 
 export default function Index(props: any) {
     const {crazy} = props
-    const [values, setValues] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-    })
 
-    const {data, setData, post, progress} = useForm({
-        name: null,
-        avatar: null,
-    })
+    const {data, setData, post, progress} = useForm(crazy)
 
-    function handleChange(e) {
-        const key = e.target.id;
-        const value = e.target.value
-        setValues(values => ({
-            ...values,
-            [key]: value,
+    function handleChange({ target }) {
+        const {name, value} = target
+
+        const a = name.match(/([^\[]+)\[(\d+)\]/);
+
+        console.log(a, value)
+
+        setData(data => ({
+            ...data,
+            [name]: value,
         }))
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        router.post('/users', values)
+        router.post('/users', data)
     }
 
     return (
@@ -39,11 +35,11 @@ export default function Index(props: any) {
             <form onSubmit={handleSubmit} className="mb-4">
                 <div className="mb-4">
                     <div className="mb-4">
-                        <Input label="name" className="mb-4" id="first_name" value={values.first_name}
+                        <Input label="name" className="mb-4" id="name" defaultValue={data.name}
                                onChange={handleChange}/>
                     </div>
                     <div className="mb-4">
-                        <Input label='Audio' type="file" className="mb-4" value={data.avatar}
+                        <Input label='Audio' type="file" className="mb-4" defaultValue={data.avatar}
                                onChange={e => setData('avatar', e.target.files[0])}/>
                         {progress && (
                             <progress value={progress.percentage} max="100">
@@ -74,35 +70,25 @@ export default function Index(props: any) {
                         </tr>
                         </thead>
                         <tbody>
-                        {crazy.details.map(({sentence, meaning, time, ipa}, index) => (
+                        {data.details.map(({id, sentence, meaning, time, ipa}, index) => (
                             <tr key={index} className="even:bg-blue-gray-50/50">
                                 <td className="p-4">
                                     {index+1}
                                 </td>
                                 <td className="p-4 w-24">
-                                    <Input value={time} label="Time"/>
+                                    <Input defaultValue={time} label="Time"/>
                                 </td>
                                 <td className="p-4">
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        <Input value={sentence} label="Sentence"/>
-                                    </Typography>
+                                    <Input id={`sentence[${id}]`} name={`sentence[${id}]`} onChange={handleChange} defaultValue={sentence} label="Sentence"/>
                                 </td>
                                 <td className="p-4">
-                                    <Typography variant="small" color="blue-gray" className="font-normal">
-                                        <Input value={meaning} label="Sentence"/>
-                                    </Typography>
+                                    <Input name={'meaning'+[id]} onChange={handleChange} defaultValue={meaning} label="Meaning"/>
                                 </td>
                                 <td className="p-4">
-                                    <Typography as="a" href="#" variant="small" color="blue-gray"
-                                                className="font-medium">
-                                        <Input value={sentence} label="IPA" />
-                                    </Typography>
+                                    <Input _name="ipa" _id={id} onChange={handleChange} defaultValue={ipa} label="IPA" />
                                 </td>
                                 <td className="p-4">
-                                    <Typography as="a" href="#" variant="small" color="blue-gray"
-                                                className="font-medium">
-                                        <Input value={sentence} label="IPA" />
-                                    </Typography>
+                                   <Button color="red">Delete</Button>
                                 </td>
                             </tr>
                         ))}
